@@ -23,7 +23,8 @@ button, input { font: inherit; color: inherit; }
   min-height: 64px; padding: var(--space-4) var(--space-4) var(--space-2);
 }
 .topbar h1 { margin: 0; flex: 1; font-family: var(--font-display); font-size: 26px; line-height: 30px; font-weight: 600; }
-.wordmark { flex: 1; font-family: var(--font-display); font-size: 22px; line-height: 26px; font-weight: 600; }
+.wordmark { flex: 1; min-width: 0; font-family: var(--font-display); font-size: 22px; line-height: 26px; font-weight: 600; white-space: nowrap; }
+@media (max-width: 374px) { .wordmark { font-size: 19px; } }
 .icon-btn {
   width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center;
   border-radius: var(--radius-md); color: var(--ink); text-decoration: none;
@@ -40,6 +41,17 @@ button, input { font: inherit; color: inherit; }
 .label--glory { color: var(--glory-ink); }
 .section { display: flex; flex-direction: column; gap: var(--space-2); }
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Language switch: a native select laid over a compact globe + code chip */
+.lang-switch {
+  position: relative; display: inline-flex; align-items: center; gap: var(--space-1);
+  min-width: 44px; height: 44px; padding: 0 var(--space-2);
+  border: 1.5px solid var(--line-strong); border-radius: var(--radius-md); color: var(--ink);
+}
+.lang-switch svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.lang-switch__code { font-size: 12px; line-height: 16px; font-weight: 700; letter-spacing: 0.08em; }
+.lang-switch select { position: absolute; inset: 0; width: 100%; opacity: 0; cursor: pointer; font-size: 16px; }
+.lang-switch:focus-within { outline: 2px solid var(--focus); outline-offset: 2px; }
 
 /* Character row */
 .character { display: flex; align-items: center; flex-wrap: wrap; gap: var(--space-2); padding: 0 var(--space-4); }

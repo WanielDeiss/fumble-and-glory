@@ -31,6 +31,7 @@ const ICONS = {
   sliders: '<path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/>',
   back: '<path d="M15 18l-6-6 6-6"/>',
   search: '<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>',
+  globe: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/>',
   martial: '<path d="M14.5 17.5 3 6V3h3l11.5 11.5M13 19l6-6M16 16l4 4M19 21l2-2"/>',
   ranged: '<path d="M3 21 21 3M15 3h6v6M5 6c4 0 13 9 13 13"/>',
   arcane: '<path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/>',
@@ -82,11 +83,25 @@ function update(patch: Partial<Settings>) {
 
 // ---------- views ----------
 
+const LANG_NAMES: Record<string, string> = { en: "English", de: "Deutsch", fr: "Français" };
+
+function langSwitch(): string {
+  const options = data.manifest.locales
+    .map((l) => `<option value="${esc(l)}"${l === settings.locale ? " selected" : ""}>${esc(LANG_NAMES[l] ?? l.toUpperCase())}</option>`)
+    .join("");
+  return `
+    <label class="lang-switch">
+      ${icon("globe")}
+      <span class="lang-switch__code" aria-hidden="true">${esc(settings.locale.toUpperCase())}</span>
+      <select data-action="locale" aria-label="${esc(t("table.language"))}">${options}</select>
+    </label>`;
+}
+
 function topbar(title: string | null, actions = ""): string {
   const left = title === null
     ? `<div class="wordmark">Fumble &amp; Glory</div>`
     : `<a class="icon-btn" href="#/" aria-label="${esc(t("nav.back"))}">${icon("back")}</a><h1>${esc(title)}</h1>`;
-  return `<header class="topbar">${left}${actions}</header>`;
+  return `<header class="topbar">${left}${actions}${langSwitch()}</header>`;
 }
 
 function cardView(c: LocalizedCard, fresh: boolean): string {
@@ -251,6 +266,11 @@ app.addEventListener("input", (e) => {
     const list = app.querySelector(".deck-list");
     if (list) list.innerHTML = deckRows();
   }
+});
+
+app.addEventListener("change", (e) => {
+  const el = e.target as HTMLSelectElement;
+  if (el.dataset.action === "locale") update({ locale: el.value });
 });
 
 window.addEventListener("hashchange", () => { render(); window.scrollTo(0, 0); });
