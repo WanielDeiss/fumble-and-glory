@@ -1,0 +1,28 @@
+{
+  "classGroups": {
+    "martial": { "en": "Martial", "de": "Nahkampf", "fr": "Mêlée" },
+    "ranged": { "en": "Ranged", "de": "Fernkampf", "fr": "Distance" },
+    "arcane": { "en": "Arcane", "de": "Magie", "fr": "Arcane" }
+  },
+  "tones": {
+    "fumble": {
+      "awkward": { "en": "Awkward", "de": "Unbeholfen", "fr": "Maladroit" },
+      "embarrassing": { "en": "Embarrassing", "de": "Peinlich", "fr": "Gênant" },
+      "shameful": { "en": "Shameful", "de": "Beschämend", "fr": "Honteux" },
+      "disgraceful": { "en": "Disgraceful", "de": "Schmachvoll", "fr": "Déshonorant" },
+      "painful": { "en": "Painful", "de": "Schmerzhaft", "fr": "Douloureux" },
+      "comic": { "en": "Comic", "de": "Komisch", "fr": "Comique" }
+    },
+    "glory": {
+      "heroic": { "en": "Heroic", "de": "Heldenhaft", "fr": "Héroïque" },
+      "flashy": { "en": "Flashy", "de": "Spektakulär", "fr": "Spectaculaire" },
+      "brutal": { "en": "Brutal", "de": "Brutal", "fr": "Brutal" },
+      "lucky": { "en": "Lucky", "de": "Glücklich", "fr": "Chanceux" }
+    }
+  },
+  "severities": {
+    "mild": { "en": "Mild", "de": "Mild", "fr": "Léger" },
+    "medium": { "en": "Medium", "de": "Mittel", "fr": "Moyen" },
+    "harsh": { "en": "Harsh", "de": "Hart", "fr": "Sévère" }
+  }
+}

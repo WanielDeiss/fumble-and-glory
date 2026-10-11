@@ -1,0 +1,51 @@
+{
+  "id": "core-glory",
+  "name": { "en": "Core glories", "de": "Basis-Triumphe", "fr": "Triomphes de base" },
+  "cards": [
+    {
+      "id": "glory-martial-whirling-strike",
+      "kind": "glory",
+      "classGroups": ["martial"],
+      "tones": ["heroic"],
+      "severity": "medium",
+      "i18n": {
+        "en": { "title": "Whirling Strike", "effect": "The same roll also hits a second enemy within your reach.", "duration": "Immediately" },
+        "de": { "title": "Wirbelnder Hieb", "effect": "Du triffst mit demselben Wurf einen zweiten Gegner in Reichweite.", "duration": "Sofort" }
+      }
+    },
+    {
+      "id": "glory-ranged-through-the-gap",
+      "kind": "glory",
+      "classGroups": ["ranged"],
+      "tones": ["flashy"],
+      "severity": "medium",
+      "i18n": {
+        "en": { "title": "Through the Gap", "effect": "Your attack ignores cover and deals an extra 1d6 damage.", "duration": "Immediately" },
+        "de": { "title": "Pfeil durch die Lücke", "effect": "Dein Angriff ignoriert Deckung und verursacht 1d6 zusätzlichen Schaden.", "duration": "Sofort" },
+        "fr": { "title": "Par la faille", "effect": "Ton attaque ignore l'abri et inflige 1d6 dégâts supplémentaires.", "duration": "Immédiatement" }
+      }
+    },
+    {
+      "id": "glory-arcane-echoing-incantation",
+      "kind": "glory",
+      "classGroups": ["arcane"],
+      "tones": ["heroic", "flashy"],
+      "severity": "medium",
+      "i18n": {
+        "en": { "title": "Echoing Incantation", "effect": "The target has disadvantage on saving throws against your spells.", "duration": "1d4 rounds" },
+        "de": { "title": "Widerhallende Beschwörung", "effect": "Das Ziel hat Nachteil auf Rettungswürfe gegen deine Zauber.", "duration": "1d4 Runden" }
+      }
+    },
+    {
+      "id": "glory-any-rallying-cry",
+      "kind": "glory",
+      "classGroups": [],
+      "tones": ["heroic"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Rallying Cry", "effect": "Allies within 30 feet add 1d4 to their next attack roll.", "duration": "Until the end of the round" },
+        "de": { "title": "Ruf zur Sammlung", "effect": "Verbündete im Umkreis von 9 m erhalten 1d4 auf ihren nächsten Angriffswurf.", "duration": "Bis zum Ende der Runde" }
+      }
+    }
+  ]
+}

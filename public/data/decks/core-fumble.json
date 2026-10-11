@@ -1,0 +1,73 @@
+{
+  "id": "core-fumble",
+  "name": { "en": "Core fumbles", "de": "Basis-Patzer", "fr": "Échecs de base" },
+  "cards": [
+    {
+      "id": "fumble-martial-lost-footing",
+      "kind": "fumble",
+      "classGroups": ["martial"],
+      "tones": ["awkward"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Lost Footing", "effect": "You stumble and move 5 feet back from the target.", "duration": "Immediately" },
+        "de": { "title": "Verlorener Stand", "effect": "Du stolperst und weichst 1,5 m vom Ziel zurück.", "duration": "Sofort" },
+        "fr": { "title": "Perte d'appui", "effect": "Tu trébuches et recules de 1,5 m par rapport à la cible.", "duration": "Immédiatement" }
+      }
+    },
+    {
+      "id": "fumble-martial-stuck-blade",
+      "kind": "fumble",
+      "classGroups": ["martial"],
+      "tones": ["embarrassing"],
+      "severity": "medium",
+      "i18n": {
+        "en": { "title": "Stuck Blade", "effect": "Your weapon gets stuck. You need a bonus action to free it.", "duration": "Until you free it" },
+        "de": { "title": "Klinge im Boden", "effect": "Deine Waffe bleibt stecken. Du brauchst eine Bonusaktion, um sie zu befreien.", "duration": "Bis du sie befreist" }
+      }
+    },
+    {
+      "id": "fumble-ranged-slipped-string",
+      "kind": "fumble",
+      "classGroups": ["ranged"],
+      "tones": ["embarrassing"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Slipped Bowstring", "effect": "You don't add your damage bonus to your next attack.", "duration": "Until the end of your next turn" },
+        "de": { "title": "Verrutschte Bogensehne", "effect": "Du addierst deinen Schadensbonus nicht zu deinem nächsten Angriff.", "duration": "Bis zum Ende deines nächsten Zuges" }
+      }
+    },
+    {
+      "id": "fumble-ranged-friendly-fire",
+      "kind": "fumble",
+      "classGroups": ["ranged"],
+      "tones": ["shameful", "painful"],
+      "severity": "harsh",
+      "i18n": {
+        "en": { "title": "Friendly Fire", "effect": "Your shot grazes the nearest ally instead. Roll damage against them with no bonus.", "duration": "Immediately" },
+        "de": { "title": "Eigenbeschuss", "effect": "Dein Schuss streift stattdessen den nächsten Verbündeten. Würfle Schaden gegen ihn, ohne Bonus.", "duration": "Sofort" }
+      }
+    },
+    {
+      "id": "fumble-arcane-stuttered-formula",
+      "kind": "fumble",
+      "classGroups": ["arcane"],
+      "tones": ["shameful"],
+      "severity": "medium",
+      "i18n": {
+        "en": { "title": "Stuttered Formula", "effect": "The target has advantage on saving throws against your spells.", "duration": "1d4 rounds" },
+        "de": { "title": "Stotternde Formel", "effect": "Das Ziel hat Vorteil auf Rettungswürfe gegen deine Zauber.", "duration": "1d4 Runden" },
+        "fr": { "title": "Formule bégayée", "effect": "La cible a l'avantage aux jets de sauvegarde contre tes sorts.", "duration": "1d4 rounds" }
+      }
+    },
+    {
+      "id": "fumble-any-own-feet",
+      "kind": "fumble",
+      "classGroups": [],
+      "tones": ["comic", "embarrassing"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Over Your Own Feet", "effect": "You fall and are prone.", "duration": "Until you stand up" }
+      }
+    }
+  ]
+}

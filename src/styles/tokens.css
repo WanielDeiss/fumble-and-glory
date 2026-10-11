@@ -1,0 +1,60 @@
+/* Fumble & Glory design tokens. Source of truth: the "Fumble & Glory" design system (tokens.json). */
+:root,
+[data-theme="parchment"] {
+  --surface: #f3ead8;
+  --surface-raised: #fbf6ea;
+  --line: #d8c7a4;
+  --line-strong: #8c7656;
+  --ink: #2a1f14;
+  --ink-muted: #6a5944;
+  --fumble: #9e2a24;
+  --fumble-soft: #f6dcd3;
+  --on-fumble: #fff7ec;
+  --glory: #c9952a;
+  --glory-ink: #7a5608;
+  --glory-soft: #f5e6bf;
+  --on-glory: #2a1f14;
+  --class-martial: #5b4636;
+  --class-ranged: #3f6131;
+  --class-arcane: #3a5486;
+  --focus: #2a5bd7;
+  --shadow-card: 0 1px 2px rgba(42, 31, 20, 0.12), 0 8px 24px rgba(42, 31, 20, 0.14);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="parchment"]) {
+    --surface: #17130f;
+    --surface-raised: #241d17;
+    --line: #43382c;
+    --line-strong: #8a775c;
+    --ink: #f1e6d2;
+    --ink-muted: #b9a78c;
+    --fumble: #e8675e;
+    --fumble-soft: #3d1a16;
+    --on-fumble: #17130f;
+    --glory: #e2b54f;
+    --glory-ink: #e9c46a;
+    --glory-soft: #3a2e12;
+    --on-glory: #17130f;
+    --class-martial: #c9a98d;
+    --class-ranged: #9cc58a;
+    --class-arcane: #9db6e8;
+    --focus: #8fb3ff;
+    --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.5), 0 10px 28px rgba(0, 0, 0, 0.55);
+  }
+}
+
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --radius-sm: 4px;
+  --radius-md: 10px;
+  --radius-card: 16px;
+  --radius-pill: 999px;
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-sans: "Alegreya Sans", "Segoe UI", system-ui, sans-serif;
+}
