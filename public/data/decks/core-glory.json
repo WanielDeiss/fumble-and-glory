@@ -46,6 +46,438 @@
         "en": { "title": "Rallying Cry", "effect": "Allies within 30 feet add 1d4 to their next attack roll.", "duration": "Until the end of the round" },
         "de": { "title": "Ruf zur Sammlung", "effect": "Verbündete im Umkreis von 9 m erhalten 1d4 auf ihren nächsten Angriffswurf.", "duration": "Bis zum Ende der Runde" }
       }
+    },
+    {
+      "id": "glory-any-reeling",
+      "kind": "glory",
+      "classGroups": [],
+      "tones": ["brutal"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Reeling", "effect": "Your hit leaves the target dazed. It can't take reactions.", "duration": "Until the start of its next turn" },
+        "de": { "title": "Benommen", "effect": "Dein Treffer lässt das Ziel taumeln. Es kann keine Reaktionen ausführen.", "duration": "Bis zum Beginn seines nächsten Zuges" },
+        "fr": { "title": "Sonné", "effect": "Ton coup laisse la cible hébétée. Elle ne peut pas effectuer de réaction.", "duration": "Jusqu'au début de son prochain tour" }
+      }
+    },
+    {
+      "id": "glory-arcane-splash",
+      "kind": "glory",
+      "classGroups": ["arcane"],
+      "tones": ["flashy"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Splash", "effect": "Your spell bursts on impact. The target and any creatures you choose within 5 feet of it take an extra 1d4 damage of the spell's type.", "duration": "Immediately" },
+        "de": { "title": "Aufprallwelle", "effect": "Dein Zauber zerbirst beim Aufprall. Das Ziel und beliebige Kreaturen deiner Wahl im Umkreis von 1,5 m erleiden 1d4 zusätzlichen Schaden der Schadensart des Zaubers.", "duration": "Sofort" },
+        "fr": { "title": "Éclaboussure", "effect": "Ton sort éclate à l'impact. La cible et les créatures de ton choix à 1,5 m ou moins d'elle subissent 1d4 dégâts supplémentaires du type du sort.", "duration": "Immédiatement" }
+      }
+    },
+    {
+      "id": "glory-arcane-trail-of-fire",
+      "kind": "glory",
+      "classGroups": ["arcane"],
+      "tones": ["flashy"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Trail of Fire", "effect": "Flames streak 15 feet along the ground from the target's space in a 5-foot-wide line. The first creature to enter it or start its turn there takes 1d6 fire damage, then the flames die.", "duration": "Until the start of your next turn" },
+        "de": { "title": "Feuerspur", "effect": "Vom Feld des Ziels zieht sich eine 4,5 m lange, 1,5 m breite Flammenlinie über den Boden. Die erste Kreatur, die sie betritt oder dort ihren Zug beginnt, erleidet 1d6 Feuerschaden, dann erlöschen die Flammen.", "duration": "Bis zum Beginn deines nächsten Zuges" },
+        "fr": { "title": "Traînée de feu", "effect": "Une ligne de flammes de 4,5 m de long et 1,5 m de large part de l'emplacement de la cible. La première créature qui y entre ou y commence son tour subit 1d6 dégâts de feu, puis les flammes s'éteignent.", "duration": "Jusqu'au début de ton prochain tour" }
+      }
+    },
+    {
+      "id": "glory-arcane-softened-up",
+      "kind": "glory",
+      "classGroups": ["arcane"],
+      "tones": ["brutal"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Softened Up", "effect": "Your spell weakens the target's defenses. Its AC is reduced by 1; this doesn't stack with itself.", "duration": "Until the start of your next turn" },
+        "de": { "title": "Aufgeweicht", "effect": "Dein Zauber schwächt die Abwehr des Ziels. Seine RK sinkt um 1; mehrere solcher Effekte sind nicht kumulativ.", "duration": "Bis zum Beginn deines nächsten Zuges" },
+        "fr": { "title": "Défenses fondues", "effect": "Ton sort affaiblit les défenses de la cible. Sa CA est réduite de 1 ; cet effet ne se cumule pas.", "duration": "Jusqu'au début de ton prochain tour" }
+      }
+    },
+    {
+      "id": "glory-arcane-shockwave",
+      "kind": "glory",
+      "classGroups": ["arcane"],
+      "tones": ["brutal"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Shockwave", "effect": "The force of your spell hurls the target back. If it is Large or smaller, it is pushed up to 10 feet directly away from you.", "duration": "Immediately" },
+        "de": { "title": "Druckwelle", "effect": "Die Wucht deines Zaubers schleudert das Ziel zurück. Ist es groß oder kleiner, wird es bis zu 3 m direkt von dir weggestoßen.", "duration": "Sofort" },
+        "fr": { "title": "Onde de choc", "effect": "La force de ton sort projette la cible. Si elle est de taille G ou inférieure, elle est repoussée de 3 m au maximum en s'éloignant directement de toi.", "duration": "Immédiatement" }
+      }
+    },
+    {
+      "id": "glory-arcane-afterburn",
+      "kind": "glory",
+      "classGroups": ["arcane"],
+      "tones": ["brutal"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Afterburn", "effect": "Your spell keeps eating at the target. At the start of its next turn, it takes an extra 1d6 damage of the spell's type.", "duration": "Until the start of its next turn" },
+        "de": { "title": "Nachbrennen", "effect": "Dein Zauber zehrt weiter am Ziel. Zu Beginn seines nächsten Zuges erleidet es 1d6 zusätzlichen Schaden der Schadensart des Zaubers.", "duration": "Bis zum Beginn seines nächsten Zuges" },
+        "fr": { "title": "Brûlure persistante", "effect": "Ton sort continue de ronger la cible. Au début de son prochain tour, elle subit 1d6 dégâts supplémentaires du type du sort.", "duration": "Jusqu'au début de son prochain tour" }
+      }
+    },
+    {
+      "id": "glory-arcane-arcing-spell",
+      "kind": "glory",
+      "classGroups": ["arcane"],
+      "tones": ["flashy"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Arcing Spell", "effect": "Your spell leaps onward. Another creature you can see within 15 feet of the target takes damage of the spell's type equal to your proficiency bonus.", "duration": "Immediately" },
+        "de": { "title": "Überspringender Zauber", "effect": "Dein Zauber springt über. Eine andere Kreatur, die du im Umkreis von 4,5 m um das Ziel sehen kannst, erleidet Schaden der Schadensart des Zaubers in Höhe deines Übungsbonus.", "duration": "Sofort" },
+        "fr": { "title": "Arc magique", "effect": "Ton sort rebondit. Une autre créature que tu vois à 4,5 m ou moins de la cible subit des dégâts du type du sort égaux à ton bonus de maîtrise.", "duration": "Immédiatement" }
+      }
+    },
+    {
+      "id": "glory-arcane-in-the-flow",
+      "kind": "glory",
+      "classGroups": ["arcane"],
+      "tones": ["lucky"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "In the Flow", "effect": "The magic comes easily now. You have advantage on your next spell attack roll.", "duration": "Until the end of your next turn" },
+        "de": { "title": "Im Fluss", "effect": "Die Magie fließt jetzt mühelos. Du hast Vorteil auf deinen nächsten Zauberangriffswurf.", "duration": "Bis zum Ende deines nächsten Zuges" },
+        "fr": { "title": "Dans le flux", "effect": "La magie vient toute seule. Tu as l'avantage à ton prochain jet d'attaque de sort.", "duration": "Jusqu'à la fin de ton prochain tour" }
+      }
+    },
+    {
+      "id": "glory-arcane-arcane-mark",
+      "kind": "glory",
+      "classGroups": ["arcane"],
+      "tones": ["heroic"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Arcane Mark", "effect": "A glowing mark lingers on the target. The next attack that hits it deals an extra 1d6 damage, then the mark fades.", "duration": "Until the start of your next turn" },
+        "de": { "title": "Arkanes Mal", "effect": "Ein leuchtendes Mal bleibt auf dem Ziel. Der nächste Angriff, der es trifft, verursacht 1d6 zusätzlichen Schaden, dann verblasst das Mal.", "duration": "Bis zum Beginn deines nächsten Zuges" },
+        "fr": { "title": "Marque arcanique", "effect": "Une marque lumineuse reste sur la cible. La prochaine attaque qui la touche inflige 1d6 dégâts supplémentaires, puis la marque s'efface.", "duration": "Jusqu'au début de ton prochain tour" }
+      }
+    },
+    {
+      "id": "glory-arcane-overflow",
+      "kind": "glory",
+      "classGroups": ["arcane"],
+      "tones": ["brutal"],
+      "severity": "medium",
+      "i18n": {
+        "en": { "title": "Overflow", "effect": "Raw power floods your spell. Roll one extra damage die of the spell; like the others, it's doubled by the critical hit.", "duration": "Immediately" },
+        "de": { "title": "Überfluss", "effect": "Rohe Macht flutet deinen Zauber. Würfle einen zusätzlichen Schadenswürfel des Zaubers; wie die anderen wird er durch den kritischen Treffer verdoppelt.", "duration": "Sofort" },
+        "fr": { "title": "Débordement", "effect": "Une puissance brute inonde ton sort. Lance un dé de dégâts supplémentaire du sort ; comme les autres, il est doublé par le coup critique.", "duration": "Immédiatement" }
+      }
+    },
+    {
+      "id": "glory-martial-heavy-hand",
+      "kind": "glory",
+      "classGroups": ["martial"],
+      "tones": ["brutal"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Heavy Hand", "effect": "You put your full weight behind it. The target takes extra damage equal to your proficiency bonus.", "duration": "Immediately" },
+        "de": { "title": "Schwere Hand", "effect": "Du legst dein ganzes Gewicht hinein. Das Ziel erleidet zusätzlichen Schaden in Höhe deines Übungsbonus.", "duration": "Sofort" },
+        "fr": { "title": "Main lourde", "effect": "Tu y mets tout ton poids. La cible subit des dégâts supplémentaires égaux à ton bonus de maîtrise.", "duration": "Immédiatement" }
+      }
+    },
+    {
+      "id": "glory-martial-thrown-off",
+      "kind": "glory",
+      "classGroups": ["martial"],
+      "tones": ["heroic"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Thrown Off", "effect": "Your blow knocks the target off balance. It has disadvantage on its next attack roll.", "duration": "Until the end of its next turn" },
+        "de": { "title": "Aus dem Konzept", "effect": "Dein Schlag bringt das Ziel aus dem Gleichgewicht. Es hat Nachteil auf seinen nächsten Angriffswurf.", "duration": "Bis zum Ende seines nächsten Zuges" },
+        "fr": { "title": "Déstabilisé", "effect": "Ton coup déséquilibre la cible. Elle a le désavantage à son prochain jet d'attaque.", "duration": "Jusqu'à la fin de son prochain tour" }
+      }
+    },
+    {
+      "id": "glory-martial-bulldozer",
+      "kind": "glory",
+      "classGroups": ["martial"],
+      "tones": ["brutal"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Bulldozer", "effect": "You drive the target back. You can push it up to 5 feet away from you if it is no more than one size larger than you.", "duration": "Immediately" },
+        "de": { "title": "Rammbock", "effect": "Du treibst das Ziel zurück. Du kannst es bis zu 1,5 m von dir wegstoßen, wenn es höchstens eine Größenkategorie größer ist als du.", "duration": "Sofort" },
+        "fr": { "title": "Bélier", "effect": "Tu fais reculer la cible. Tu peux la repousser de 1,5 m au maximum si elle ne fait pas plus d'une catégorie de taille de plus que toi.", "duration": "Immédiatement" }
+      }
+    },
+    {
+      "id": "glory-martial-leg-sweep",
+      "kind": "glory",
+      "classGroups": ["martial"],
+      "tones": ["brutal"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Leg Sweep", "effect": "You knock the target's legs out. It makes a Strength saving throw (DC 8 + your proficiency bonus + your Strength modifier) or falls prone.", "duration": "Immediately" },
+        "de": { "title": "Beinfeger", "effect": "Du holst dem Ziel die Beine weg. Es macht einen Stärkerettungswurf (SG 8 + dein Übungsbonus + dein Stärkemodifikator) oder liegt am Boden.", "duration": "Sofort" },
+        "fr": { "title": "Fauchage", "effect": "Tu fauches les jambes de la cible. Elle fait un jet de sauvegarde de Force (DD 8 + ton bonus de maîtrise + ton modificateur de Force) ou tombe à terre.", "duration": "Immédiatement" }
+      }
+    },
+    {
+      "id": "glory-martial-ringing-ears",
+      "kind": "glory",
+      "classGroups": ["martial"],
+      "tones": ["flashy"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Ringing Ears", "effect": "Your strike rings out like a bell. The target has disadvantage on Wisdom (Perception) checks that rely on hearing and can't make opportunity attacks.", "duration": "Until the start of its next turn" },
+        "de": { "title": "Klingelnde Ohren", "effect": "Dein Schlag hallt wie eine Glocke. Das Ziel hat Nachteil auf Weisheitswürfe (Wahrnehmung), die auf Gehör beruhen, und kann keine Gelegenheitsangriffe ausführen.", "duration": "Bis zum Beginn seines nächsten Zuges" },
+        "fr": { "title": "Oreilles qui sifflent", "effect": "Ton coup résonne comme une cloche. La cible a le désavantage aux tests de Sagesse (Perception) basés sur l'ouïe et ne peut pas faire d'attaque d'opportunité.", "duration": "Jusqu'au début de son prochain tour" }
+      }
+    },
+    {
+      "id": "glory-martial-buckled-shield",
+      "kind": "glory",
+      "classGroups": ["martial"],
+      "tones": ["brutal"],
+      "severity": "medium",
+      "i18n": {
+        "en": { "title": "Buckled Shield", "effect": "If the target holds a nonmagical shield, its AC bonus drops by 1 until repaired (doesn't stack). Otherwise, the target takes an extra 1d4 damage.", "duration": "Until repaired" },
+        "de": { "title": "Verbeulter Schild", "effect": "Trägt das Ziel einen nichtmagischen Schild, sinkt dessen RK-Bonus bis zur Reparatur um 1 (nicht kumulativ). Andernfalls erleidet das Ziel 1d4 zusätzlichen Schaden.", "duration": "Bis zur Reparatur" },
+        "fr": { "title": "Bouclier cabossé", "effect": "Si la cible porte un bouclier non magique, son bonus de CA diminue de 1 jusqu'à réparation (non cumulable). Sinon, la cible subit 1d4 dégâts supplémentaires.", "duration": "Jusqu'à réparation" }
+      }
+    },
+    {
+      "id": "glory-martial-split-armor",
+      "kind": "glory",
+      "classGroups": ["martial"],
+      "tones": ["brutal"],
+      "severity": "medium",
+      "i18n": {
+        "en": { "title": "Split Armor", "effect": "If the target wears nonmagical armor, its AC drops by 1 until repaired (doesn't stack). Otherwise, the target takes an extra 1d6 damage.", "duration": "Until repaired" },
+        "de": { "title": "Gesprengte Rüstung", "effect": "Trägt das Ziel eine nichtmagische Rüstung, sinkt seine RK bis zur Reparatur um 1 (nicht kumulativ). Andernfalls erleidet es 1d6 zusätzlichen Schaden.", "duration": "Bis zur Reparatur" },
+        "fr": { "title": "Armure fendue", "effect": "Si la cible porte une armure non magique, sa CA diminue de 1 jusqu'à réparation (non cumulable). Sinon, elle subit 1d6 dégâts supplémentaires.", "duration": "Jusqu'à réparation" }
+      }
+    },
+    {
+      "id": "glory-martial-quake",
+      "kind": "glory",
+      "classGroups": ["martial"],
+      "tones": ["flashy"],
+      "severity": "medium",
+      "i18n": {
+        "en": { "title": "Quake", "effect": "Part of the blow shakes the ground. Each other creature within 5 feet of you makes a Dexterity saving throw (DC 8 + your proficiency bonus + your Strength modifier) or takes 1d4 bludgeoning damage and is pushed 5 feet away.", "duration": "Immediately" },
+        "de": { "title": "Beben", "effect": "Ein Teil des Schlags lässt den Boden beben. Jede andere Kreatur im Umkreis von 1,5 m macht einen Geschicklichkeitsrettungswurf (SG 8 + dein Übungsbonus + dein Stärkemodifikator) oder erleidet 1d4 Wuchtschaden und wird 1,5 m weggestoßen.", "duration": "Sofort" },
+        "fr": { "title": "Séisme", "effect": "Une partie du coup fait trembler le sol. Chaque autre créature à 1,5 m ou moins de toi fait un jet de sauvegarde de Dextérité (DD 8 + bonus de maîtrise + mod. de Force) ou subit 1d4 dégâts contondants et est repoussée de 1,5 m.", "duration": "Immédiatement" }
+      }
+    },
+    {
+      "id": "glory-martial-bone-breaker",
+      "kind": "glory",
+      "classGroups": ["martial"],
+      "tones": ["brutal"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Bone Breaker", "effect": "Something cracks under your blow. The target takes an extra 1d8 damage.", "duration": "Immediately" },
+        "de": { "title": "Knochenbrecher", "effect": "Unter deinem Schlag knackt etwas. Das Ziel erleidet 1d8 zusätzlichen Schaden.", "duration": "Sofort" },
+        "fr": { "title": "Brise-os", "effect": "Quelque chose craque sous ton coup. La cible subit 1d8 dégâts supplémentaires.", "duration": "Immédiatement" }
+      }
+    },
+    {
+      "id": "glory-martial-ready-guard",
+      "kind": "glory",
+      "classGroups": ["martial"],
+      "tones": ["heroic"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Ready Guard", "effect": "You snap back into a defensive stance. The next time a melee attack hits you, reduce the damage by one roll of your weapon's damage die.", "duration": "Until the start of your next turn" },
+        "de": { "title": "Sofortige Deckung", "effect": "Du gehst sofort wieder in Abwehrhaltung. Trifft dich der nächste Nahkampfangriff, verringerst du den Schaden um einen Wurf deines Waffenschadenswürfels.", "duration": "Bis zum Beginn deines nächsten Zuges" },
+        "fr": { "title": "Garde relevée", "effect": "Tu reprends aussitôt une posture défensive. La prochaine fois qu'une attaque au corps à corps te touche, réduis les dégâts d'un jet du dé de dégâts de ton arme.", "duration": "Jusqu'au début de ton prochain tour" }
+      }
+    },
+    {
+      "id": "glory-martial-steered",
+      "kind": "glory",
+      "classGroups": ["martial"],
+      "tones": ["flashy"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Steered", "effect": "You catch the target with your weapon and steer it. Move it up to 5 feet into an empty space within your reach.", "duration": "Immediately" },
+        "de": { "title": "Umgelenkt", "effect": "Du hakst das Ziel mit deiner Waffe ein und lenkst es um. Versetze es bis zu 1,5 m auf ein freies Feld in deiner Reichweite.", "duration": "Sofort" },
+        "fr": { "title": "Dirigé", "effect": "Tu accroches la cible avec ton arme et la déplaces. Déplace-la de 1,5 m au maximum vers un emplacement libre à ton allonge.", "duration": "Immédiatement" }
+      }
+    },
+    {
+      "id": "glory-martial-opening",
+      "kind": "glory",
+      "classGroups": ["martial"],
+      "tones": ["heroic"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Opening", "effect": "Your weapon cuts through the target's defenses. The next attack roll against it gets a +2 bonus.", "duration": "Until the start of your next turn" },
+        "de": { "title": "Lücke", "effect": "Deine Waffe durchbricht die Abwehr des Ziels. Der nächste Angriffswurf gegen es erhält +2.", "duration": "Bis zum Beginn deines nächsten Zuges" },
+        "fr": { "title": "Brèche", "effect": "Ton arme perce les défenses de la cible. Le prochain jet d'attaque contre elle bénéficie d'un bonus de +2.", "duration": "Jusqu'au début de ton prochain tour" }
+      }
+    },
+    {
+      "id": "glory-martial-hobbled",
+      "kind": "glory",
+      "classGroups": ["martial"],
+      "tones": ["brutal"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Hobbled", "effect": "You strike the target's legs. Its speed is halved and it can't take the Dash action.", "duration": "Until the end of its next turn" },
+        "de": { "title": "Lahmgelegt", "effect": "Du triffst das Ziel an den Beinen. Seine Bewegungsrate ist halbiert und es kann die Aktion Spurt nicht nutzen.", "duration": "Bis zum Ende seines nächsten Zuges" },
+        "fr": { "title": "Entravé", "effect": "Tu frappes la cible aux jambes. Sa vitesse est réduite de moitié et elle ne peut pas effectuer l'action Foncer.", "duration": "Jusqu'à la fin de son prochain tour" }
+      }
+    },
+    {
+      "id": "glory-martial-deep-cut",
+      "kind": "glory",
+      "classGroups": ["martial"],
+      "tones": ["brutal"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Deep Cut", "effect": "The wound keeps bleeding. At the start of its next turn, the target takes damage equal to one roll of your weapon's damage die, unless a creature uses its action to staunch it.", "duration": "Until the start of its next turn" },
+        "de": { "title": "Tiefe Wunde", "effect": "Die Wunde blutet weiter. Zu Beginn seines nächsten Zuges erleidet das Ziel Schaden in Höhe eines Wurfs deines Waffenschadenswürfels, außer eine Kreatur stillt die Blutung mit ihrer Aktion.", "duration": "Bis zum Beginn seines nächsten Zuges" },
+        "fr": { "title": "Entaille profonde", "effect": "La blessure continue de saigner. Au début de son prochain tour, la cible subit des dégâts égaux à un jet du dé de dégâts de ton arme, sauf si une créature utilise son action pour arrêter le saignement.", "duration": "Jusqu'au début de son prochain tour" }
+      }
+    },
+    {
+      "id": "glory-martial-momentum",
+      "kind": "glory",
+      "classGroups": ["martial"],
+      "tones": ["flashy"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Momentum", "effect": "You ride the swing forward. You can immediately move up to half your speed without provoking opportunity attacks from the target.", "duration": "Immediately" },
+        "de": { "title": "Schwung", "effect": "Du nutzt den Schwung. Du kannst dich sofort bis zur Hälfte deiner Bewegungsrate bewegen, ohne Gelegenheitsangriffe des Ziels auszulösen.", "duration": "Sofort" },
+        "fr": { "title": "Élan", "effect": "Tu profites de ton élan. Tu peux immédiatement te déplacer de la moitié de ta vitesse sans provoquer d'attaque d'opportunité de la cible.", "duration": "Immédiatement" }
+      }
+    },
+    {
+      "id": "glory-martial-follow-up",
+      "kind": "glory",
+      "classGroups": ["martial"],
+      "tones": ["heroic"],
+      "severity": "medium",
+      "i18n": {
+        "en": { "title": "Follow-Up", "effect": "You don't let up. Immediately make one more attack with the same weapon against the same target, with advantage. It can't trigger another glory card.", "duration": "Immediately" },
+        "de": { "title": "Nachsetzen", "effect": "Du lässt nicht locker. Führe sofort einen weiteren Angriff mit derselben Waffe gegen dasselbe Ziel aus, mit Vorteil. Er kann keinen weiteren Triumph auslösen.", "duration": "Sofort" },
+        "fr": { "title": "Enchaînement", "effect": "Tu ne relâches pas la pression. Fais immédiatement une attaque supplémentaire avec la même arme contre la même cible, avec avantage. Elle ne peut pas déclencher d'autre triomphe.", "duration": "Immédiatement" }
+      }
+    },
+    {
+      "id": "glory-martial-cyclone",
+      "kind": "glory",
+      "classGroups": ["martial"],
+      "tones": ["flashy"],
+      "severity": "harsh",
+      "i18n": {
+        "en": { "title": "Cyclone", "effect": "You spin in a wide arc. Make one attack against each creature of your choice within your reach. These attacks can't trigger more glory cards.", "duration": "Immediately" },
+        "de": { "title": "Wirbelsturm", "effect": "Du wirbelst in einem weiten Bogen herum. Führe einen Angriff gegen jede Kreatur deiner Wahl in deiner Reichweite aus. Diese Angriffe lösen keine weiteren Triumphe aus.", "duration": "Sofort" },
+        "fr": { "title": "Cyclone", "effect": "Tu tournoies en un large arc. Fais une attaque contre chaque créature de ton choix à ton allonge. Ces attaques ne peuvent pas déclencher d'autres triomphes.", "duration": "Immédiatement" }
+      }
+    },
+    {
+      "id": "glory-weapon-crippled",
+      "kind": "glory",
+      "classGroups": ["martial", "ranged"],
+      "tones": ["brutal"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Crippled", "effect": "You hit a leg, wing or other limb it moves with. The target's speed is reduced by 10 feet, or its flying speed by 20 feet.", "duration": "Until the end of its next turn" },
+        "de": { "title": "Verkrüppelt", "effect": "Du triffst ein Bein, einen Flügel oder ein anderes Glied, mit dem es sich bewegt. Die Bewegungsrate des Ziels sinkt um 3 m, seine Flugbewegungsrate um 6 m.", "duration": "Bis zum Ende seines nächsten Zuges" },
+        "fr": { "title": "Estropié", "effect": "Tu touches une jambe, une aile ou un autre membre servant à se déplacer. La vitesse de la cible est réduite de 3 m, sa vitesse de vol de 6 m.", "duration": "Jusqu'à la fin de son prochain tour" }
+      }
+    },
+    {
+      "id": "glory-weapon-knocked-loose",
+      "kind": "glory",
+      "classGroups": ["martial", "ranged"],
+      "tones": ["flashy"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Knocked Loose", "effect": "You strike something the target is holding. It makes a Strength saving throw (DC 8 + your proficiency bonus + the modifier you attacked with) or drops one held object of your choice at its feet.", "duration": "Immediately" },
+        "de": { "title": "Aus der Hand geschlagen", "effect": "Du triffst etwas, das das Ziel hält. Es macht einen Stärkerettungswurf (SG 8 + dein Übungsbonus + der Modifikator deines Angriffs) oder lässt einen gehaltenen Gegenstand deiner Wahl vor seine Füße fallen.", "duration": "Sofort" },
+        "fr": { "title": "Désarmé", "effect": "Tu frappes un objet que tient la cible. Elle fait un jet de sauvegarde de Force (DD 8 + ton bonus de maîtrise + le modificateur de ton attaque) ou lâche à ses pieds un objet tenu de ton choix.", "duration": "Immédiatement" }
+      }
+    },
+    {
+      "id": "glory-ranged-pinned",
+      "kind": "glory",
+      "classGroups": ["ranged"],
+      "tones": ["flashy"],
+      "severity": "medium",
+      "i18n": {
+        "en": { "title": "Pinned", "effect": "Your shot nails the target to a nearby surface. It makes a Strength saving throw (DC 8 + your proficiency bonus + your Dexterity modifier) or its speed is 0. It succeeds automatically if no solid surface is within 5 feet.", "duration": "Until the start of your next turn" },
+        "de": { "title": "Festgenagelt", "effect": "Dein Schuss nagelt das Ziel an eine nahe Fläche. Es macht einen Stärkerettungswurf (SG 8 + Übungsbonus + GE-Modifikator), sonst ist seine Bewegungsrate 0. Ohne feste Fläche im Umkreis von 1,5 m gelingt der Wurf automatisch.", "duration": "Bis zum Beginn deines nächsten Zuges" },
+        "fr": { "title": "Cloué", "effect": "Ton tir cloue la cible à une surface proche. Elle fait un jet de sauvegarde de Force (DD 8 + bonus de maîtrise + mod. de Dex) ou sa vitesse tombe à 0. Elle réussit d'office sans surface solide à 1,5 m.", "duration": "Jusqu'au début de ton prochain tour" }
+      }
+    },
+    {
+      "id": "glory-ranged-cover-breaker",
+      "kind": "glory",
+      "classGroups": ["ranged"],
+      "tones": ["flashy"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Cover Breaker", "effect": "Your shot smashes through the target's protection. It gets no benefit from half cover and only +2 AC from three-quarters cover.", "duration": "Until the start of your next turn" },
+        "de": { "title": "Deckungsbrecher", "effect": "Dein Schuss durchschlägt den Schutz des Ziels. Halbe Deckung nützt ihm nichts, Dreivierteldeckung gibt nur +2 auf die RK.", "duration": "Bis zum Beginn deines nächsten Zuges" },
+        "fr": { "title": "Brise-abri", "effect": "Ton tir traverse la protection de la cible. Un abri partiel ne lui sert à rien et un abri important ne lui donne que +2 à la CA.", "duration": "Jusqu'au début de ton prochain tour" }
+      }
+    },
+    {
+      "id": "glory-ranged-pass-through",
+      "kind": "glory",
+      "classGroups": ["ranged"],
+      "tones": ["flashy"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Pass-Through", "effect": "Your shot punches clean through. Pick a creature directly behind the target within 10 feet of it; if your attack roll would hit it, it takes piercing damage equal to one roll of your weapon's damage die.", "duration": "Immediately" },
+        "de": { "title": "Durchschuss", "effect": "Dein Schuss geht glatt hindurch. Wähle eine Kreatur direkt hinter dem Ziel im Umkreis von 3 m; trifft dein Angriffswurf auch sie, erleidet sie Stichschaden in Höhe eines Wurfs deines Waffenschadenswürfels.", "duration": "Sofort" },
+        "fr": { "title": "Transpercé", "effect": "Ton tir traverse la cible de part en part. Choisis une créature juste derrière elle à 3 m ou moins ; si ton jet d'attaque la toucherait, elle subit des dégâts perforants égaux à un jet du dé de dégâts de ton arme.", "duration": "Immédiatement" }
+      }
+    },
+    {
+      "id": "glory-ranged-weak-spot",
+      "kind": "glory",
+      "classGroups": ["ranged"],
+      "tones": ["heroic"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Weak Spot", "effect": "Your shot exposes a weakness. The next attack roll against the target has advantage.", "duration": "Until the start of your next turn" },
+        "de": { "title": "Schwachstelle", "effect": "Dein Schuss legt eine Schwäche offen. Der nächste Angriffswurf gegen das Ziel hat Vorteil.", "duration": "Bis zum Beginn deines nächsten Zuges" },
+        "fr": { "title": "Point faible", "effect": "Ton tir révèle une faiblesse. Le prochain jet d'attaque contre la cible a l'avantage.", "duration": "Jusqu'au début de ton prochain tour" }
+      }
+    },
+    {
+      "id": "glory-ranged-deflection",
+      "kind": "glory",
+      "classGroups": ["ranged"],
+      "tones": ["flashy", "lucky"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Deflection", "effect": "Your shot glances off toward another foe. A creature you can see within 15 feet of the target takes piercing damage equal to your Dexterity modifier (minimum 1).", "duration": "Immediately" },
+        "de": { "title": "Abpraller", "effect": "Dein Schuss prallt zu einem weiteren Feind ab. Eine Kreatur, die du im Umkreis von 4,5 m um das Ziel sehen kannst, erleidet Stichschaden in Höhe deines Geschicklichkeitsmodifikators (mindestens 1).", "duration": "Sofort" },
+        "fr": { "title": "Déviation", "effect": "Ton tir dévie vers un autre ennemi. Une créature que tu vois à 4,5 m ou moins de la cible subit des dégâts perforants égaux à ton modificateur de Dextérité (minimum 1).", "duration": "Immédiatement" }
+      }
+    },
+    {
+      "id": "glory-ranged-knockback",
+      "kind": "glory",
+      "classGroups": ["ranged"],
+      "tones": ["brutal"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Knockback", "effect": "Your shot drives the target backward. If it is no more than one size larger than you, it makes a Strength saving throw (DC 8 + your proficiency bonus + your Dexterity modifier) or is pushed up to 10 feet away from you.", "duration": "Immediately" },
+        "de": { "title": "Zurückgeworfen", "effect": "Dein Schuss treibt das Ziel zurück. Ist es höchstens eine Größenkategorie größer als du, macht es einen Stärkerettungswurf (SG 8 + Übungsbonus + GE-Modifikator) oder wird bis zu 3 m von dir weggestoßen.", "duration": "Sofort" },
+        "fr": { "title": "Projeté", "effect": "Ton tir repousse la cible. Si elle ne fait pas plus d'une catégorie de taille de plus que toi, elle fait un jet de sauvegarde de Force (DD 8 + bonus de maîtrise + mod. de Dex) ou est repoussée de 3 m au maximum.", "duration": "Immédiatement" }
+      }
+    },
+    {
+      "id": "glory-ranged-kill-shot",
+      "kind": "glory",
+      "classGroups": ["ranged"],
+      "tones": ["brutal"],
+      "severity": "harsh",
+      "i18n": {
+        "en": { "title": "Kill Shot", "effect": "You hit a truly vital spot. Roll two extra weapon damage dice and add them after doubling for the critical hit. The target can't take reactions and its speed is halved.", "duration": "Until the end of its next turn" },
+        "de": { "title": "Todesschuss", "effect": "Du triffst eine lebenswichtige Stelle. Würfle zwei zusätzliche Waffenschadenswürfel und addiere sie nach der Verdopplung durch den kritischen Treffer. Das Ziel kann keine Reaktionen ausführen und seine Bewegungsrate ist halbiert.", "duration": "Bis zum Ende seines nächsten Zuges" },
+        "fr": { "title": "Tir mortel", "effect": "Tu touches un point vital. Lance deux dés de dégâts d'arme supplémentaires et ajoute-les après le doublement du coup critique. La cible ne peut pas effectuer de réaction et sa vitesse est réduite de moitié.", "duration": "Jusqu'à la fin de son prochain tour" }
+      }
     }
   ]
 }

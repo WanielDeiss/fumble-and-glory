@@ -488,6 +488,414 @@
         "de": { "title": "Geliehene Jahre", "effect": "Der Zauber zehrt an deiner Lebenszeit. Mach einen Rettungswurf SG 16 mit deinem Attribut zum Zauberwirken; bei einem Fehlschlag alterst du um 5d10 Jahre.", "duration": "Dauerhaft" },
         "fr": { "title": "Années volées", "effect": "Le sort se nourrit de ta vie. Fais un jet de sauvegarde DD 16 avec ta caractéristique d'incantation ; en cas d'échec, tu vieillis de 5d10 ans.", "duration": "Permanent" }
       }
+    },
+    {
+      "id": "fumble-arcane-smoldering-fingers",
+      "kind": "fumble",
+      "classGroups": ["arcane"],
+      "tones": ["awkward"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Smoldering Fingers", "effect": "Sparks sting your fingertips. You have disadvantage on your next spell attack roll.", "duration": "Until the end of your next turn" },
+        "de": { "title": "Glimmende Finger", "effect": "Funken brennen dir in den Fingerspitzen. Du hast Nachteil auf deinen nächsten Zauberangriffswurf.", "duration": "Bis zum Ende deines nächsten Zuges" },
+        "fr": { "title": "Doigts fumants", "effect": "Des étincelles te piquent le bout des doigts. Tu as le désavantage à ton prochain jet d'attaque de sort.", "duration": "Jusqu'à la fin de ton prochain tour" }
+      }
+    },
+    {
+      "id": "fumble-arcane-stray-spell",
+      "kind": "fumble",
+      "classGroups": ["arcane"],
+      "tones": ["awkward", "comic"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Stray Spell", "effect": "Your spell hits a random empty spot within 10 feet of the target. If it deals fire damage, one unattended flammable object there catches fire.", "duration": "Immediately" },
+        "de": { "title": "Streuzauber", "effect": "Dein Zauber schlägt an einer zufälligen freien Stelle im Umkreis von 3 m um das Ziel ein. Verursacht er Feuerschaden, fängt dort ein brennbarer Gegenstand Feuer, den niemand trägt.", "duration": "Sofort" },
+        "fr": { "title": "Sort égaré", "effect": "Ton sort frappe un emplacement libre au hasard à 3 m ou moins de la cible. S'il inflige des dégâts de feu, un objet inflammable que personne ne porte s'y embrase.", "duration": "Immédiatement" }
+      }
+    },
+    {
+      "id": "fumble-arcane-dazzled",
+      "kind": "fumble",
+      "classGroups": ["arcane"],
+      "tones": ["awkward"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Dazzled", "effect": "A bright flare burns into your eyes. You are blinded to anything more than 30 feet away from you.", "duration": "Until the start of your next turn" },
+        "de": { "title": "Geblendet", "effect": "Ein greller Blitz brennt sich in deine Augen. Du bist blind für alles, was mehr als 9 m von dir entfernt ist.", "duration": "Bis zum Beginn deines nächsten Zuges" },
+        "fr": { "title": "Ébloui", "effect": "Un éclat aveuglant te brûle les yeux. Tu es aveuglé pour tout ce qui se trouve à plus de 9 m de toi.", "duration": "Jusqu'au début de ton prochain tour" }
+      }
+    },
+    {
+      "id": "fumble-arcane-kickback",
+      "kind": "fumble",
+      "classGroups": ["arcane"],
+      "tones": ["awkward"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Kickback", "effect": "The release shoves you backward. You move 5 feet directly away from the target; this doesn't provoke opportunity attacks.", "duration": "Immediately" },
+        "de": { "title": "Rückstoß", "effect": "Die Entladung stößt dich zurück. Du bewegst dich 1,5 m direkt vom Ziel weg; das löst keine Gelegenheitsangriffe aus.", "duration": "Sofort" },
+        "fr": { "title": "Recul", "effect": "La décharge te repousse. Tu te déplaces de 1,5 m en t'éloignant directement de la cible ; cela ne provoque pas d'attaque d'opportunité.", "duration": "Immédiatement" }
+      }
+    },
+    {
+      "id": "fumble-arcane-singed-sleeve",
+      "kind": "fumble",
+      "classGroups": ["arcane"],
+      "tones": ["embarrassing", "painful"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Singed Sleeve", "effect": "Your sleeve catches a spark. You take fire damage equal to your proficiency bonus; it can't be reduced or prevented.", "duration": "Immediately" },
+        "de": { "title": "Angesengter Ärmel", "effect": "Dein Ärmel fängt einen Funken. Du erleidest Feuerschaden in Höhe deines Übungsbonus; er kann nicht verringert oder verhindert werden.", "duration": "Sofort" },
+        "fr": { "title": "Manche roussie", "effect": "Ta manche attrape une étincelle. Tu subis des dégâts de feu égaux à ton bonus de maîtrise ; ils ne peuvent être ni réduits ni empêchés.", "duration": "Immédiatement" }
+      }
+    },
+    {
+      "id": "fumble-arcane-puff-of-smoke",
+      "kind": "fumble",
+      "classGroups": ["arcane"],
+      "tones": ["awkward", "comic"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Puff of Smoke", "effect": "Your spell fizzles into thick smoke. The area within 5 feet of you is lightly obscured; a strong wind clears it at once.", "duration": "Until the start of your next turn" },
+        "de": { "title": "Rauchwölkchen", "effect": "Dein Zauber verpufft in dichtem Rauch. Der Bereich im Umkreis von 1,5 m um dich ist leicht verschleiert; starker Wind vertreibt ihn sofort.", "duration": "Bis zum Beginn deines nächsten Zuges" },
+        "fr": { "title": "Nuage de fumée", "effect": "Ton sort s'éteint dans une épaisse fumée. La zone dans un rayon de 1,5 m autour de toi est légèrement obscurcie ; un vent fort la dissipe aussitôt.", "duration": "Jusqu'au début de ton prochain tour" }
+      }
+    },
+    {
+      "id": "fumble-arcane-beacon",
+      "kind": "fumble",
+      "classGroups": ["arcane"],
+      "tones": ["embarrassing"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Beacon", "effect": "Your spell bursts above you in a flash seen for miles. You can't turn invisible or take the Hide action, and any invisibility on you ends.", "duration": "Until the start of your next turn" },
+        "de": { "title": "Leuchtfeuer", "effect": "Dein Zauber zerplatzt über dir in einem weithin sichtbaren Blitz. Du kannst nicht unsichtbar werden und nicht die Aktion Verstecken nutzen; Unsichtbarkeit auf dir endet.", "duration": "Bis zum Beginn deines nächsten Zuges" },
+        "fr": { "title": "Signal lumineux", "effect": "Ton sort éclate au-dessus de toi en un éclair visible de très loin. Tu ne peux ni devenir invisible ni effectuer l'action Se cacher, et toute invisibilité sur toi prend fin.", "duration": "Jusqu'au début de ton prochain tour" }
+      }
+    },
+    {
+      "id": "fumble-arcane-hot-feet",
+      "kind": "fumble",
+      "classGroups": ["arcane"],
+      "tones": ["awkward", "painful"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Hot Feet", "effect": "The ground beneath you catches fire. If you end your next turn in that space, you take 1d6 fire damage.", "duration": "Until the end of your next turn" },
+        "de": { "title": "Heiße Sohlen", "effect": "Der Boden unter dir fängt Feuer. Beendest du deinen nächsten Zug auf diesem Feld, erleidest du 1d6 Feuerschaden.", "duration": "Bis zum Ende deines nächsten Zuges" },
+        "fr": { "title": "Pieds brûlants", "effect": "Le sol sous toi prend feu. Si tu termines ton prochain tour à cet emplacement, tu subis 1d6 dégâts de feu.", "duration": "Jusqu'à la fin de ton prochain tour" }
+      }
+    },
+    {
+      "id": "fumble-arcane-pent-up-power",
+      "kind": "fumble",
+      "classGroups": ["arcane"],
+      "tones": ["comic"],
+      "severity": "medium",
+      "i18n": {
+        "en": { "title": "Pent-Up Power", "effect": "Leftover energy crackles in your hands. Your next spell attack that hits deals an extra 1d6 damage; if you roll another natural 1 on it, take 1d6 damage and draw another fumble.", "duration": "Until the end of your next turn" },
+        "de": { "title": "Aufgestaute Kraft", "effect": "Restenergie knistert in deinen Händen. Dein nächster Zauberangriff, der trifft, verursacht 1d6 zusätzlichen Schaden; würfelst du dabei erneut eine natürliche 1, erleidest du 1d6 Schaden und ziehst einen weiteren Patzer.", "duration": "Bis zum Ende deines nächsten Zuges" },
+        "fr": { "title": "Énergie contenue", "effect": "Un reste d'énergie crépite dans tes mains. Ta prochaine attaque de sort qui touche inflige 1d6 dégâts supplémentaires ; si tu obtiens encore un 1 naturel, tu subis 1d6 dégâts et tires un autre échec.", "duration": "Jusqu'à la fin de ton prochain tour" }
+      }
+    },
+    {
+      "id": "fumble-martial-rattled",
+      "kind": "fumble",
+      "classGroups": ["martial"],
+      "tones": ["awkward"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Rattled", "effect": "The blow jars back through your arms. You can't take reactions.", "duration": "Until the start of your next turn" },
+        "de": { "title": "Durchgeschüttelt", "effect": "Der Schlag fährt dir durch die Arme. Du kannst keine Reaktionen ausführen.", "duration": "Bis zum Beginn deines nächsten Zuges" },
+        "fr": { "title": "Secoué", "effect": "Le choc te remonte dans les bras. Tu ne peux pas effectuer de réaction.", "duration": "Jusqu'au début de ton prochain tour" }
+      }
+    },
+    {
+      "id": "fumble-weapon-wide-open",
+      "kind": "fumble",
+      "classGroups": ["martial", "ranged"],
+      "tones": ["embarrassing"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Wide Open", "effect": "Your miss leaves you exposed. The next attack roll against you has advantage.", "duration": "Until the start of your next turn" },
+        "de": { "title": "Weit offen", "effect": "Dein Fehlschlag lässt dich ungeschützt. Der nächste Angriffswurf gegen dich hat Vorteil.", "duration": "Bis zum Beginn deines nächsten Zuges" },
+        "fr": { "title": "Grand ouvert", "effect": "Ton échec te laisse à découvert. Le prochain jet d'attaque contre toi a l'avantage.", "duration": "Jusqu'au début de ton prochain tour" }
+      }
+    },
+    {
+      "id": "fumble-weapon-pins-and-needles",
+      "kind": "fumble",
+      "classGroups": ["martial", "ranged"],
+      "tones": ["awkward"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Pins and Needles", "effect": "Your hands tingle from the jolt. You have disadvantage on your next weapon attack roll.", "duration": "Until the end of your next turn" },
+        "de": { "title": "Kribbelnde Hände", "effect": "Deine Hände kribbeln von der Erschütterung. Du hast Nachteil auf deinen nächsten Waffenangriffswurf.", "duration": "Bis zum Ende deines nächsten Zuges" },
+        "fr": { "title": "Fourmillements", "effect": "Tes mains fourmillent après le choc. Tu as le désavantage à ton prochain jet d'attaque avec une arme.", "duration": "Jusqu'à la fin de ton prochain tour" }
+      }
+    },
+    {
+      "id": "fumble-weapon-wobble",
+      "kind": "fumble",
+      "classGroups": ["martial", "ranged"],
+      "tones": ["awkward"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Wobble", "effect": "You shift your weight at the wrong moment. Make a DC 10 Dexterity saving throw or fall prone.", "duration": "Immediately" },
+        "de": { "title": "Wackelpartie", "effect": "Du verlagerst dein Gewicht im falschen Moment. Mach einen Geschicklichkeitsrettungswurf SG 10, sonst liegst du am Boden.", "duration": "Sofort" },
+        "fr": { "title": "Vacillement", "effect": "Tu déplaces ton poids au mauvais moment. Fais un jet de sauvegarde de Dextérité DD 10 ou tombe à terre.", "duration": "Immédiatement" }
+      }
+    },
+    {
+      "id": "fumble-martial-slippery-grip",
+      "kind": "fumble",
+      "classGroups": ["martial"],
+      "tones": ["embarrassing"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Slippery Grip", "effect": "Your weapon slips from your hands and lands in an empty space within 5 feet of you, chosen by the GM.", "duration": "Immediately" },
+        "de": { "title": "Glitschiger Griff", "effect": "Deine Waffe rutscht dir aus den Händen und landet auf einem freien Feld im Umkreis von 1,5 m, das die SL wählt.", "duration": "Sofort" },
+        "fr": { "title": "Prise glissante", "effect": "Ton arme t'échappe des mains et atterrit sur un emplacement libre à 1,5 m ou moins de toi, choisi par le MJ.", "duration": "Immédiatement" }
+      }
+    },
+    {
+      "id": "fumble-martial-overswung",
+      "kind": "fumble",
+      "classGroups": ["martial"],
+      "tones": ["awkward"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Overswung", "effect": "The weight of your weapon drags you off line. Your speed is reduced by 10 feet.", "duration": "Until the end of this turn" },
+        "de": { "title": "Überschwung", "effect": "Das Gewicht deiner Waffe reißt dich aus der Spur. Deine Bewegungsrate sinkt um 3 m.", "duration": "Bis zum Ende dieses Zuges" },
+        "fr": { "title": "Élan excessif", "effect": "Le poids de ton arme te déporte. Ta vitesse est réduite de 3 m.", "duration": "Jusqu'à la fin de ce tour" }
+      }
+    },
+    {
+      "id": "fumble-martial-loud-clang",
+      "kind": "fumble",
+      "classGroups": ["martial"],
+      "tones": ["embarrassing"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Loud Clang", "effect": "Your weapon strikes stone or metal with a crash heard 300 feet away. If you were hidden, your position is revealed.", "duration": "Immediately" },
+        "de": { "title": "Lautes Scheppern", "effect": "Deine Waffe kracht gegen Stein oder Metall, noch in 90 m Entfernung zu hören. Warst du versteckt, ist deine Position verraten.", "duration": "Sofort" },
+        "fr": { "title": "Grand fracas", "effect": "Ton arme percute la pierre ou le métal avec un fracas audible à 90 m. Si tu étais caché, ta position est révélée.", "duration": "Immédiatement" }
+      }
+    },
+    {
+      "id": "fumble-martial-pulled-shoulder",
+      "kind": "fumble",
+      "classGroups": ["martial"],
+      "tones": ["awkward", "painful"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Pulled Shoulder", "effect": "Your shoulder twinges. You have disadvantage on Strength (Athletics) checks and can't make opportunity attacks with this weapon.", "duration": "Until the end of your next turn" },
+        "de": { "title": "Gezerrte Schulter", "effect": "Deine Schulter zwickt. Du hast Nachteil auf Stärkewürfe (Athletik) und kannst mit dieser Waffe keine Gelegenheitsangriffe ausführen.", "duration": "Bis zum Ende deines nächsten Zuges" },
+        "fr": { "title": "Épaule froissée", "effect": "Ton épaule te lance. Tu as le désavantage aux tests de Force (Athlétisme) et ne peux pas faire d'attaque d'opportunité avec cette arme.", "duration": "Jusqu'à la fin de ton prochain tour" }
+      }
+    },
+    {
+      "id": "fumble-martial-cracked-floor",
+      "kind": "fumble",
+      "classGroups": ["martial"],
+      "tones": ["awkward"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Cracked Floor", "effect": "Your blow smashes the ground at your feet. Your space becomes difficult terrain.", "duration": "Until the start of your next turn" },
+        "de": { "title": "Rissiger Boden", "effect": "Dein Schlag zertrümmert den Boden zu deinen Füßen. Dein Feld wird zu schwierigem Gelände.", "duration": "Bis zum Beginn deines nächsten Zuges" },
+        "fr": { "title": "Sol fissuré", "effect": "Ton coup fracasse le sol à tes pieds. Ton emplacement devient un terrain difficile.", "duration": "Jusqu'au début de ton prochain tour" }
+      }
+    },
+    {
+      "id": "fumble-martial-wild-swing",
+      "kind": "fumble",
+      "classGroups": ["martial"],
+      "tones": ["shameful"],
+      "severity": "medium",
+      "i18n": {
+        "en": { "title": "Wild Swing", "effect": "Your swing goes wide. A random creature within 5 feet of you makes a Dexterity saving throw (DC 8 + your proficiency bonus + your Strength modifier) or takes damage equal to your proficiency bonus.", "duration": "Immediately" },
+        "de": { "title": "Wilder Schwung", "effect": "Dein Schwung gerät außer Kontrolle. Eine zufällige Kreatur im Umkreis von 1,5 m macht einen Geschicklichkeitsrettungswurf (SG 8 + dein Übungsbonus + dein Stärkemodifikator) oder erleidet Schaden in Höhe deines Übungsbonus.", "duration": "Sofort" },
+        "fr": { "title": "Moulinet sauvage", "effect": "Ton coup part de travers. Une créature au hasard à 1,5 m ou moins de toi fait un jet de sauvegarde de Dextérité (DD 8 + ton bonus de maîtrise + ton modificateur de Force) ou subit des dégâts égaux à ton bonus de maîtrise.", "duration": "Immédiatement" }
+      }
+    },
+    {
+      "id": "fumble-martial-wobbly-handle",
+      "kind": "fumble",
+      "classGroups": ["martial"],
+      "tones": ["embarrassing"],
+      "severity": "medium",
+      "i18n": {
+        "en": { "title": "Wobbly Handle", "effect": "Your weapon's handle works loose. You take a -1 penalty to its damage rolls until it's repaired with smith's or tinker's tools during a short rest.", "duration": "Until repaired" },
+        "de": { "title": "Wackeliger Griff", "effect": "Der Griff deiner Waffe lockert sich. Du erhältst -1 auf ihre Schadenswürfe, bis sie während einer kurzen Rast mit Schmiede- oder Kesselflickerwerkzeug repariert wird.", "duration": "Bis zur Reparatur" },
+        "fr": { "title": "Manche branlant", "effect": "Le manche de ton arme se desserre. Tu subis un malus de -1 à ses jets de dégâts jusqu'à ce qu'elle soit réparée avec des outils de forgeron ou de bricoleur pendant un repos court.", "duration": "Jusqu'à réparation" }
+      }
+    },
+    {
+      "id": "fumble-martial-flat-side",
+      "kind": "fumble",
+      "classGroups": ["martial"],
+      "tones": ["awkward"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Flat Side", "effect": "You hit with the flat of your weapon. Don't add your ability modifier to the damage of your next hit.", "duration": "Until the end of your next turn" },
+        "de": { "title": "Breitseite", "effect": "Du triffst mit der flachen Seite. Addiere deinen Attributsmodifikator nicht zum Schaden deines nächsten Treffers.", "duration": "Bis zum Ende deines nächsten Zuges" },
+        "fr": { "title": "Du plat de la lame", "effect": "Tu frappes du plat de ton arme. N'ajoute pas ton modificateur de caractéristique aux dégâts de ta prochaine attaque réussie.", "duration": "Jusqu'à la fin de ton prochain tour" }
+      }
+    },
+    {
+      "id": "fumble-martial-dropped-guard",
+      "kind": "fumble",
+      "classGroups": ["martial"],
+      "tones": ["embarrassing"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Dropped Guard", "effect": "Your swing is too wide and leaves you exposed. You take a -2 penalty to AC.", "duration": "Until the start of your next turn" },
+        "de": { "title": "Deckung offen", "effect": "Dein Schwung ist zu weit und lässt dich ungeschützt. Du erhältst -2 auf deine RK.", "duration": "Bis zum Beginn deines nächsten Zuges" },
+        "fr": { "title": "Garde baissée", "effect": "Ton coup est trop large et te laisse à découvert. Tu subis un malus de -2 à ta CA.", "duration": "Jusqu'au début de ton prochain tour" }
+      }
+    },
+    {
+      "id": "fumble-martial-overreach",
+      "kind": "fumble",
+      "classGroups": ["martial"],
+      "tones": ["awkward"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Overreach", "effect": "You lunge too far. The target may move you up to 5 feet into an empty space next to it.", "duration": "Immediately" },
+        "de": { "title": "Zu weit gestreckt", "effect": "Du stößt zu weit vor. Das Ziel darf dich bis zu 1,5 m auf ein freies Feld neben sich versetzen.", "duration": "Sofort" },
+        "fr": { "title": "Fente trop longue", "effect": "Tu te fends trop loin. La cible peut te déplacer de 1,5 m au maximum vers un emplacement libre adjacent à elle.", "duration": "Immédiatement" }
+      }
+    },
+    {
+      "id": "fumble-martial-stinging-hilt",
+      "kind": "fumble",
+      "classGroups": ["martial"],
+      "tones": ["painful"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Stinging Hilt", "effect": "The impact shoots back through the grip. You take bludgeoning damage equal to your proficiency bonus.", "duration": "Immediately" },
+        "de": { "title": "Prellender Griff", "effect": "Der Aufprall schießt durch den Griff zurück. Du erleidest Wuchtschaden in Höhe deines Übungsbonus.", "duration": "Sofort" },
+        "fr": { "title": "Poignée cinglante", "effect": "L'impact remonte par la poignée. Tu subis des dégâts contondants égaux à ton bonus de maîtrise.", "duration": "Immédiatement" }
+      }
+    },
+    {
+      "id": "fumble-martial-out-of-rhythm",
+      "kind": "fumble",
+      "classGroups": ["martial"],
+      "tones": ["embarrassing"],
+      "severity": "medium",
+      "i18n": {
+        "en": { "title": "Out of Rhythm", "effect": "You can't recover your stance. You can't make any more attacks with this weapon this turn.", "duration": "Until the end of this turn" },
+        "de": { "title": "Aus dem Takt", "effect": "Du findest nicht zurück in deine Haltung. Du kannst in diesem Zug keine weiteren Angriffe mit dieser Waffe ausführen.", "duration": "Bis zum Ende dieses Zuges" },
+        "fr": { "title": "Hors rythme", "effect": "Tu ne retrouves pas ta posture. Tu ne peux plus attaquer avec cette arme ce tour-ci.", "duration": "Jusqu'à la fin de ce tour" }
+      }
+    },
+    {
+      "id": "fumble-martial-punished",
+      "kind": "fumble",
+      "classGroups": ["martial"],
+      "tones": ["shameful"],
+      "severity": "medium",
+      "i18n": {
+        "en": { "title": "Punished", "effect": "Your target seizes the opening. It can use its reaction to make one melee attack against you with advantage.", "duration": "Immediately" },
+        "de": { "title": "Bestraft", "effect": "Dein Ziel nutzt die Lücke. Es kann mit seiner Reaktion einen Nahkampfangriff mit Vorteil gegen dich ausführen.", "duration": "Sofort" },
+        "fr": { "title": "Puni", "effect": "Ta cible saisit l'ouverture. Elle peut utiliser sa réaction pour faire une attaque au corps à corps contre toi avec avantage.", "duration": "Immédiatement" }
+      }
+    },
+    {
+      "id": "fumble-martial-sent-flying",
+      "kind": "fumble",
+      "classGroups": ["martial"],
+      "tones": ["shameful"],
+      "severity": "harsh",
+      "i18n": {
+        "en": { "title": "Sent Flying", "effect": "Your target knocks the weapon out of your hands. It lands in an empty space of the target's choice within 15 feet of you, and you fall prone.", "duration": "Immediately" },
+        "de": { "title": "Weggeschleudert", "effect": "Dein Ziel schlägt dir die Waffe aus der Hand. Sie landet auf einem freien Feld seiner Wahl im Umkreis von 4,5 m, und du liegst am Boden.", "duration": "Sofort" },
+        "fr": { "title": "Envoyée valser", "effect": "Ta cible fait sauter l'arme de tes mains. Elle atterrit sur un emplacement libre de son choix à 4,5 m ou moins de toi, et tu tombes à terre.", "duration": "Immédiatement" }
+      }
+    },
+    {
+      "id": "fumble-ranged-frayed-string",
+      "kind": "fumble",
+      "classGroups": ["ranged"],
+      "tones": ["embarrassing"],
+      "severity": "medium",
+      "i18n": {
+        "en": { "title": "Frayed String", "effect": "Your bowstring slips loose. You can't attack with this weapon until you spend an action or bonus action to restring it.", "duration": "Until you restring it" },
+        "de": { "title": "Ausgefranste Sehne", "effect": "Deine Sehne springt ab. Du kannst mit dieser Waffe nicht angreifen, bis du sie mit einer Aktion oder Bonusaktion neu bespannst.", "duration": "Bis du sie neu bespannst" },
+        "fr": { "title": "Corde effilochée", "effect": "Ta corde se détache. Tu ne peux plus attaquer avec cette arme jusqu'à ce que tu utilises une action ou une action bonus pour la remonter.", "duration": "Jusqu'à ce que tu la remontes" }
+      }
+    },
+    {
+      "id": "fumble-ranged-snagged-quiver",
+      "kind": "fumble",
+      "classGroups": ["ranged"],
+      "tones": ["embarrassing"],
+      "severity": "medium",
+      "i18n": {
+        "en": { "title": "Snagged Quiver", "effect": "Your ammunition gets caught. On your next turn you can make only one ranged weapon attack, no matter how many you normally get.", "duration": "During your next turn" },
+        "de": { "title": "Verhakter Köcher", "effect": "Deine Munition verhakt sich. In deinem nächsten Zug kannst du nur einen Fernkampf-Waffenangriff ausführen, egal wie viele dir sonst zustehen.", "duration": "Während deines nächsten Zuges" },
+        "fr": { "title": "Carquois coincé", "effect": "Tes munitions se coincent. Pendant ton prochain tour, tu ne peux faire qu'une seule attaque à distance avec une arme, quel que soit ton nombre d'attaques habituel.", "duration": "Pendant ton prochain tour" }
+      }
+    },
+    {
+      "id": "fumble-ranged-close-call",
+      "kind": "fumble",
+      "classGroups": ["ranged"],
+      "tones": ["embarrassing"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Close Call", "effect": "Your shot grazes past someone. A creature of your choice within 5 feet of its path makes a Dexterity saving throw (DC 8 + your proficiency bonus + your Dexterity modifier) or takes piercing damage equal to your Dexterity modifier (min. 1).", "duration": "Immediately" },
+        "de": { "title": "Knapp daneben", "effect": "Dein Schuss saust knapp an jemandem vorbei. Eine Kreatur deiner Wahl bis 1,5 m neben der Flugbahn macht einen Geschicklichkeitsrettungswurf (SG 8 + Übungsbonus + GE-Modifikator) oder erleidet Stichschaden in Höhe deines GE-Modifikators (min. 1).", "duration": "Sofort" },
+        "fr": { "title": "Frôlé", "effect": "Ton tir frôle quelqu'un. Une créature de ton choix à 1,5 m ou moins de la trajectoire fait un jet de sauvegarde de Dextérité (DD 8 + bonus de maîtrise + mod. de Dex) ou subit des dégâts perforants égaux à ton mod. de Dex (min. 1).", "duration": "Immédiatement" }
+      }
+    },
+    {
+      "id": "fumble-ranged-string-slap",
+      "kind": "fumble",
+      "classGroups": ["ranged"],
+      "tones": ["painful"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "String Slap", "effect": "The bowstring lashes your forearm. You take damage equal to your proficiency bonus and can't take reactions.", "duration": "Until the start of your next turn" },
+        "de": { "title": "Sehnenpeitsche", "effect": "Die Sehne peitscht dir über den Unterarm. Du erleidest Schaden in Höhe deines Übungsbonus und kannst keine Reaktionen ausführen.", "duration": "Bis zum Beginn deines nächsten Zuges" },
+        "fr": { "title": "Coup de corde", "effect": "La corde te cingle l'avant-bras. Tu subis des dégâts égaux à ton bonus de maîtrise et ne peux pas effectuer de réaction.", "duration": "Jusqu'au début de ton prochain tour" }
+      }
+    },
+    {
+      "id": "fumble-ranged-spilled-arrows",
+      "kind": "fumble",
+      "classGroups": ["ranged"],
+      "tones": ["comic", "embarrassing"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Spilled Arrows", "effect": "Your quiver tips over. 1d4 pieces of ammunition fall into your space and must be picked up before you can use them.", "duration": "Until you pick them up" },
+        "de": { "title": "Verstreute Pfeile", "effect": "Dein Köcher kippt. 1d4 Geschosse fallen auf dein Feld und müssen aufgehoben werden, bevor du sie benutzen kannst.", "duration": "Bis du sie aufhebst" },
+        "fr": { "title": "Flèches éparpillées", "effect": "Ton carquois bascule. 1d4 munitions tombent sur ton emplacement et doivent être ramassées avant de pouvoir servir.", "duration": "Jusqu'à ce que tu les ramasses" }
+      }
+    },
+    {
+      "id": "fumble-ranged-lost-sight",
+      "kind": "fumble",
+      "classGroups": ["ranged"],
+      "tones": ["awkward"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Lost Sight", "effect": "The miss throws off your aim. Your next ranged weapon attack roll can't benefit from advantage.", "duration": "Until the end of your next turn" },
+        "de": { "title": "Ziel verloren", "effect": "Der Fehlschuss bringt dein Zielen durcheinander. Dein nächster Fernkampf-Waffenangriffswurf kann keinen Vorteil erhalten.", "duration": "Bis zum Ende deines nächsten Zuges" },
+        "fr": { "title": "Cible perdue", "effect": "Le tir raté perturbe ta visée. Ton prochain jet d'attaque à distance avec une arme ne peut pas bénéficier de l'avantage.", "duration": "Jusqu'à la fin de ton prochain tour" }
+      }
+    },
+    {
+      "id": "fumble-ranged-whiplash",
+      "kind": "fumble",
+      "classGroups": ["ranged"],
+      "tones": ["shameful", "painful"],
+      "severity": "harsh",
+      "i18n": {
+        "en": { "title": "Whiplash", "effect": "Your string snaps on release and the recoil knocks you down. Take piercing damage equal to one roll of the weapon's damage die and fall prone; the weapon is useless until you spend an action to fix it.", "duration": "Until you repair it" },
+        "de": { "title": "Peitschenhieb", "effect": "Deine Sehne reißt beim Schuss und der Rückschlag wirft dich um. Du erleidest Stichschaden in Höhe eines Wurfs des Waffenschadenswürfels und liegst am Boden; die Waffe ist nutzlos, bis du sie mit einer Aktion reparierst.", "duration": "Bis du sie reparierst" },
+        "fr": { "title": "Coup de fouet", "effect": "Ta corde casse au tir et le recul te renverse. Tu subis des dégâts perforants égaux à un jet du dé de dégâts de l'arme et tu tombes à terre ; l'arme est inutilisable jusqu'à ce que tu la répares avec une action.", "duration": "Jusqu'à ce que tu la répares" }
+      }
     }
   ]
 }
