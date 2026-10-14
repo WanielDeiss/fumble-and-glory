@@ -15,6 +15,10 @@ let drawn: { card: LocalizedCard; fresh: boolean } | null = null;
 let deckFilter: "all" | Kind = "all";
 let deckQuery = "";
 
+/** Chrome's deferred install prompt (beforeinstallprompt); null where the browser has none. */
+interface InstallPromptEvent extends Event { prompt(): Promise<void> }
+let installPrompt: InstallPromptEvent | null = null;
+
 // ---------- helpers ----------
 
 const esc = (s: string) =>
@@ -35,6 +39,7 @@ const ICONS = {
   martial: '<path d="M14.5 17.5 3 6V3h3l11.5 11.5M13 19l6-6M16 16l4 4M19 21l2-2"/>',
   ranged: '<path d="M3 21 21 3M15 3h6v6M5 6c4 0 13 9 13 13"/>',
   arcane: '<path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/>',
+  install: '<path d="M12 3v12M7 10l5 5 5-5M5 21h14"/>',
 } as const;
 const icon = (name: keyof typeof ICONS) => `<svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[name]}</svg>`;
 
@@ -67,6 +72,20 @@ function drawPool(kind: Kind): LocalizedCard[] {
       c.tones.some((tn) => tones.includes(tn)) &&
       withinSeverity(c, settings.maxSeverity),
   );
+}
+
+/** True when running as the installed app rather than in a browser tab. */
+const isInstalled = () =>
+  matchMedia("(display-mode: standalone)").matches || (navigator as { standalone?: boolean }).standalone === true;
+
+type Platform = "ios" | "android" | "mac" | "desktop";
+function detectPlatform(): Platform {
+  const ua = navigator.userAgent;
+  // iPadOS reports itself as a Mac; touch support gives it away.
+  if (/iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1)) return "ios";
+  if (/Android/.test(ua)) return "android";
+  if (/Macintosh/.test(ua) && /Safari/.test(ua) && !/Chrome|Chromium|Edg|Firefox/.test(ua)) return "mac";
+  return "desktop";
 }
 
 function update(patch: Partial<Settings>) {
@@ -138,6 +157,7 @@ function drawScreen(): string {
     <div class="stage">
       ${drawn ? cardView(drawn.card, drawn.fresh) : `<div class="empty-card">${esc(t("draw.empty"))}</div>`}
     </div>
+    ${drawn || isInstalled() ? "" : `<p class="center"><a class="text-link" href="#/install">${icon("install")}${esc(t("install.link"))}</a></p>`}
     <div class="footer">
       <p class="meta center">${esc(t("draw.pool", { fumble: fumbles, glory: glories }))}</p>
       <button class="fg-btn fg-btn--fumble" data-action="draw" data-kind="fumble" ${fumbles ? "" : "disabled"}>${esc(t("draw.fumble"))}</button>
@@ -191,6 +211,11 @@ function tableScreen(): string {
         <p class="meta">${esc(t("table.fallback"))}</p>
         ${segmented("fallback", 2, [["en", t("table.fallback.en")], ["hide", t("table.fallback.hide")]], settings.fallback)}
       </section>
+      ${isInstalled() ? "" : `
+      <section class="section">
+        <h2 class="label">${esc(t("table.app"))}</h2>
+        <a class="fg-btn fg-btn--outline" href="#/install">${icon("install")}${esc(t("install.link"))}</a>
+      </section>`}
     </div>
     <div class="footer"><a class="fg-btn fg-btn--primary" href="#/">${esc(t("table.done"))}</a></div>`;
 }
@@ -227,10 +252,37 @@ function deckScreen(): string {
     <ul class="deck-list">${deckRows()}</ul>`;
 }
 
+const INSTALL_STEPS: Record<Platform, number> = { ios: 3, android: 3, desktop: 3, mac: 2 };
+
+function installScreen(): string {
+  const current = detectPlatform();
+  const order = [current, ...(Object.keys(INSTALL_STEPS) as Platform[]).filter((p) => p !== current)];
+  const block = (p: Platform) => `
+    <details class="install-block"${p === current ? " open" : ""}>
+      <summary>${esc(t(`install.${p}.title`))}</summary>
+      <ol class="steps">${Array.from({ length: INSTALL_STEPS[p] }, (_, i) => `<li>${esc(t(`install.${p}.${i + 1}`))}</li>`).join("")}</ol>
+      ${p === "desktop" ? `<p class="meta">${esc(t("install.desktop.firefox"))}</p>` : ""}
+    </details>`;
+  return `
+    ${topbar(t("install.title"))}
+    <div class="content">
+      ${isInstalled()
+        ? `<p class="notice">${esc(t("install.installed"))}</p>`
+        : `<p class="lead">${esc(t("install.intro"))}</p>
+           ${installPrompt ? `<button class="fg-btn fg-btn--primary" data-action="install">${icon("install")}${esc(t("install.button"))}</button>` : ""}
+           ${order.map(block).join("")}`}
+      <p class="meta">${esc(t("install.offline"))}</p>
+    </div>`;
+}
+
 function render() {
   document.documentElement.lang = settings.locale;
   const route = location.hash.replace(/^#/, "") || "/";
-  app.innerHTML = route === "/table" ? tableScreen() : route === "/deck" ? deckScreen() : drawScreen();
+  app.innerHTML =
+    route === "/table" ? tableScreen() :
+    route === "/deck" ? deckScreen() :
+    route === "/install" ? installScreen() :
+    drawScreen();
   if (drawn) drawn.fresh = false;
 }
 
@@ -253,6 +305,10 @@ app.addEventListener("click", (e) => {
     const field = kind === "fumble" ? "fumbleTones" : "gloryTones";
     const cur = settings[field];
     update({ [field]: cur.includes(value) ? cur.filter((x) => x !== value) : [...cur, value] } as Partial<Settings>);
+  } else if (action === "install" && installPrompt) {
+    const prompt = installPrompt;
+    installPrompt = null; // a prompt can only be shown once
+    void prompt.prompt().finally(render);
   }
 });
 
@@ -274,6 +330,25 @@ app.addEventListener("change", (e) => {
 });
 
 window.addEventListener("hashchange", () => { render(); window.scrollTo(0, 0); });
+
+// Keep Chrome's install prompt for our own button instead of its mini-infobar.
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  installPrompt = e as InstallPromptEvent;
+  if (settings) render();
+});
+window.addEventListener("appinstalled", () => {
+  installPrompt = null;
+  if (settings) render();
+});
+
+if ("serviceWorker" in navigator && import.meta.env.PROD) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register(`${import.meta.env.BASE_URL}sw.js`).catch(() => {
+      /* no offline support, the app still works online */
+    });
+  });
+}
 
 // ---------- start ----------
 

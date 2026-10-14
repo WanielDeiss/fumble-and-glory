@@ -18,6 +18,7 @@ scripts/validate.mjs           schema + consistency checks, translation report
 
 - The app loads `manifest.json` fresh on every start and uses its `version` to cache-bust everything else. **Bump `version` whenever you change data.**
 - Settings (language, character, class group, tones, severity) live in the browser's `localStorage`.
+- **Installable app (PWA):** `public/manifest.webmanifest` and `public/sw.js` make the site installable and usable offline. The service worker fetches pages, decks and UI strings network-first (new cards appear as soon as you're online) and serves the last copy when offline. The in-app guide at `#/install` explains installing on iPhone, Android, Chrome/Edge and Safari on Mac. Icons live in `public/icons/` (`icon.svg` is the source for the PNGs).
 - **Translations:** a card is shown in the app language. If that translation is missing, the player chooses: show it in English, or hide it. English is required for every card.
 
 ## Adding a card
