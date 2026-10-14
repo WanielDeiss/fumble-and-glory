@@ -78,5 +78,22 @@
   "editor.confirmDelete": "Delete this card?",
   "editor.errorRequired": "Please enter a title and an effect and pick at least one tone.",
   "editor.errorStorage": "The card couldn't be saved on this device.",
-  "editor.savedLocally": "Your own cards are stored only on this device."
+  "editor.savedLocally": "Your own cards are stored only on this device.",
+  "table.help": "Help",
+  "help.title": "How it works",
+  "help.link": "How does it work?",
+  "help.intro": "Fumble & Glory turns every natural 1 and natural 20 into a small story. Instead of a plain miss or double damage, you draw a card with an effect.",
+  "help.fumble.title": "Fumble: natural 1",
+  "help.fumble.text": "If your d20 shows a 1 on an attack roll, the attack misses and something goes wrong. Draw a fumble.",
+  "help.glory.title": "Glory: natural 20",
+  "help.glory.text": "If it shows a 20, you score a critical hit as usual and get something extra on top. Draw a glory.",
+  "help.setup.title": "Before you play",
+  "help.setup.text": "In the table settings, enter your character and pick a class group: melee, ranged or magic. You only draw cards that fit your class.",
+  "help.tones.title": "Tones",
+  "help.tones.text": "Tones decide what kind of cards are in the deck: from awkward to painful for fumbles, from heroic to brutal for glories. Agree on them as a group, so nobody draws a card the table doesn't want.",
+  "help.severity.title": "Severity",
+  "help.severity.text": "Severity limits how strong the effects get: mild for light consequences, harsh for when it should really hurt or shine.",
+  "help.gm.title": "The GM has the final say",
+  "help.gm.text": "Read the card out loud. If an effect doesn't fit the situation, the GM can adjust it or have you draw again.",
+  "help.start": "Let's go"
 }

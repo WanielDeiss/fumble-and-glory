@@ -8,6 +8,7 @@ export interface Settings {
   fumbleTones: string[];
   gloryTones: string[];
   maxSeverity: Severity;
+  seenHelp: boolean; // the "how it works" page opens once on first start
 }
 
 const KEY = "fumble-and-glory.settings.v1";
@@ -22,6 +23,7 @@ export function defaultSettings(locales: string[]): Settings {
     fumbleTones: ["awkward", "embarrassing", "comic"],
     gloryTones: ["heroic", "flashy"],
     maxSeverity: "medium",
+    seenHelp: false,
   };
 }
 

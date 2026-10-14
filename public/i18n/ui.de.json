@@ -78,5 +78,22 @@
   "editor.confirmDelete": "Diese Karte löschen?",
   "editor.errorRequired": "Bitte gib Titel und Effekt ein und wähl mindestens einen Ton.",
   "editor.errorStorage": "Die Karte konnte auf diesem Gerät nicht gespeichert werden.",
-  "editor.savedLocally": "Deine eigenen Karten werden nur auf diesem Gerät gespeichert."
+  "editor.savedLocally": "Deine eigenen Karten werden nur auf diesem Gerät gespeichert.",
+  "table.help": "Hilfe",
+  "help.title": "So funktioniert's",
+  "help.link": "Wie funktioniert das?",
+  "help.intro": "Fumble & Glory macht aus jeder natürlichen 1 und jeder natürlichen 20 eine kleine Geschichte. Statt einfach daneben oder doppeltem Schaden ziehst du eine Karte mit einem Effekt.",
+  "help.fumble.title": "Patzer: natürliche 1",
+  "help.fumble.text": "Zeigt dein W20 beim Angriffswurf eine 1, geht der Angriff daneben und es läuft etwas schief. Zieh einen Patzer.",
+  "help.glory.title": "Triumph: natürliche 20",
+  "help.glory.text": "Zeigt er eine 20, triffst du wie gewohnt kritisch und bekommst noch etwas obendrauf. Zieh einen Triumph.",
+  "help.setup.title": "Vor dem Spiel",
+  "help.setup.text": "Trag in den Tisch-Einstellungen deinen Charakter ein und wähl eine Klassengruppe: Nahkampf, Fernkampf oder Magie. Du ziehst nur Karten, die zu deiner Klasse passen.",
+  "help.tones.title": "Töne",
+  "help.tones.text": "Die Töne legen fest, welche Art Karten im Deck ist: von unbeholfen bis schmerzhaft bei Patzern, von heldenhaft bis brutal bei Triumphen. Stimmt sie als Gruppe ab, damit niemand eine Karte zieht, die keiner am Tisch will.",
+  "help.severity.title": "Härte",
+  "help.severity.text": "Die Härte begrenzt, wie stark die Effekte werden: mild für leichte Folgen, hart, wenn es richtig wehtun oder glänzen soll.",
+  "help.gm.title": "Die Spielleitung entscheidet",
+  "help.gm.text": "Lies die Karte laut vor. Passt ein Effekt nicht zur Situation, kann die Spielleitung ihn anpassen oder dich neu ziehen lassen.",
+  "help.start": "Los geht's"
 }

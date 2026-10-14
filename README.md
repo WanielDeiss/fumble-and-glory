@@ -17,6 +17,7 @@ scripts/validate.mjs           schema + consistency checks, translation report
 ```
 
 - The app keeps the decks it last downloaded on the device and starts from that copy. On start (and when an installed app comes back to the foreground) it loads `manifest.json` fresh; if the `version` differs, it shows "N new cards available" and switches to the new decks only when the player taps "Load". **Bump `version` whenever you change data**, otherwise nobody gets the update.
+- **How it works:** `#/help` explains fumbles, glories, tones and severity. It opens once on first start and is linked from the draw screen and the table settings.
 - **Own cards:** in the installed app (not in a browser tab) players can create, edit and delete their own cards from the deck screen. They are stored only on that device (`localStorage`, with persistent storage requested), written in one language and shown in every language.
 - Settings (language, character, class group, tones, severity) live in the browser's `localStorage`.
 - **Installable app (PWA):** `public/manifest.webmanifest` and `public/sw.js` make the site installable and usable offline. The service worker fetches pages, decks and UI strings network-first (new cards appear as soon as you're online) and serves the last copy when offline. The in-app guide at `#/install` explains installing on iPhone, Android, Chrome/Edge and Safari on Mac. Icons live in `public/icons/` (`icon.svg` is the source for the PNGs).

@@ -63,6 +63,7 @@ const ICONS = {
   arcane: '<path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/>',
   install: '<path d="M12 3v12M7 10l5 5 5-5M5 21h14"/>',
   plus: '<path d="M12 5v14M5 12h14"/>',
+  help: '<circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.5v.7M12 17h.01"/>',
 } as const;
 const icon = (name: keyof typeof ICONS) => `<svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[name]}</svg>`;
 
@@ -193,7 +194,11 @@ function drawScreen(): string {
     <div class="stage">
       ${drawn ? cardView(drawn.card, drawn.fresh) : `<div class="empty-card">${esc(t("draw.empty"))}</div>`}
     </div>
-    ${drawn || isInstalled() ? "" : `<p class="center"><a class="text-link" href="#/install">${icon("install")}${esc(t("install.link"))}</a></p>`}
+    ${drawn ? "" : `
+      <p class="hint-links">
+        <a class="text-link" href="#/help">${icon("help")}${esc(t("help.link"))}</a>
+        ${isInstalled() ? "" : `<a class="text-link" href="#/install">${icon("install")}${esc(t("install.link"))}</a>`}
+      </p>`}
     <div class="footer">
       <p class="meta center">${esc(t("draw.pool", { fumble: fumbles, glory: glories }))}</p>
       <button class="fg-btn fg-btn--fumble" data-action="draw" data-kind="fumble" ${fumbles ? "" : "disabled"}>${esc(t("draw.fumble"))}</button>
@@ -246,6 +251,10 @@ function tableScreen(): string {
         ${segmented("locale", langs.length, langs, settings.locale)}
         <p class="meta">${esc(t("table.fallback"))}</p>
         ${segmented("fallback", 2, [["en", t("table.fallback.en")], ["hide", t("table.fallback.hide")]], settings.fallback)}
+      </section>
+      <section class="section">
+        <h2 class="label">${esc(t("table.help"))}</h2>
+        <a class="fg-btn fg-btn--outline" href="#/help">${icon("help")}${esc(t("help.title"))}</a>
       </section>
       ${isInstalled() ? "" : `
       <section class="section">
@@ -427,6 +436,35 @@ function applyUpdate() {
   render();
 }
 
+function helpScreen(): string {
+  if (!settings.seenHelp) {
+    settings.seenHelp = true;
+    saveSettings(settings);
+  }
+  const rule = (kind: Kind) => `
+    <section class="help-rule">
+      <span class="deck-die deck-die--${kind}" aria-hidden="true">${kind === "fumble" ? 1 : 20}</span>
+      <div class="section">
+        <h2 class="help-title">${esc(t(`help.${kind}.title`))}</h2>
+        <p class="help-text">${esc(t(`help.${kind}.text`))}</p>
+      </div>
+    </section>`;
+  const part = (key: string) => `
+    <section class="section">
+      <h2 class="label">${esc(t(`help.${key}.title`))}</h2>
+      <p class="help-text">${esc(t(`help.${key}.text`))}</p>
+    </section>`;
+  return `
+    ${topbar(t("help.title"))}
+    <div class="content">
+      <p class="lead">${esc(t("help.intro"))}</p>
+      ${rule("fumble")}
+      ${rule("glory")}
+      ${["setup", "tones", "severity", "gm"].map(part).join("")}
+    </div>
+    <div class="footer"><a class="fg-btn fg-btn--primary" href="#/">${esc(t("help.start"))}</a></div>`;
+}
+
 const INSTALL_STEPS: Record<Platform, number> = { ios: 3, android: 3, desktop: 3, mac: 2 };
 
 function installScreen(): string {
@@ -457,6 +495,7 @@ function render() {
     route === "/table" ? tableScreen() :
     route === "/deck" ? deckScreen() :
     route === "/install" ? installScreen() :
+    route === "/help" ? helpScreen() :
     route.startsWith("/card/") ? editorScreen(decodeURIComponent(route.slice("/card/".length))) :
     drawScreen();
   if (drawn) drawn.fresh = false;
@@ -568,6 +607,8 @@ if ("serviceWorker" in navigator && import.meta.env.PROD) {
     customCards = loadCustomCards();
     settings = loadSettings(data.manifest.locales);
     ui = await loadUiStrings(settings.locale, __BUILD_ID__);
+    // First start: explain the app before anything else.
+    if (!settings.seenHelp && (location.hash === "" || location.hash === "#/")) location.replace("#/help");
     render();
     if (stored) void checkForUpdate();
   } catch (err) {

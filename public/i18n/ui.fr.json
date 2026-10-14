@@ -78,5 +78,22 @@
   "editor.confirmDelete": "Supprimer cette carte ?",
   "editor.errorRequired": "Indique un titre et un effet, et choisis au moins un ton.",
   "editor.errorStorage": "La carte n'a pas pu être enregistrée sur cet appareil.",
-  "editor.savedLocally": "Tes cartes perso sont enregistrées uniquement sur cet appareil."
+  "editor.savedLocally": "Tes cartes perso sont enregistrées uniquement sur cet appareil.",
+  "table.help": "Aide",
+  "help.title": "Comment ça marche",
+  "help.link": "Comment ça marche ?",
+  "help.intro": "Fumble & Glory transforme chaque 1 et chaque 20 naturel en une petite histoire. Au lieu d'un simple raté ou de dégâts doublés, tu tires une carte avec un effet.",
+  "help.fumble.title": "Échec : 1 naturel",
+  "help.fumble.text": "Si ton d20 affiche 1 sur un jet d'attaque, l'attaque rate et quelque chose tourne mal. Tire un échec.",
+  "help.glory.title": "Triomphe : 20 naturel",
+  "help.glory.text": "S'il affiche 20, tu fais un coup critique comme d'habitude et tu obtiens un bonus en plus. Tire un triomphe.",
+  "help.setup.title": "Avant de jouer",
+  "help.setup.text": "Dans les réglages de la table, indique ton personnage et choisis un groupe de classes : mêlée, distance ou arcane. Tu ne tires que des cartes adaptées à ta classe.",
+  "help.tones.title": "Tons",
+  "help.tones.text": "Les tons définissent le genre de cartes du paquet : de maladroit à douloureux pour les échecs, d'héroïque à brutal pour les triomphes. Choisissez-les ensemble, pour que personne ne tire une carte dont la table ne veut pas.",
+  "help.severity.title": "Sévérité",
+  "help.severity.text": "La sévérité limite la force des effets : léger pour des conséquences douces, sévère quand ça doit vraiment faire mal ou briller.",
+  "help.gm.title": "Le MJ a le dernier mot",
+  "help.gm.text": "Lis la carte à voix haute. Si un effet ne colle pas à la situation, le MJ peut l'adapter ou te faire tirer à nouveau.",
+  "help.start": "C'est parti"
 }
