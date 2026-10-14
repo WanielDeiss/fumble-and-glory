@@ -68,6 +68,426 @@
       "i18n": {
         "en": { "title": "Over Your Own Feet", "effect": "You fall and are prone.", "duration": "Until you stand up" }
       }
+    },
+    {
+      "id": "fumble-martial-bounce-back",
+      "kind": "fumble",
+      "classGroups": ["martial"],
+      "tones": ["embarrassing", "painful"],
+      "severity": "medium",
+      "i18n": {
+        "en": { "title": "Bounce-Back", "effect": "Your weapon glances off the target and smacks you in the face. Take half the weapon's damage, and you have disadvantage on your next attack.", "duration": "Until your next attack" },
+        "de": { "title": "Rückprall", "effect": "Deine Waffe prallt vom Ziel ab und trifft dich mitten ins Gesicht. Du erleidest die Hälfte ihres Schadens und hast Nachteil auf deinen nächsten Angriff.", "duration": "Bis zu deinem nächsten Angriff" },
+        "fr": { "title": "Retour à l'envoyeur", "effect": "Ton arme rebondit sur la cible et te frappe en plein visage. Tu subis la moitié de ses dégâts et tu as le désavantage à ta prochaine attaque.", "duration": "Jusqu'à ta prochaine attaque" }
+      }
+    },
+    {
+      "id": "fumble-weapon-blank-moment",
+      "kind": "fumble",
+      "classGroups": ["martial", "ranged"],
+      "tones": ["embarrassing"],
+      "severity": "medium",
+      "i18n": {
+        "en": { "title": "Blank Moment", "effect": "Your mind goes blank mid-fight. You don't add your proficiency bonus to your attack rolls.", "duration": "1d4 rounds" },
+        "de": { "title": "Aussetzer", "effect": "Mitten im Kampf ist dein Kopf wie leergefegt. Du addierst deinen Übungsbonus nicht zu deinen Angriffswürfen.", "duration": "1d4 Runden" },
+        "fr": { "title": "Trou noir", "effect": "En plein combat, ton esprit se vide. Tu n'ajoutes pas ton bonus de maîtrise à tes jets d'attaque.", "duration": "1d4 rounds" }
+      }
+    },
+    {
+      "id": "fumble-martial-caught-in-the-folds",
+      "kind": "fumble",
+      "classGroups": ["martial"],
+      "tones": ["embarrassing"],
+      "severity": "medium",
+      "i18n": {
+        "en": { "title": "Caught in the Folds", "effect": "You get tangled in the target's clothing or armor. Attacks against you have advantage until you free yourself with a DC 14 Dexterity or Strength saving throw.", "duration": "Until you break free" },
+        "de": { "title": "Verheddert", "effect": "Du verhedderst dich in Kleidung oder Rüstung des Ziels. Angriffe gegen dich haben Vorteil, bis du dich mit einem Geschicklichkeits- oder Stärkerettungswurf SG 14 befreist.", "duration": "Bis du dich befreist" },
+        "fr": { "title": "Pris dans les plis", "effect": "Tu t'emmêles dans les vêtements ou l'armure de la cible. Les attaques contre toi ont l'avantage jusqu'à ce que tu te libères avec un jet de sauvegarde de Dextérité ou de Force DD 14.", "duration": "Jusqu'à ce que tu te libères" }
+      }
+    },
+    {
+      "id": "fumble-arcane-lost-words",
+      "kind": "fumble",
+      "classGroups": ["arcane"],
+      "tones": ["embarrassing"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Lost the Words", "effect": "The incantation slips your mind. You can't cast this spell again.", "duration": "1 minute" },
+        "de": { "title": "Formel vergessen", "effect": "Die Beschwörungsformel ist wie weggeblasen. Du kannst diesen Zauber nicht erneut wirken.", "duration": "1 Minute" },
+        "fr": { "title": "Formule envolée", "effect": "L'incantation t'échappe complètement. Tu ne peux plus lancer ce sort.", "duration": "1 minute" }
+      }
+    },
+    {
+      "id": "fumble-martial-shield-to-the-teeth",
+      "kind": "fumble",
+      "classGroups": ["martial"],
+      "tones": ["shameful", "painful"],
+      "severity": "harsh",
+      "i18n": {
+        "en": { "title": "Shield to the Teeth", "effect": "If you hold a shield, it slams into your mouth: make a DC 16 Strength saving throw. On a failure, take 1d6 damage and you can only mumble; spells with a verbal component have a 75% chance to fail.", "duration": "1d4 rounds" },
+        "de": { "title": "Schild an die Zähne", "effect": "Trägst du einen Schild, knallt er dir gegen den Mund: Stärkerettungswurf SG 16. Bei einem Fehlschlag erleidest du 1d6 Schaden und kannst nur nuscheln; Zauber mit verbaler Komponente misslingen zu 75 %.", "duration": "1d4 Runden" },
+        "fr": { "title": "Bouclier dans les dents", "effect": "Si tu tiens un bouclier, il te heurte la bouche : jet de sauvegarde de Force DD 16. En cas d'échec, tu subis 1d6 dégâts et ne peux que marmonner ; les sorts à composante verbale ont 75 % de chances d'échouer.", "duration": "1d4 rounds" }
+      }
+    },
+    {
+      "id": "fumble-ranged-rebound-shot",
+      "kind": "fumble",
+      "classGroups": ["ranged"],
+      "tones": ["shameful", "painful"],
+      "severity": "harsh",
+      "i18n": {
+        "en": { "title": "Rebound Shot", "effect": "Your shot ricochets back toward you. Make a DC 16 Dexterity saving throw; on a failure, take the weapon's damage and you are blinded.", "duration": "1d4 rounds" },
+        "de": { "title": "Querschläger", "effect": "Dein Geschoss prallt ab und kommt zu dir zurück. Mach einen Geschicklichkeitsrettungswurf SG 16; bei einem Fehlschlag erleidest du den Waffenschaden und bist blind.", "duration": "1d4 Runden" },
+        "fr": { "title": "Retour de flèche", "effect": "Ton tir ricoche et revient vers toi. Fais un jet de sauvegarde de Dextérité DD 16 ; en cas d'échec, tu subis les dégâts de l'arme et tu es aveuglé.", "duration": "1d4 rounds" }
+      }
+    },
+    {
+      "id": "fumble-martial-sprained-limb",
+      "kind": "fumble",
+      "classGroups": ["martial"],
+      "tones": ["shameful", "painful"],
+      "severity": "harsh",
+      "i18n": {
+        "en": { "title": "Sprained Limb", "effect": "You hit wrong and something gives. Make a DC 16 Constitution saving throw; on a failure, you can't attack with that limb.", "duration": "Until you finish a short rest" },
+        "de": { "title": "Verstaucht", "effect": "Du triffst falsch auf und etwas gibt nach. Mach einen Konstitutionsrettungswurf SG 16; bei einem Fehlschlag kannst du mit diesem Körperteil nicht angreifen.", "duration": "Bis du eine kurze Rast beendest" },
+        "fr": { "title": "Membre froissé", "effect": "Tu frappes mal et quelque chose lâche. Fais un jet de sauvegarde de Constitution DD 16 ; en cas d'échec, tu ne peux plus attaquer avec ce membre.", "duration": "Jusqu'à ce que tu termines un repos court" }
+      }
+    },
+    {
+      "id": "fumble-arcane-inside-out",
+      "kind": "fumble",
+      "classGroups": ["arcane"],
+      "tones": ["shameful"],
+      "severity": "harsh",
+      "i18n": {
+        "en": { "title": "Inside Out", "effect": "Your spell turns on you. Harmful effects hit you instead of the target at double strength; beneficial effects meant for you or an ally land on a random enemy in range.", "duration": "Immediately" },
+        "de": { "title": "Umgekehrte Magie", "effect": "Dein Zauber wendet sich gegen dich. Schädliche Effekte treffen dich statt des Ziels mit doppelter Wirkung; nützliche Effekte für dich oder Verbündete gehen an einen zufälligen Feind in Reichweite.", "duration": "Sofort" },
+        "fr": { "title": "Sort retourné", "effect": "Ton sort se retourne contre toi. Les effets néfastes te frappent à la place de la cible avec une puissance doublée ; les effets bénéfiques destinés à toi ou à un allié touchent un ennemi au hasard à portée.", "duration": "Immédiatement" }
+      }
+    },
+    {
+      "id": "fumble-martial-lost-focus",
+      "kind": "fumble",
+      "classGroups": ["martial"],
+      "tones": ["awkward"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Lost Focus", "effect": "Your attention wanders for a moment. You don't add your proficiency bonus to your next attack roll.", "duration": "Until your next attack" },
+        "de": { "title": "Abgelenkt", "effect": "Deine Aufmerksamkeit schweift kurz ab. Du addierst deinen Übungsbonus nicht zu deinem nächsten Angriffswurf.", "duration": "Bis zu deinem nächsten Angriff" },
+        "fr": { "title": "Distrait", "effect": "Ton attention s'égare un instant. Tu n'ajoutes pas ton bonus de maîtrise à ton prochain jet d'attaque.", "duration": "Jusqu'à ta prochaine attaque" }
+      }
+    },
+    {
+      "id": "fumble-martial-showboating",
+      "kind": "fumble",
+      "classGroups": ["martial"],
+      "tones": ["embarrassing"],
+      "severity": "medium",
+      "i18n": {
+        "en": { "title": "Showboating", "effect": "You twirl your weapon once too often and drop it. Make a DC 14 Dexterity saving throw; on a failure, it hits you for its normal damage.", "duration": "Immediately" },
+        "de": { "title": "Angeberei", "effect": "Du wirbelst deine Waffe einmal zu oft herum und lässt sie fallen. Mach einen Geschicklichkeitsrettungswurf SG 14; bei einem Fehlschlag trifft sie dich mit ihrem normalen Schaden.", "duration": "Sofort" },
+        "fr": { "title": "Frime", "effect": "Tu fais tournoyer ton arme une fois de trop et tu la lâches. Fais un jet de sauvegarde de Dextérité DD 14 ; en cas d'échec, elle t'inflige ses dégâts normaux.", "duration": "Immédiatement" }
+      }
+    },
+    {
+      "id": "fumble-ranged-spotted",
+      "kind": "fumble",
+      "classGroups": ["ranged"],
+      "tones": ["embarrassing"],
+      "severity": "medium",
+      "i18n": {
+        "en": { "title": "Spotted", "effect": "If you were hidden, your target sees you. Reroll your Dexterity (Stealth) check with disadvantage against the passive Perception of every enemy within 120 feet.", "duration": "Immediately" },
+        "de": { "title": "Entdeckt", "effect": "Warst du versteckt, sieht dich dein Ziel. Wiederhole deinen Geschicklichkeitswurf (Heimlichkeit) mit Nachteil gegen die passive Wahrnehmung aller Feinde im Umkreis von 36 m.", "duration": "Sofort" },
+        "fr": { "title": "Repéré", "effect": "Si tu étais caché, ta cible te voit. Relance ton test de Dextérité (Discrétion) avec désavantage contre la Perception passive de chaque ennemi dans un rayon de 36 m.", "duration": "Immédiatement" }
+      }
+    },
+    {
+      "id": "fumble-arcane-inoculated",
+      "kind": "fumble",
+      "classGroups": ["arcane"],
+      "tones": ["embarrassing"],
+      "severity": "medium",
+      "i18n": {
+        "en": { "title": "Inoculated", "effect": "Your spell only toughens the target. It gains resistance to the spell's damage type.", "duration": "1d4 rounds" },
+        "de": { "title": "Abgehärtet", "effect": "Dein Zauber härtet das Ziel nur ab. Es erhält Resistenz gegen die Schadensart des Zaubers.", "duration": "1d4 Runden" },
+        "fr": { "title": "Endurci", "effect": "Ton sort ne fait qu'endurcir la cible. Elle obtient la résistance au type de dégâts du sort.", "duration": "1d4 rounds" }
+      }
+    },
+    {
+      "id": "fumble-martial-winded",
+      "kind": "fumble",
+      "classGroups": ["martial"],
+      "tones": ["awkward"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Winded", "effect": "You put so much into the swing that you're out of breath. You can't speak.", "duration": "1d4 rounds" },
+        "de": { "title": "Außer Atem", "effect": "Du legst so viel in den Schlag, dass dir die Luft wegbleibt. Du kannst nicht sprechen.", "duration": "1d4 Runden" },
+        "fr": { "title": "Essoufflé", "effect": "Tu mets tant de force dans ton coup que tu en perds le souffle. Tu ne peux pas parler.", "duration": "1d4 rounds" }
+      }
+    },
+    {
+      "id": "fumble-ranged-torn-seam",
+      "kind": "fumble",
+      "classGroups": ["ranged"],
+      "tones": ["awkward", "comic"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Torn Seam", "effect": "A piece of your clothing or armor (GM's choice) rips. Each time you make an attack roll, there's a 25% chance it tears further.", "duration": "Until it's mended" },
+        "de": { "title": "Geplatzte Naht", "effect": "Ein Kleidungs- oder Rüstungsteil (SL wählt) reißt auf. Bei jedem Angriffswurf reißt es mit 25 % Wahrscheinlichkeit weiter.", "duration": "Bis es geflickt ist" },
+        "fr": { "title": "Couture craquée", "effect": "Un de tes vêtements ou une pièce d'armure (au choix du MJ) se déchire. À chaque jet d'attaque, il y a 25 % de chances qu'il se déchire davantage.", "duration": "Jusqu'à ce qu'il soit réparé" }
+      }
+    },
+    {
+      "id": "fumble-martial-muscle-cramp",
+      "kind": "fumble",
+      "classGroups": ["martial"],
+      "tones": ["awkward"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Muscle Cramp", "effect": "A cramp shoots through your arm. Subtract 1d4 from your next attack roll.", "duration": "Until your next attack" },
+        "de": { "title": "Muskelkrampf", "effect": "Ein Krampf schießt dir in den Arm. Zieh 1d4 von deinem nächsten Angriffswurf ab.", "duration": "Bis zu deinem nächsten Angriff" },
+        "fr": { "title": "Crampe", "effect": "Une crampe te traverse le bras. Soustrais 1d4 à ton prochain jet d'attaque.", "duration": "Jusqu'à ta prochaine attaque" }
+      }
+    },
+    {
+      "id": "fumble-arcane-overcharged",
+      "kind": "fumble",
+      "classGroups": ["arcane"],
+      "tones": ["awkward", "comic"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Overcharged", "effect": "If this spell deals force damage, the energy lingers in you: whenever you reach to touch or hold something, there's a 10% chance you shove at full force instead.", "duration": "1d4 days" },
+        "de": { "title": "Überladen", "effect": "Verursacht dieser Zauber Energieschaden, bleibt die Kraft in dir hängen: Wann immer du etwas berühren oder halten willst, stößt du mit 10 % Wahrscheinlichkeit stattdessen mit voller Wucht zu.", "duration": "1d4 Tage" },
+        "fr": { "title": "Surchargé", "effect": "Si ce sort inflige des dégâts de force, l'énergie reste en toi : chaque fois que tu veux toucher ou tenir quelque chose, il y a 10 % de chances que tu pousses de toutes tes forces à la place.", "duration": "1d4 jours" }
+      }
+    },
+    {
+      "id": "fumble-martial-rolled-ankle",
+      "kind": "fumble",
+      "classGroups": ["martial"],
+      "tones": ["awkward"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Rolled Ankle", "effect": "You land badly on your foot. Your speed is reduced by 5 feet.", "duration": "Until you finish a short rest" },
+        "de": { "title": "Umgeknickt", "effect": "Du knickst mit dem Fuß um. Deine Bewegungsrate sinkt um 1,5 m.", "duration": "Bis du eine kurze Rast beendest" },
+        "fr": { "title": "Mauvaise réception", "effect": "Tu retombes mal sur ton pied. Ta vitesse est réduite de 1,5 m.", "duration": "Jusqu'à ce que tu termines un repos court" }
+      }
+    },
+    {
+      "id": "fumble-martial-sprained-ankle",
+      "kind": "fumble",
+      "classGroups": ["martial"],
+      "tones": ["embarrassing"],
+      "severity": "medium",
+      "i18n": {
+        "en": { "title": "Sprained Ankle", "effect": "Your ankle gives way with an audible crack. Your speed is reduced by 10 feet.", "duration": "Until you finish a short rest" },
+        "de": { "title": "Verstauchter Knöchel", "effect": "Dein Knöchel gibt mit einem hörbaren Knacken nach. Deine Bewegungsrate sinkt um 3 m.", "duration": "Bis du eine kurze Rast beendest" },
+        "fr": { "title": "Cheville foulée", "effect": "Ta cheville cède avec un craquement audible. Ta vitesse est réduite de 3 m.", "duration": "Jusqu'à ce que tu termines un repos court" }
+      }
+    },
+    {
+      "id": "fumble-ranged-taunted",
+      "kind": "fumble",
+      "classGroups": ["ranged"],
+      "tones": ["awkward"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Taunted", "effect": "Your target mocks your miss. Make a DC 12 Wisdom saving throw; on a failure, you have disadvantage on attacks against it until you hit it.", "duration": "Until you hit it" },
+        "de": { "title": "Verspottet", "effect": "Dein Ziel verspottet deinen Fehlschuss. Mach einen Weisheitsrettungswurf SG 12; bei einem Fehlschlag hast du Nachteil auf Angriffe gegen es, bis du es triffst.", "duration": "Bis du es triffst" },
+        "fr": { "title": "Nargué", "effect": "Ta cible se moque de ton tir raté. Fais un jet de sauvegarde de Sagesse DD 12 ; en cas d'échec, tu as le désavantage aux attaques contre elle jusqu'à ce que tu la touches.", "duration": "Jusqu'à ce que tu la touches" }
+      }
+    },
+    {
+      "id": "fumble-martial-dodged",
+      "kind": "fumble",
+      "classGroups": ["martial"],
+      "tones": ["awkward"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Dodged", "effect": "Your target slips past you and you trade places. Make a DC 12 Dexterity saving throw; on a failure, you fall prone.", "duration": "Immediately" },
+        "de": { "title": "Ausgewichen", "effect": "Dein Ziel schlüpft an dir vorbei und ihr tauscht die Plätze. Mach einen Geschicklichkeitsrettungswurf SG 12; bei einem Fehlschlag liegst du am Boden.", "duration": "Sofort" },
+        "fr": { "title": "Esquivé", "effect": "Ta cible se faufile et vous échangez vos places. Fais un jet de sauvegarde de Dextérité DD 12 ; en cas d'échec, tu tombes à terre.", "duration": "Immédiatement" }
+      }
+    },
+    {
+      "id": "fumble-martial-matador",
+      "kind": "fumble",
+      "classGroups": ["martial"],
+      "tones": ["embarrassing"],
+      "severity": "medium",
+      "i18n": {
+        "en": { "title": "Matador", "effect": "Your target sidesteps and you charge right past, swapping places. Make a DC 14 Dexterity saving throw; on a failure, you fall prone.", "duration": "Immediately" },
+        "de": { "title": "Torero", "effect": "Dein Ziel tritt zur Seite und du stürmst an ihm vorbei, ihr tauscht die Plätze. Mach einen Geschicklichkeitsrettungswurf SG 14; bei einem Fehlschlag liegst du am Boden.", "duration": "Sofort" },
+        "fr": { "title": "Matador", "effect": "Ta cible fait un pas de côté et tu la dépasses en trombe : vous échangez vos places. Fais un jet de sauvegarde de Dextérité DD 14 ; en cas d'échec, tu tombes à terre.", "duration": "Immédiatement" }
+      }
+    },
+    {
+      "id": "fumble-arcane-frog-legs",
+      "kind": "fumble",
+      "classGroups": ["arcane"],
+      "tones": ["awkward", "comic"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Frog Legs", "effect": "Your legs only remember how to jump. You can't walk or run; you can only move by jumping.", "duration": "1d4 minutes" },
+        "de": { "title": "Froschbeine", "effect": "Deine Beine können nur noch springen. Du kannst weder gehen noch laufen, sondern dich nur hüpfend fortbewegen.", "duration": "1d4 Minuten" },
+        "fr": { "title": "Pattes de grenouille", "effect": "Tes jambes ne savent plus que sauter. Tu ne peux ni marcher ni courir, seulement te déplacer en sautant.", "duration": "1d4 minutes" }
+      }
+    },
+    {
+      "id": "fumble-weapon-seized-up",
+      "kind": "fumble",
+      "classGroups": ["martial", "ranged"],
+      "tones": ["embarrassing"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Seized Up", "effect": "Your muscles lock at the worst moment. Subtract 1d6 from your next attack roll.", "duration": "Until your next attack" },
+        "de": { "title": "Verkrampft", "effect": "Deine Muskeln verkrampfen im ungünstigsten Moment. Zieh 1d6 von deinem nächsten Angriffswurf ab.", "duration": "Bis zu deinem nächsten Angriff" },
+        "fr": { "title": "Muscles noués", "effect": "Tes muscles se nouent au pire moment. Soustrais 1d6 à ton prochain jet d'attaque.", "duration": "Jusqu'à ta prochaine attaque" }
+      }
+    },
+    {
+      "id": "fumble-martial-aching-arm",
+      "kind": "fumble",
+      "classGroups": ["martial"],
+      "tones": ["embarrassing", "painful"],
+      "severity": "medium",
+      "i18n": {
+        "en": { "title": "Aching Arm", "effect": "Your arm throbs with every blow. You deal only half damage.", "duration": "1d4 + 1 rounds" },
+        "de": { "title": "Schmerzender Arm", "effect": "Dein Arm pocht bei jedem Schlag. Du verursachst nur halben Schaden.", "duration": "1d4 + 1 Runden" },
+        "fr": { "title": "Bras endolori", "effect": "Ton bras t'élance à chaque coup. Tu n'infliges que la moitié des dégâts.", "duration": "1d4 + 1 rounds" }
+      }
+    },
+    {
+      "id": "fumble-arcane-unplanned-departure",
+      "kind": "fumble",
+      "classGroups": ["arcane"],
+      "tones": ["embarrassing", "comic"],
+      "severity": "medium",
+      "i18n": {
+        "en": { "title": "Unplanned Departure", "effect": "Your spell yanks you away. You teleport 30 feet in a direction the GM picks at random (up counts).", "duration": "Immediately" },
+        "de": { "title": "Ungeplante Abreise", "effect": "Dein Zauber reißt dich fort. Du teleportierst dich 9 m in eine zufällige Richtung, die die SL bestimmt (auch nach oben).", "duration": "Sofort" },
+        "fr": { "title": "Départ imprévu", "effect": "Ton sort t'arrache sur place. Tu te téléportes de 9 m dans une direction aléatoire choisie par le MJ (le haut compte aussi).", "duration": "Immédiatement" }
+      }
+    },
+    {
+      "id": "fumble-ranged-off-balance",
+      "kind": "fumble",
+      "classGroups": ["ranged"],
+      "tones": ["awkward"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Off Balance", "effect": "Your footing is wrong for the shot. Make a DC 12 Wisdom saving throw; on a failure, subtract 1d6 from your next ranged attack roll.", "duration": "Until your next ranged attack" },
+        "de": { "title": "Aus dem Gleichgewicht", "effect": "Dein Stand passt nicht zum Schuss. Mach einen Weisheitsrettungswurf SG 12; bei einem Fehlschlag ziehst du 1d6 von deinem nächsten Fernkampf-Angriffswurf ab.", "duration": "Bis zu deinem nächsten Fernkampfangriff" },
+        "fr": { "title": "Déséquilibré", "effect": "Ta posture ne convient pas au tir. Fais un jet de sauvegarde de Sagesse DD 12 ; en cas d'échec, soustrais 1d6 à ton prochain jet d'attaque à distance.", "duration": "Jusqu'à ta prochaine attaque à distance" }
+      }
+    },
+    {
+      "id": "fumble-ranged-shaky-aim",
+      "kind": "fumble",
+      "classGroups": ["ranged"],
+      "tones": ["embarrassing"],
+      "severity": "medium",
+      "i18n": {
+        "en": { "title": "Shaky Aim", "effect": "You can't find your stance anymore. Make a DC 14 Wisdom saving throw; on a failure, subtract 1d6 from your next ranged attack roll.", "duration": "Until your next ranged attack" },
+        "de": { "title": "Zittrige Hand", "effect": "Du findest deinen Stand nicht mehr. Mach einen Weisheitsrettungswurf SG 14; bei einem Fehlschlag ziehst du 1d6 von deinem nächsten Fernkampf-Angriffswurf ab.", "duration": "Bis zu deinem nächsten Fernkampfangriff" },
+        "fr": { "title": "Visée tremblante", "effect": "Tu ne retrouves plus ta posture. Fais un jet de sauvegarde de Sagesse DD 14 ; en cas d'échec, soustrais 1d6 à ton prochain jet d'attaque à distance.", "duration": "Jusqu'à ta prochaine attaque à distance" }
+      }
+    },
+    {
+      "id": "fumble-arcane-memory-gap",
+      "kind": "fumble",
+      "classGroups": ["arcane"],
+      "tones": ["embarrassing"],
+      "severity": "medium",
+      "i18n": {
+        "en": { "title": "Memory Gap", "effect": "The spell's pattern fades from your mind. Make a DC 14 saving throw with your spellcasting ability; on a failure, you can't cast this spell again.", "duration": "Until you finish a short rest" },
+        "de": { "title": "Gedächtnislücke", "effect": "Das Muster des Zaubers verblasst in deinem Kopf. Mach einen Rettungswurf SG 14 mit deinem Attribut zum Zauberwirken; bei einem Fehlschlag kannst du diesen Zauber nicht erneut wirken.", "duration": "Bis du eine kurze Rast beendest" },
+        "fr": { "title": "Trou de mémoire", "effect": "Le schéma du sort s'efface de ton esprit. Fais un jet de sauvegarde DD 14 avec ta caractéristique d'incantation ; en cas d'échec, tu ne peux plus lancer ce sort.", "duration": "Jusqu'à ce que tu termines un repos court" }
+      }
+    },
+    {
+      "id": "fumble-martial-tangled-feet",
+      "kind": "fumble",
+      "classGroups": ["martial"],
+      "tones": ["awkward"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Tangled Feet", "effect": "Your feet won't cooperate. You can't take the Disengage action.", "duration": "Until the end of your next turn" },
+        "de": { "title": "Knoten in den Beinen", "effect": "Deine Füße wollen nicht so wie du. Du kannst die Aktion Rückzug nicht ausführen.", "duration": "Bis zum Ende deines nächsten Zuges" },
+        "fr": { "title": "Pieds emmêlés", "effect": "Tes pieds refusent de coopérer. Tu ne peux pas effectuer l'action Se désengager.", "duration": "Jusqu'à la fin de ton prochain tour" }
+      }
+    },
+    {
+      "id": "fumble-martial-throbbing-toe",
+      "kind": "fumble",
+      "classGroups": ["martial"],
+      "tones": ["awkward", "comic"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Throbbing Toe", "effect": "You kick something hard and your toe throbs. Your speed is halved.", "duration": "Until the end of your next turn" },
+        "de": { "title": "Pochender Zeh", "effect": "Du trittst gegen etwas Hartes und dein Zeh pocht. Deine Bewegungsrate ist halbiert.", "duration": "Bis zum Ende deines nächsten Zuges" },
+        "fr": { "title": "Orteil meurtri", "effect": "Tu cognes quelque chose de dur et ton orteil t'élance. Ta vitesse est réduite de moitié.", "duration": "Jusqu'à la fin de ton prochain tour" }
+      }
+    },
+    {
+      "id": "fumble-arcane-uninvited-guest",
+      "kind": "fumble",
+      "classGroups": ["arcane"],
+      "tones": ["awkward", "comic"],
+      "severity": "medium",
+      "i18n": {
+        "en": { "title": "Uninvited Guest", "effect": "Your spell opens a door it shouldn't. A CR 1/2 creature, chosen at random by the GM, appears within 30 feet of you, hostile to everyone.", "duration": "Until it is defeated or leaves" },
+        "de": { "title": "Ungebetener Gast", "effect": "Dein Zauber öffnet eine Tür, die zu bleiben sollte. Eine Kreatur mit HG 1/2, von der SL zufällig gewählt, erscheint im Umkreis von 9 m und ist allen feindlich gesinnt.", "duration": "Bis sie besiegt ist oder verschwindet" },
+        "fr": { "title": "Invité surprise", "effect": "Ton sort ouvre une porte qui aurait dû rester fermée. Une créature de FP 1/2, choisie au hasard par le MJ, apparaît à 9 m de toi ou moins, hostile envers tout le monde.", "duration": "Jusqu'à ce qu'elle soit vaincue ou parte" }
+      }
+    },
+    {
+      "id": "fumble-martial-snatched",
+      "kind": "fumble",
+      "classGroups": ["martial"],
+      "tones": ["shameful"],
+      "severity": "harsh",
+      "i18n": {
+        "en": { "title": "Snatched", "effect": "Your target grabs for your weapon. Make a contested Strength or Dexterity check against it; if it wins, it takes your weapon.", "duration": "Immediately" },
+        "de": { "title": "Entrissen", "effect": "Dein Ziel greift nach deiner Waffe. Mach einen vergleichenden Stärke- oder Geschicklichkeitswurf gegen es; gewinnt es, nimmt es dir die Waffe ab.", "duration": "Sofort" },
+        "fr": { "title": "Arraché", "effect": "Ta cible tente de saisir ton arme. Fais un test opposé de Force ou de Dextérité contre elle ; si elle l'emporte, elle te prend ton arme.", "duration": "Immédiatement" }
+      }
+    },
+    {
+      "id": "fumble-ranged-wrenched-wrist",
+      "kind": "fumble",
+      "classGroups": ["ranged"],
+      "tones": ["shameful", "painful"],
+      "severity": "harsh",
+      "i18n": {
+        "en": { "title": "Wrenched Wrist", "effect": "If you threw a weapon, take 1d6 damage. Each time you make a thrown weapon attack, make a DC 16 Constitution saving throw or take another 1d6 damage.", "duration": "Until you finish a short rest" },
+        "de": { "title": "Verrenktes Handgelenk", "effect": "Hast du eine Waffe geworfen, erleidest du 1d6 Schaden. Bei jedem Angriff mit einer Wurfwaffe musst du einen Konstitutionsrettungswurf SG 16 schaffen, sonst erleidest du erneut 1d6 Schaden.", "duration": "Bis du eine kurze Rast beendest" },
+        "fr": { "title": "Poignet tordu", "effect": "Si tu as lancé une arme, tu subis 1d6 dégâts. À chaque attaque avec une arme de lancer, fais un jet de sauvegarde de Constitution DD 16 ou subis à nouveau 1d6 dégâts.", "duration": "Jusqu'à ce que tu termines un repos court" }
+      }
+    },
+    {
+      "id": "fumble-martial-wrong-target",
+      "kind": "fumble",
+      "classGroups": ["martial"],
+      "tones": ["shameful"],
+      "severity": "harsh",
+      "i18n": {
+        "en": { "title": "Wrong Target", "effect": "You lash out at the wrong person. Reroll this attack against an ally within 5 feet of both you and your target.", "duration": "Immediately" },
+        "de": { "title": "Falsches Ziel", "effect": "Du schlägst nach der falschen Person. Wiederhole diesen Angriff gegen einen Verbündeten, der höchstens 1,5 m von dir und deinem Ziel entfernt ist.", "duration": "Sofort" },
+        "fr": { "title": "Mauvaise cible", "effect": "Tu frappes la mauvaise personne. Relance cette attaque contre un allié situé à 1,5 m ou moins de toi et de ta cible.", "duration": "Immédiatement" }
+      }
+    },
+    {
+      "id": "fumble-arcane-borrowed-years",
+      "kind": "fumble",
+      "classGroups": ["arcane"],
+      "tones": ["shameful"],
+      "severity": "harsh",
+      "i18n": {
+        "en": { "title": "Borrowed Years", "effect": "The spell feeds on your lifetime. Make a DC 16 saving throw with your spellcasting ability; on a failure, you age 5d10 years.", "duration": "Permanent" },
+        "de": { "title": "Geliehene Jahre", "effect": "Der Zauber zehrt an deiner Lebenszeit. Mach einen Rettungswurf SG 16 mit deinem Attribut zum Zauberwirken; bei einem Fehlschlag alterst du um 5d10 Jahre.", "duration": "Dauerhaft" },
+        "fr": { "title": "Années volées", "effect": "Le sort se nourrit de ta vie. Fais un jet de sauvegarde DD 16 avec ta caractéristique d'incantation ; en cas d'échec, tu vieillis de 5d10 ans.", "duration": "Permanent" }
+      }
     }
   ]
 }
