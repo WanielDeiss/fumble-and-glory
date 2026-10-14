@@ -1,9 +1,10 @@
 import "./styles/tokens.css";
 import "./styles/app.css";
 import {
-  loadData, loadUiStrings, localize, label, withinSeverity,
-  type GameData, type Kind, type Labels, type LocalizedCard,
+  fetchData, loadStoredData, storeData, diffData, loadUiStrings, localize, label, withinSeverity,
+  type Card, type DataDiff, type GameData, type Kind, type Labels, type LocalizedCard, type Severity,
 } from "./data";
+import { loadCustomCards, saveCustomCards, newCustomId } from "./custom";
 import { loadSettings, saveSettings, type Settings } from "./settings";
 
 const app = document.getElementById("app")!;
@@ -14,6 +15,27 @@ let settings: Settings;
 let drawn: { card: LocalizedCard; fresh: boolean } | null = null;
 let deckFilter: "all" | Kind = "all";
 let deckQuery = "";
+
+let customCards: Card[] = [];
+
+/** Newer decks found on the server, waiting for the player to load them. */
+let pendingUpdate: { data: GameData; diff: DataDiff } | null = null;
+let updateDone = false;
+let lastUpdateCheck = 0;
+
+/** The card being created or edited on #/card/… */
+interface Draft {
+  id: string | null;
+  kind: Kind;
+  title: string;
+  effect: string;
+  duration: string;
+  classGroups: string[];
+  tones: string[];
+  severity: Severity;
+}
+let draft: Draft | null = null;
+let draftError = "";
 
 /** Chrome's deferred install prompt (beforeinstallprompt); null where the browser has none. */
 interface InstallPromptEvent extends Event { prompt(): Promise<void> }
@@ -40,6 +62,7 @@ const ICONS = {
   ranged: '<path d="M3 21 21 3M15 3h6v6M5 6c4 0 13 9 13 13"/>',
   arcane: '<path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/>',
   install: '<path d="M12 3v12M7 10l5 5 5-5M5 21h14"/>',
+  plus: '<path d="M12 5v14M5 12h14"/>',
 } as const;
 const icon = (name: keyof typeof ICONS) => `<svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[name]}</svg>`;
 
@@ -55,9 +78,9 @@ function classBadge(groups: string[]): string {
 
 const toneLabel = (kind: Kind, tone: string) => label(data.taxonomy.tones[kind][tone], settings.locale);
 
-/** Cards shown in the user's locale, after the translation fallback rule. */
+/** Cards shown in the user's locale, after the translation fallback rule. Own cards first. */
 function visibleCards(): LocalizedCard[] {
-  return data.cards
+  return [...(isInstalled() ? customCards : []), ...data.cards]
     .map((c) => localize(c, settings.locale, settings.fallback))
     .filter((c): c is LocalizedCard => c !== null);
 }
@@ -94,7 +117,7 @@ function update(patch: Partial<Settings>) {
   saveSettings(settings);
   if (localeChanged) {
     drawn = null;
-    void loadUiStrings(settings.locale, data.manifest.version).then((s) => { ui = s; render(); });
+    void loadUiStrings(settings.locale, __BUILD_ID__).then((s) => { ui = s; render(); });
   } else {
     render();
   }
@@ -136,9 +159,21 @@ function cardView(c: LocalizedCard, fresh: boolean): string {
         <h2 class="fg-card__title">${esc(c.text.title)}</h2>
         <p class="fg-card__effect">${esc(c.text.effect)}</p>
         ${c.text.duration ? `<p class="meta">${esc(c.text.duration)}</p>` : ""}
-        <div class="fg-card__tags">${c.tones.map((tn) => `<span class="fg-tag fg-tag--static">${esc(toneLabel(c.kind, tn))}</span>`).join("")}</div>
+        <div class="fg-card__tags">${c.custom ? `<span class="fg-tag fg-tag--static fg-tag--custom">${esc(t("card.custom"))}</span>` : ""}${c.tones.map((tn) => `<span class="fg-tag fg-tag--static">${esc(toneLabel(c.kind, tn))}</span>`).join("")}</div>
       </div>
     </article>`;
+}
+
+function updateBanner(): string {
+  if (updateDone) return `<div class="update-banner" role="status"><span>${esc(t("update.done"))}</span></div>`;
+  if (!pendingUpdate) return "";
+  const { added } = pendingUpdate.diff;
+  const text = added === 1 ? t("update.newOne") : added > 1 ? t("update.new", { n: added }) : t("update.changed");
+  return `
+    <div class="update-banner" role="status">
+      <span>${esc(text)}</span>
+      <button class="fg-btn fg-btn--small fg-btn--primary" data-action="apply-update">${esc(t("update.load"))}</button>
+    </div>`;
 }
 
 function drawScreen(): string {
@@ -149,6 +184,7 @@ function drawScreen(): string {
     ${topbar(null, `
       <a class="icon-btn" href="#/deck" aria-label="${esc(t("nav.deck"))}">${icon("deck")}</a>
       <a class="icon-btn" href="#/table" aria-label="${esc(t("nav.table"))}">${icon("sliders")}</a>`)}
+    ${updateBanner()}
     <section class="character">
       ${settings.characterName ? `<strong>${esc(settings.characterName)}</strong>` : ""}
       ${classBadge([settings.classGroup])}
@@ -165,15 +201,15 @@ function drawScreen(): string {
     </div>`;
 }
 
-function segmented(name: string, cols: number, options: [string, string][], current: string): string {
+function segmented(name: string, cols: number, options: [string, string][], current: string, action = "set"): string {
   return `<div class="segmented" style="--cols:${cols}" role="group">${options
-    .map(([v, l]) => `<button class="seg" data-action="set" data-key="${name}" data-value="${esc(v)}" aria-pressed="${v === current}">${esc(l)}</button>`)
+    .map(([v, l]) => `<button class="seg" data-action="${action}" data-key="${name}" data-value="${esc(v)}" aria-pressed="${v === current}">${esc(l)}</button>`)
     .join("")}</div>`;
 }
 
-function toneToggles(kind: Kind, selected: string[]): string {
+function toneToggles(kind: Kind, selected: string[], action = "tone"): string {
   return `<div class="tags" role="group">${Object.keys(data.taxonomy.tones[kind])
-    .map((tn) => `<button class="fg-tag${kind === "glory" ? " fg-tag--glory" : ""}" data-action="tone" data-kind="${kind}" data-value="${esc(tn)}" aria-pressed="${selected.includes(tn)}">${esc(toneLabel(kind, tn))}</button>`)
+    .map((tn) => `<button class="fg-tag${kind === "glory" ? " fg-tag--glory" : ""}" data-action="${action}" data-kind="${kind}" data-key="tones" data-value="${esc(tn)}" aria-pressed="${selected.includes(tn)}">${esc(toneLabel(kind, tn))}</button>`)
     .join("")}</div>`;
 }
 
@@ -227,15 +263,19 @@ function deckRows(): string {
       (!q || `${c.text.title} ${c.text.effect}`.toLowerCase().includes(q)),
   );
   return list
-    .map((c) => `
-      <li class="deck-row">
+    .map((c) => {
+      const inner = `
         <span class="deck-die deck-die--${c.kind}" aria-label="${esc(t(c.kind === "fumble" ? "card.fumble" : "card.glory"))}">${c.kind === "fumble" ? 1 : 20}</span>
         <span class="deck-row__text">
           <span class="deck-row__title">${esc(c.text.title)}</span>
           <span class="deck-row__effect">${esc(c.text.effect)}</span>
-          <span class="deck-row__meta">${classBadge(c.classGroups)}<span class="meta">${esc(c.tones.map((tn) => toneLabel(c.kind, tn)).join(", "))}</span></span>
-        </span>
-      </li>`)
+          <span class="deck-row__meta">${c.custom ? `<span class="fg-tag fg-tag--static fg-tag--custom">${esc(t("card.custom"))}</span>` : ""}${classBadge(c.classGroups)}<span class="meta">${esc(c.tones.map((tn) => toneLabel(c.kind, tn)).join(", "))}</span></span>
+        </span>`;
+      // Own cards open the editor.
+      return c.custom
+        ? `<li><a class="deck-row deck-row--link" href="#/card/${esc(c.id)}">${inner}</a></li>`
+        : `<li class="deck-row">${inner}</li>`;
+    })
     .join("");
 }
 
@@ -243,13 +283,148 @@ function deckScreen(): string {
   const count = visibleCards().filter((c) => deckFilter === "all" || c.kind === deckFilter).length;
   return `
     ${topbar(t("deck.title"), `<span class="meta">${esc(t("deck.count", { n: count }))}</span>`)}
+    ${updateBanner()}
     <div class="filters">
+      ${isInstalled()
+        ? `<a class="fg-btn fg-btn--outline" href="#/card/new">${icon("plus")}${esc(t("deck.addCustom"))}</a>`
+        : `<p class="meta">${esc(t("deck.customHint"))} <a href="#/install">${esc(t("install.title"))}</a></p>`}
       <label class="search">${icon("search")}<span class="visually-hidden">${esc(t("deck.search"))}</span>
         <input type="search" placeholder="${esc(t("deck.search"))}" value="${esc(deckQuery)}" data-action="search">
       </label>
       ${segmented("deckFilter", 3, [["all", t("deck.filter.all")], ["fumble", t("deck.filter.fumble")], ["glory", t("deck.filter.glory")]], deckFilter)}
     </div>
     <ul class="deck-list">${deckRows()}</ul>`;
+}
+
+function newDraft(id: string): Draft | null {
+  if (id === "new") {
+    return { id: null, kind: "fumble", title: "", effect: "", duration: "", classGroups: [], tones: [], severity: "mild" };
+  }
+  const card = customCards.find((c) => c.id === id);
+  if (!card) return null;
+  const text = Object.values(card.i18n)[0];
+  return {
+    id: card.id, kind: card.kind, title: text.title, effect: text.effect, duration: text.duration ?? "",
+    classGroups: [...card.classGroups], tones: [...card.tones], severity: card.severity,
+  };
+}
+
+function editorScreen(id: string): string {
+  if (!isInstalled()) { location.replace("#/install"); return ""; }
+  if (!draft || (draft.id ?? "new") !== id) { draft = newDraft(id); draftError = ""; }
+  if (!draft) { location.replace("#/deck"); return ""; }
+  const d = draft;
+  const loc = settings.locale;
+  const groups = Object.entries(data.taxonomy.classGroups);
+  const sev = Object.entries(data.taxonomy.severities).map(([k, v]) => [k, label(v, loc)] as [string, string]);
+  return `
+    ${topbar(t(d.id ? "editor.edit" : "editor.new"))}
+    <div class="content">
+      <section class="section">
+        <h2 class="label">${esc(t("editor.kind"))}</h2>
+        ${segmented("kind", 2, [["fumble", t("card.fumble")], ["glory", t("card.glory")]], d.kind, "draft")}
+      </section>
+      <section class="section">
+        <label class="label" for="card-title">${esc(t("editor.title"))}</label>
+        <input id="card-title" class="input" type="text" maxlength="60" autocomplete="off" value="${esc(d.title)}" data-action="draft-text" data-key="title">
+        <label class="label" for="card-effect">${esc(t("editor.effect"))}</label>
+        <textarea id="card-effect" class="input textarea" maxlength="280" rows="4" placeholder="${esc(t("editor.effectPlaceholder"))}" data-action="draft-text" data-key="effect">${esc(d.effect)}</textarea>
+        <label class="label" for="card-duration">${esc(t("editor.duration"))}</label>
+        <input id="card-duration" class="input" type="text" maxlength="60" autocomplete="off" placeholder="${esc(t("editor.durationPlaceholder"))}" value="${esc(d.duration)}" data-action="draft-text" data-key="duration">
+      </section>
+      <section class="section">
+        <h2 class="label">${esc(t("editor.classes"))}</h2>
+        <p class="meta">${esc(t("editor.classesHint"))}</p>
+        <div class="tags" role="group">${groups
+          .map(([g, l]) => `<button class="fg-tag" data-action="draft-toggle" data-key="classGroups" data-value="${esc(g)}" aria-pressed="${d.classGroups.includes(g)}">${esc(label(l, loc))}</button>`)
+          .join("")}</div>
+      </section>
+      <section class="section">
+        <h2 class="label ${d.kind === "fumble" ? "label--fumble" : "label--glory"}">${esc(t("editor.tones"))}</h2>
+        ${toneToggles(d.kind, d.tones, "draft-toggle")}
+      </section>
+      <section class="section">
+        <h2 class="label">${esc(t("editor.severity"))}</h2>
+        ${segmented("severity", sev.length, sev, d.severity, "draft")}
+      </section>
+      <p class="meta">${esc(t("editor.savedLocally"))}</p>
+      ${draftError ? `<p class="form-error" role="alert">${esc(draftError)}</p>` : ""}
+    </div>
+    <div class="footer">
+      <button class="fg-btn fg-btn--primary" data-action="save-card">${esc(t("editor.save"))}</button>
+      ${d.id ? `<button class="fg-btn fg-btn--outline fg-btn--danger" data-action="delete-card">${esc(t("editor.delete"))}</button>` : ""}
+      <a class="fg-btn fg-btn--outline" href="#/deck">${esc(t("editor.cancel"))}</a>
+    </div>`;
+}
+
+function saveDraft() {
+  if (!draft) return;
+  const d = draft;
+  const title = d.title.trim(), effect = d.effect.trim(), duration = d.duration.trim();
+  if (!title || !effect || d.tones.length === 0) {
+    draftError = t("editor.errorRequired");
+    render();
+    return;
+  }
+  const card: Card = {
+    id: d.id ?? newCustomId(),
+    kind: d.kind,
+    classGroups: d.classGroups,
+    tones: d.tones,
+    severity: d.severity,
+    i18n: { [settings.locale]: duration ? { title, effect, duration } : { title, effect } },
+    custom: true,
+  };
+  const next = d.id ? customCards.map((c) => (c.id === d.id ? card : c)) : [card, ...customCards];
+  if (!saveCustomCards(next)) {
+    draftError = t("editor.errorStorage");
+    render();
+    return;
+  }
+  customCards = next;
+  draft = null;
+  location.hash = "#/deck";
+}
+
+function deleteDraft() {
+  if (!draft?.id || !confirm(t("editor.confirmDelete"))) return;
+  const id = draft.id;
+  const next = customCards.filter((c) => c.id !== id);
+  if (!saveCustomCards(next)) return;
+  customCards = next;
+  if (drawn?.card.id === id) drawn = null;
+  draft = null;
+  location.hash = "#/deck";
+}
+
+async function checkForUpdate() {
+  if (Date.now() - lastUpdateCheck < 10 * 60 * 1000) return;
+  lastUpdateCheck = Date.now();
+  try {
+    const remote = await fetchData();
+    if (remote.manifest.version === data.manifest.version) return;
+    const diff = diffData(data, remote);
+    if (diff.added + diff.changed + diff.removed === 0) {
+      // Only labels or settings changed: nothing for the player to decide.
+      data = remote;
+      storeData(data);
+      render();
+      return;
+    }
+    pendingUpdate = { data: remote, diff };
+    render();
+  } catch {
+    /* offline: check again next time */
+  }
+}
+
+function applyUpdate() {
+  if (!pendingUpdate) return;
+  data = pendingUpdate.data;
+  storeData(data);
+  pendingUpdate = null;
+  updateDone = true;
+  render();
 }
 
 const INSTALL_STEPS: Record<Platform, number> = { ios: 3, android: 3, desktop: 3, mac: 2 };
@@ -282,6 +457,7 @@ function render() {
     route === "/table" ? tableScreen() :
     route === "/deck" ? deckScreen() :
     route === "/install" ? installScreen() :
+    route.startsWith("/card/") ? editorScreen(decodeURIComponent(route.slice("/card/".length))) :
     drawScreen();
   if (drawn) drawn.fresh = false;
 }
@@ -305,6 +481,21 @@ app.addEventListener("click", (e) => {
     const field = kind === "fumble" ? "fumbleTones" : "gloryTones";
     const cur = settings[field];
     update({ [field]: cur.includes(value) ? cur.filter((x) => x !== value) : [...cur, value] } as Partial<Settings>);
+  } else if (action === "draft" && draft && key && value) {
+    if (key === "kind" && value !== draft.kind) draft.tones = []; // tones belong to one kind
+    draft = { ...draft, [key]: value };
+    render();
+  } else if (action === "draft-toggle" && draft && (key === "classGroups" || key === "tones") && value) {
+    const cur = draft[key];
+    draft[key] = cur.includes(value) ? cur.filter((x) => x !== value) : [...cur, value];
+    draftError = "";
+    render();
+  } else if (action === "save-card") {
+    saveDraft();
+  } else if (action === "delete-card") {
+    deleteDraft();
+  } else if (action === "apply-update") {
+    applyUpdate();
   } else if (action === "install" && installPrompt) {
     const prompt = installPrompt;
     installPrompt = null; // a prompt can only be shown once
@@ -317,6 +508,9 @@ app.addEventListener("input", (e) => {
   if (el.dataset.action === "name") {
     settings.characterName = el.value;
     saveSettings(settings);
+  } else if (el.dataset.action === "draft-text" && draft) {
+    const key = el.dataset.key as "title" | "effect" | "duration";
+    draft[key] = el.value;
   } else if (el.dataset.action === "search") {
     deckQuery = el.value;
     const list = app.querySelector(".deck-list");
@@ -329,7 +523,17 @@ app.addEventListener("change", (e) => {
   if (el.dataset.action === "locale") update({ locale: el.value });
 });
 
-window.addEventListener("hashchange", () => { render(); window.scrollTo(0, 0); });
+window.addEventListener("hashchange", () => {
+  if (!location.hash.startsWith("#/card/")) draft = null;
+  updateDone = false;
+  render();
+  window.scrollTo(0, 0);
+});
+
+// Installed apps stay open for days: look for new cards whenever the app comes back.
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "visible" && settings) void checkForUpdate();
+});
 
 // Keep Chrome's install prompt for our own button instead of its mini-infobar.
 window.addEventListener("beforeinstallprompt", (e) => {
@@ -354,10 +558,18 @@ if ("serviceWorker" in navigator && import.meta.env.PROD) {
 
 (async () => {
   try {
-    data = await loadData();
+    const stored = loadStoredData();
+    if (stored) {
+      data = stored;
+    } else {
+      data = await fetchData();
+      storeData(data);
+    }
+    customCards = loadCustomCards();
     settings = loadSettings(data.manifest.locales);
-    ui = await loadUiStrings(settings.locale, data.manifest.version);
+    ui = await loadUiStrings(settings.locale, __BUILD_ID__);
     render();
+    if (stored) void checkForUpdate();
   } catch (err) {
     app.innerHTML = `<p class="meta" style="padding:16px">${esc(String(err))}</p>`;
   }
