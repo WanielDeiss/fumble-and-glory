@@ -478,6 +478,102 @@
         "de": { "title": "Todesschuss", "effect": "Du triffst eine lebenswichtige Stelle. Würfle zwei zusätzliche Waffenschadenswürfel und addiere sie nach der Verdopplung durch den kritischen Treffer. Das Ziel kann keine Reaktionen ausführen und seine Bewegungsrate ist halbiert.", "duration": "Bis zum Ende seines nächsten Zuges" },
         "fr": { "title": "Tir mortel", "effect": "Tu touches un point vital. Lance deux dés de dégâts d'arme supplémentaires et ajoute-les après le doublement du coup critique. La cible ne peut pas effectuer de réaction et sa vitesse est réduite de moitié.", "duration": "Jusqu'à la fin de son prochain tour" }
       }
+    },
+    {
+      "id": "glory-any-lucky-streak",
+      "kind": "glory",
+      "classGroups": [],
+      "tones": ["lucky"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Lucky Streak", "effect": "Fortune smiles on you. You gain Heroic Inspiration.", "duration": "Until you use it" },
+        "de": { "title": "Glückssträhne", "effect": "Das Glück ist auf deiner Seite. Du erhältst Heldenhafte Inspiration.", "duration": "Bis du sie einsetzt" },
+        "fr": { "title": "Bonne étoile", "effect": "La chance te sourit. Tu obtiens l'inspiration héroïque.", "duration": "Jusqu'à ce que tu l'utilises" }
+      }
+    },
+    {
+      "id": "glory-any-second-chance",
+      "kind": "glory",
+      "classGroups": [],
+      "tones": ["lucky"],
+      "severity": "medium",
+      "i18n": {
+        "en": { "title": "Second Chance", "effect": "Once during this encounter, you may reroll one of your d20 rolls. You must use the new result.", "duration": "Until the end of the encounter" },
+        "de": { "title": "Zweite Chance", "effect": "Einmal in dieser Begegnung darfst du einen deiner W20-Würfe wiederholen. Das neue Ergebnis zählt.", "duration": "Bis zum Ende der Begegnung" },
+        "fr": { "title": "Seconde chance", "effect": "Une fois pendant cette rencontre, tu peux relancer l'un de tes d20. Le nouveau résultat s'applique.", "duration": "Jusqu'à la fin de la rencontre" }
+      }
+    },
+    {
+      "id": "glory-weapon-happy-accident",
+      "kind": "glory",
+      "classGroups": ["martial", "ranged"],
+      "tones": ["lucky"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Happy Accident", "effect": "The target steps on something slippery at just the wrong moment. It falls prone, no saving throw.", "duration": "Immediately" },
+        "de": { "title": "Glücklicher Zufall", "effect": "Das Ziel tritt im falschen Moment auf etwas Rutschiges. Es liegt am Boden, ohne Rettungswurf.", "duration": "Sofort" },
+        "fr": { "title": "Heureux hasard", "effect": "La cible marche sur quelque chose de glissant au pire moment. Elle tombe à terre, sans jet de sauvegarde.", "duration": "Immédiatement" }
+      }
+    },
+    {
+      "id": "glory-weapon-cut-purse",
+      "kind": "glory",
+      "classGroups": ["martial", "ranged"],
+      "tones": ["lucky"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Cut Purse", "effect": "Your hit tears a pouch from the target's belt. After the fight, you find 2d10 gold pieces in it.", "duration": "After the fight" },
+        "de": { "title": "Beutel getroffen", "effect": "Dein Treffer reißt dem Ziel einen Beutel vom Gürtel. Nach dem Kampf findest du darin 2d10 Goldmünzen.", "duration": "Nach dem Kampf" },
+        "fr": { "title": "Bourse arrachée", "effect": "Ton coup arrache une bourse à la ceinture de la cible. Après le combat, tu y trouves 2d10 pièces d'or.", "duration": "Après le combat" }
+      }
+    },
+    {
+      "id": "glory-arcane-free-magic",
+      "kind": "glory",
+      "classGroups": ["arcane"],
+      "tones": ["lucky"],
+      "severity": "medium",
+      "i18n": {
+        "en": { "title": "Free Magic", "effect": "The magic flows on its own. This spell doesn't expend a spell slot.", "duration": "Immediately" },
+        "de": { "title": "Freie Magie", "effect": "Die Magie fließt wie von selbst. Dieser Zauber verbraucht keinen Zauberplatz.", "duration": "Sofort" },
+        "fr": { "title": "Magie gratuite", "effect": "La magie coule d'elle-même. Ce sort ne dépense pas d'emplacement de sort.", "duration": "Immédiatement" }
+      }
+    },
+    {
+      "id": "glory-any-fanfare",
+      "kind": "glory",
+      "classGroups": [],
+      "tones": ["heroic"],
+      "severity": "medium",
+      "i18n": {
+        "en": { "title": "Fanfare", "effect": "Your feat rallies your companions. Each ally within 30 feet of you gains 1d6 temporary hit points.", "duration": "Immediately" },
+        "de": { "title": "Fanfare", "effect": "Deine Glanztat reißt deine Gefährten mit. Jeder Verbündete im Umkreis von 9 m erhält 1d6 temporäre Trefferpunkte.", "duration": "Sofort" },
+        "fr": { "title": "Fanfare", "effect": "Ton exploit galvanise tes compagnons. Chaque allié à 9 m ou moins de toi gagne 1d6 points de vie temporaires.", "duration": "Immédiatement" }
+      }
+    },
+    {
+      "id": "glory-any-morale-broken",
+      "kind": "glory",
+      "classGroups": [],
+      "tones": ["heroic", "brutal"],
+      "severity": "medium",
+      "i18n": {
+        "en": { "title": "Morale Broken", "effect": "Your blow shakes the enemy's nerve. Each enemy within 30 feet that can see you makes a Wisdom saving throw (DC 8 + your proficiency bonus + the modifier you attacked with) or is frightened of you.", "duration": "Until the end of its next turn" },
+        "de": { "title": "Moral gebrochen", "effect": "Dein Treffer erschüttert die Feinde. Jeder Feind im Umkreis von 9 m, der dich sieht, macht einen Weisheitsrettungswurf (SG 8 + dein Übungsbonus + der Modifikator deines Angriffs) oder ist vor dir verängstigt.", "duration": "Bis zum Ende seines nächsten Zuges" },
+        "fr": { "title": "Moral brisé", "effect": "Ton coup ébranle l'ennemi. Chaque ennemi à 9 m ou moins qui peut te voir fait un jet de sauvegarde de Sagesse (DD 8 + ton bonus de maîtrise + le modificateur de ton attaque) ou est effrayé par toi.", "duration": "Jusqu'à la fin de son prochain tour" }
+      }
+    },
+    {
+      "id": "glory-ranged-master-shot",
+      "kind": "glory",
+      "classGroups": ["ranged"],
+      "tones": ["heroic"],
+      "severity": "harsh",
+      "i18n": {
+        "en": { "title": "Master Shot", "effect": "You fire again before anyone can blink. Immediately make one more ranged attack with advantage against a different target. It can't trigger another glory card.", "duration": "Immediately" },
+        "de": { "title": "Meisterschuss", "effect": "Du schießt nach, bevor jemand blinzeln kann. Führe sofort einen weiteren Fernkampfangriff mit Vorteil gegen ein anderes Ziel aus. Er kann keinen weiteren Triumph auslösen.", "duration": "Sofort" },
+        "fr": { "title": "Tir de maître", "effect": "Tu tires à nouveau avant que quiconque ait pu cligner des yeux. Fais immédiatement une autre attaque à distance avec avantage contre une autre cible. Elle ne peut pas déclencher d'autre triomphe.", "duration": "Immédiatement" }
+      }
     }
   ]
 }
