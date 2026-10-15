@@ -89,7 +89,7 @@ npm run build      # validate + type-check + build to dist/
 
 npm test               # unit and UI tests (Vitest, jsdom)
 npm run test:coverage  # same, with a coverage report in coverage/
-npm run test:e2e       # browser tests against the build (Playwright; run `npx playwright install chromium` once)
+npm run test:e2e       # browser tests against the build (Playwright; run `npm run test:e2e:browser` once)
 npm run lighthouse     # Lighthouse CI against the build: performance, accessibility, best practices, SEO
 ```
 
