@@ -9,8 +9,9 @@ on:
 permissions:
   contents: read
 
+# A newer push to the same branch or PR replaces an older build; branches and PRs never cancel each other.
 concurrency:
-  group: pages
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -56,6 +57,10 @@ jobs:
     if: github.event_name != 'pull_request'
     needs: build
     runs-on: ubuntu-latest
+    # Deploys run one after another and are never cancelled halfway.
+    concurrency:
+      group: pages
+      cancel-in-progress: false
     permissions:
       pages: write
       id-token: write
