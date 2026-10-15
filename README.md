@@ -1,5 +1,17 @@
 # Fumble & Glory
 
+[![Play now](https://img.shields.io/badge/play-online-2a1f14?style=flat)](https://wanieldeiss.github.io/fumble-and-glory/)
+[![Fumbles](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fwanieldeiss.github.io%2Ffumble-and-glory%2Fdata%2Fdecks%2Fcore-fumble.json&query=%24.cards.length&label=fumbles&color=9e2a24)](public/data/decks/core-fumble.json)
+[![Glories](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fwanieldeiss.github.io%2Ffumble-and-glory%2Fdata%2Fdecks%2Fcore-glory.json&query=%24.cards.length&label=glories&color=c9952a)](public/data/decks/core-glory.json)
+[![Languages](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fwanieldeiss.github.io%2Ffumble-and-glory%2Fdata%2Fmanifest.json&query=%24.locales&label=languages&color=3a5486)](public/i18n/)
+[![PWA](https://img.shields.io/badge/PWA-installable-5b4636)](https://wanieldeiss.github.io/fumble-and-glory/#/install)
+
+[![Validate and deploy](https://github.com/WanielDeiss/fumble-and-glory/actions/workflows/deploy.yml/badge.svg)](https://github.com/WanielDeiss/fumble-and-glory/actions/workflows/deploy.yml)
+[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=WanielDeiss_fumble-and-glory&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=WanielDeiss_fumble-and-glory)
+[![Security](https://sonarcloud.io/api/project_badges/measure?project=WanielDeiss_fumble-and-glory&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=WanielDeiss_fumble-and-glory)
+[![Maintainability](https://sonarcloud.io/api/project_badges/measure?project=WanielDeiss_fumble-and-glory&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=WanielDeiss_fumble-and-glory)
+[![Reliability](https://sonarcloud.io/api/project_badges/measure?project=WanielDeiss_fumble-and-glory&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=WanielDeiss_fumble-and-glory)
+
 Crit cards for every natural 1 and 20 at your table. A phone-first web app for pen-and-paper groups: roll a natural 1 or 20, draw a card whose effect fits your character's class and the tones your table agreed on.
 
 Runs entirely on GitHub Pages. No database, no backend: all cards are JSON files in this repo.
