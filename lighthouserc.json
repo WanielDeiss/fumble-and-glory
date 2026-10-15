@@ -15,6 +15,6 @@
         "categories:seo": ["error", { "minScore": 0.9 }]
       }
     },
-    "upload": { "target": "filesystem", "outputDir": ".lighthouseci" }
+    "upload": { "target": "filesystem", "outputDir": "reports/lighthouse" }
   }
 }

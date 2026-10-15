@@ -3,5 +3,6 @@ dist
 .DS_Store
 coverage
 test-results
+reports
 playwright-report
 .lighthouseci

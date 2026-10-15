@@ -43,9 +43,9 @@ jobs:
         with:
           name: reports
           path: |
-            test-results/
+            reports/
             coverage/
-            .lighthouseci/
+            test-results/
           if-no-files-found: ignore
           retention-days: 14
       - uses: actions/upload-pages-artifact@v3

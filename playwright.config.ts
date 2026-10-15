@@ -7,7 +7,7 @@ export default defineConfig({
   testDir: "tests/e2e",
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 1 : 0,
-  reporter: [["list"], ["json", { outputFile: "test-results/playwright.json" }]],
+  reporter: [["list"], ["json", { outputFile: "reports/playwright.json" }]],
   use: {
     baseURL: `http://localhost:${PORT}/fumble-and-glory/`,
     trace: "retain-on-failure",
