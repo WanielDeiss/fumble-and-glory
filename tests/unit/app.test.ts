@@ -322,5 +322,6 @@ describe("card updates", () => {
     vi.spyOn(Date, "now").mockReturnValue(Date.now() + 60 * 60 * 1000);
     document.dispatchEvent(new Event("visibilitychange"));
     await waitFor(() => fetchSpy.mock.calls.length > before, "update check");
+    expect(String(fetchSpy.mock.calls[before][0])).toMatch(/data\/manifest\.json/);
   });
 });

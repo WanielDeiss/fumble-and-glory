@@ -11,13 +11,13 @@ export const readPublicJson = <T = any>(path: string): T => JSON.parse(readFileS
  * `override` can change a file's JSON before it is served (e.g. a newer manifest).
  */
 export function stubFetch(override: Record<string, (json: any) => any> = {}) {
-  const fetch = vi.fn(async (input: string | URL) => {
+  const fetch = vi.fn((input: string | URL) => {
     const path = new URL(String(input), "http://localhost").pathname.replace(/^\/fumble-and-glory\//, "");
     const file = join(publicDir, path);
-    if (!existsSync(file)) return new Response("not found", { status: 404 });
+    if (!existsSync(file)) return Promise.resolve(new Response("not found", { status: 404 }));
     const json = JSON.parse(readFileSync(file, "utf8"));
     const body = override[path] ? override[path](json) : json;
-    return new Response(JSON.stringify(body), { status: 200 });
+    return Promise.resolve(new Response(JSON.stringify(body), { status: 200 }));
   });
   vi.stubGlobal("fetch", fetch);
   return fetch;

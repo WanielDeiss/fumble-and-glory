@@ -14,7 +14,7 @@ export default defineConfig({
   },
   projects: [{ name: "phone", use: { ...devices["Pixel 7"] } }],
   webServer: {
-    command: `npx vite preview --port ${PORT} --strictPort`,
+    command: `vite preview --port ${PORT} --strictPort`,
     url: `http://localhost:${PORT}/fumble-and-glory/`,
     reuseExistingServer: !process.env.CI,
   },

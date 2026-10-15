@@ -8,8 +8,10 @@ const root = new URL("..", import.meta.url).pathname;
 const outDir = join(root, "dist/badges");
 const readJson = (path) => (existsSync(join(root, path)) ? JSON.parse(readFileSync(join(root, path), "utf8")) : null);
 
-const scoreColor = (pct) => (pct >= 90 ? "brightgreen" : pct >= 50 ? "orange" : "red");
-const coverageColor = (pct) => (pct >= 80 ? "brightgreen" : pct >= 60 ? "yellow" : "red");
+/** Color of the first threshold the value reaches, e.g. [[90, "brightgreen"], [50, "orange"]]; red below all. */
+const colorFor = (pct, thresholds) => thresholds.find(([min]) => pct >= min)?.[1] ?? "red";
+const scoreColor = (pct) => colorFor(pct, [[90, "brightgreen"], [50, "orange"]]); // Lighthouse's own bands
+const coverageColor = (pct) => colorFor(pct, [[80, "brightgreen"], [60, "yellow"]]);
 
 const badges = {};
 
