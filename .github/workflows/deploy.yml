@@ -25,7 +25,28 @@ jobs:
       - run: npm ci --ignore-scripts
       - name: Validate decks and report missing translations
         run: npm run validate
+      - name: Unit tests with coverage
+        run: npm run test:coverage
       - run: npm run build
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
+      - name: End-to-end tests
+        run: npm run test:e2e
+      - name: Lighthouse
+        run: npm run lighthouse
+      - name: Write README badges into the site
+        run: npm run badges
+      - name: Keep test and Lighthouse reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reports
+          path: |
+            test-results/
+            coverage/
+            .lighthouseci/
+          if-no-files-found: ignore
+          retention-days: 14
       - uses: actions/upload-pages-artifact@v3
         if: github.event_name != 'pull_request'
         with:

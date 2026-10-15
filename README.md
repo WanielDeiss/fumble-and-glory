@@ -7,6 +7,8 @@
 [![PWA](https://img.shields.io/badge/PWA-installable-5b4636)](https://wanieldeiss.github.io/fumble-and-glory/#/install)
 
 [![Validate and deploy](https://github.com/WanielDeiss/fumble-and-glory/actions/workflows/deploy.yml/badge.svg)](https://github.com/WanielDeiss/fumble-and-glory/actions/workflows/deploy.yml)
+[![Tests](https://img.shields.io/endpoint?url=https%3A%2F%2Fwanieldeiss.github.io%2Ffumble-and-glory%2Fbadges%2Ftests.json)](https://github.com/WanielDeiss/fumble-and-glory/actions/workflows/deploy.yml)
+[![Coverage](https://img.shields.io/endpoint?url=https%3A%2F%2Fwanieldeiss.github.io%2Ffumble-and-glory%2Fbadges%2Fcoverage.json)](https://github.com/WanielDeiss/fumble-and-glory/actions/workflows/deploy.yml)
 [![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=WanielDeiss_fumble-and-glory&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=WanielDeiss_fumble-and-glory)
 [![Security](https://sonarcloud.io/api/project_badges/measure?project=WanielDeiss_fumble-and-glory&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=WanielDeiss_fumble-and-glory)
 [![Maintainability](https://sonarcloud.io/api/project_badges/measure?project=WanielDeiss_fumble-and-glory&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=WanielDeiss_fumble-and-glory)
@@ -17,6 +19,11 @@
 [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=WanielDeiss_fumble-and-glory&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=WanielDeiss_fumble-and-glory)
 [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=WanielDeiss_fumble-and-glory&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=WanielDeiss_fumble-and-glory)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=WanielDeiss_fumble-and-glory&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=WanielDeiss_fumble-and-glory)
+
+[![Lighthouse performance](https://img.shields.io/endpoint?url=https%3A%2F%2Fwanieldeiss.github.io%2Ffumble-and-glory%2Fbadges%2Flighthouse-performance.json)](https://github.com/WanielDeiss/fumble-and-glory/actions/workflows/deploy.yml)
+[![Lighthouse accessibility](https://img.shields.io/endpoint?url=https%3A%2F%2Fwanieldeiss.github.io%2Ffumble-and-glory%2Fbadges%2Flighthouse-accessibility.json)](https://github.com/WanielDeiss/fumble-and-glory/actions/workflows/deploy.yml)
+[![Lighthouse best practices](https://img.shields.io/endpoint?url=https%3A%2F%2Fwanieldeiss.github.io%2Ffumble-and-glory%2Fbadges%2Flighthouse-best-practices.json)](https://github.com/WanielDeiss/fumble-and-glory/actions/workflows/deploy.yml)
+[![Lighthouse SEO](https://img.shields.io/endpoint?url=https%3A%2F%2Fwanieldeiss.github.io%2Ffumble-and-glory%2Fbadges%2Flighthouse-seo.json)](https://github.com/WanielDeiss/fumble-and-glory/actions/workflows/deploy.yml)
 
 [![SonarQube Cloud](https://sonarcloud.io/images/project_badges/sonarcloud-light.svg)](https://sonarcloud.io/summary/new_code?id=WanielDeiss_fumble-and-glory)
 
@@ -79,7 +86,14 @@ npm install
 npm run dev        # local dev server
 npm run validate   # check decks, print translation coverage
 npm run build      # validate + type-check + build to dist/
+
+npm test               # unit and UI tests (Vitest, jsdom)
+npm run test:coverage  # same, with a coverage report in coverage/
+npm run test:e2e       # browser tests against the build (Playwright; run `npx playwright install chromium` once)
+npm run lighthouse     # Lighthouse CI against the build: performance, accessibility, best practices, SEO
 ```
+
+CI runs all of these on every push and pull request, and only deploys when everything passes, including the Lighthouse minimums in `lighthouserc.json`. `scripts/badges.mjs` turns the results into the badge files under `badges/` on the published site.
 
 ## Deployment
 
