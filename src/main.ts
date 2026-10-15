@@ -478,7 +478,7 @@ const INSTALL_STEPS: Record<Platform, number> = { ios: 3, android: 3, desktop: 3
 function installScreen(): string {
   const current = detectPlatform();
   const order = [current, ...(Object.keys(INSTALL_STEPS) as Platform[]).filter((p) => p !== current)];
-  const step = (p: Platform, n: number) => `<li>${esc(t(`install.${p}.${n}`))}</li>`;
+  const step = (p: Platform, n: number) => `<li>${esc(t("install." + p + "." + n))}</li>`;
   const firefoxNote = `<p class="meta">${esc(t("install.desktop.firefox"))}</p>`;
   const block = (p: Platform) => {
     const steps = Array.from({ length: INSTALL_STEPS[p] }, (_, i) => step(p, i + 1)).join("");
