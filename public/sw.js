@@ -1,13 +1,13 @@
 // Service worker: makes the app installable and keeps it working offline.
 // Page, data and UI strings: network first, so new cards show up as soon as you're online;
-// the last copy is used when offline. Hashed build assets and fonts: cache first.
+// the last copy is used when offline. Hashed build assets and fonts never change: cache first.
 // Bump CACHE only when this file's caching logic changes.
-const CACHE = "fg-v1";
+const CACHE = "fg-v2";
 const scope = new URL(self.registration.scope);
 const ASSETS = `${scope.pathname}assets/`;
+const FONTS = `${scope.pathname}fonts/`;
 
 const isLocal = (url) => url.origin === scope.origin && url.pathname.startsWith(scope.pathname);
-const isFont = (url) => url.hostname === "fonts.googleapis.com" || url.hostname === "fonts.gstatic.com";
 // Data and UI strings are fetched with a ?v= cache buster; store them under the bare path.
 const keyFor = (req, url) => (req.mode === "navigate" ? scope.href : url.origin + url.pathname);
 
@@ -27,9 +27,8 @@ self.addEventListener("fetch", (event) => {
   const req = event.request;
   if (req.method !== "GET") return;
   const url = new URL(req.url);
-  if (isFont(url)) event.respondWith(cacheFirst(req));
-  else if (!isLocal(url) || url.pathname.endsWith("/sw.js")) return;
-  else if (url.pathname.startsWith(ASSETS)) event.respondWith(cacheFirst(req));
+  if (!isLocal(url) || url.pathname.endsWith("/sw.js")) return;
+  if (url.pathname.startsWith(ASSETS) || url.pathname.startsWith(FONTS)) event.respondWith(cacheFirst(req));
   else event.respondWith(networkFirst(event, req, keyFor(req, url)));
 });
 
@@ -90,6 +89,10 @@ async function precache() {
     "manifest.webmanifest",
     "icons/icon-192.png",
     "icons/icon.svg",
+    "fonts/fraunces-latin.woff2",
+    "fonts/alegreya-sans-400-latin.woff2",
+    "fonts/alegreya-sans-500-latin.woff2",
+    "fonts/alegreya-sans-700-latin.woff2",
   ];
   await Promise.all(paths.map(async (p) => {
     const res = await fetchFresh(p);

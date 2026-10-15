@@ -1,3 +1,4 @@
+import "./styles/fonts.css";
 import "./styles/tokens.css";
 import "./styles/app.css";
 import {
@@ -414,6 +415,18 @@ function deleteDraft() {
   location.hash = "#/deck";
 }
 
+/**
+ * Re-render after something changed in the background (update check, install prompt).
+ * Skipped while the player types, so the field under the cursor isn't replaced;
+ * the change shows up with the next render the player triggers.
+ */
+function refresh() {
+  if (!settings) return;
+  const active = document.activeElement;
+  if (active instanceof HTMLElement && app.contains(active) && active.matches("input, textarea, select")) return;
+  render();
+}
+
 async function checkForUpdate() {
   if (Date.now() - lastUpdateCheck < 10 * 60 * 1000) return;
   lastUpdateCheck = Date.now();
@@ -425,11 +438,11 @@ async function checkForUpdate() {
       // Only labels or settings changed: nothing for the player to decide.
       data = remote;
       storeData(data);
-      render();
+      refresh();
       return;
     }
     pendingUpdate = { data: remote, diff };
-    render();
+    refresh();
   } catch {
     /* offline: check again next time */
   }
@@ -617,11 +630,11 @@ document.addEventListener("visibilitychange", () => {
 window.addEventListener("beforeinstallprompt", (e) => {
   e.preventDefault();
   installPrompt = e as InstallPromptEvent;
-  if (settings) render();
+  refresh();
 });
 window.addEventListener("appinstalled", () => {
   installPrompt = null;
-  if (settings) render();
+  refresh();
 });
 
 if ("serviceWorker" in navigator && import.meta.env.PROD) {

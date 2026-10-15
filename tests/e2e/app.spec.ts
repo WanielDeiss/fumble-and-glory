@@ -2,6 +2,13 @@ import { expect, test, type Page } from "@playwright/test";
 
 const SETTINGS_KEY = "fumble-and-glory.settings.v1";
 
+/** True once the page's own fonts (not a system fallback) are in use. */
+const fontsLoaded = (page: Page) =>
+  page.evaluate(async () => {
+    await document.fonts.ready;
+    return document.fonts.check('600 20px "Fraunces"') && document.fonts.check('400 16px "Alegreya Sans"');
+  });
+
 /** Number of deck rows once the deck has rendered. */
 async function deckRows(page: Page) {
   await expect(page.locator(".deck-row").first()).toBeVisible();
@@ -14,6 +21,8 @@ async function prepare(page: Page, { seenHelp = true, installed = false } = {}) 
     ({ key, seenHelp, installed }) => {
       if (!localStorage.getItem(key)) localStorage.setItem(key, JSON.stringify({ locale: "en", seenHelp }));
       if (installed) {
+        // An installed app never gets offered for installation again.
+        window.addEventListener("beforeinstallprompt", (e) => e.stopImmediatePropagation(), true);
         const original = window.matchMedia.bind(window);
         window.matchMedia = (q: string) =>
           q.includes("display-mode: standalone") ? ({ matches: true, media: q } as MediaQueryList) : original(q);
@@ -33,6 +42,17 @@ test("first visit explains the app, then cards can be drawn", async ({ page }) =
   await expect(page.locator(".fg-card--fumble .fg-card__title")).not.toBeEmpty();
   await page.getByRole("button", { name: "Draw glory (20)" }).click();
   await expect(page.locator(".fg-card--glory")).toBeVisible();
+  expect(await fontsLoaded(page)).toBe(true);
+});
+
+test("loads fonts from the site itself, not from third parties", async ({ page }) => {
+  const foreign: string[] = [];
+  page.on("request", (r) => { if (!r.url().startsWith("http://localhost")) foreign.push(r.url()); });
+  await prepare(page);
+  await page.goto("./");
+  await expect(page.getByRole("button", { name: "Draw fumble (1)" })).toBeVisible();
+  expect(await fontsLoaded(page)).toBe(true);
+  expect(foreign).toEqual([]);
 });
 
 test("is installable and keeps working offline", async ({ page, context }) => {
@@ -53,6 +73,7 @@ test("is installable and keeps working offline", async ({ page, context }) => {
   await context.setOffline(true);
   await page.reload();
   await expect(page.locator(".deck-row")).toHaveCount(cards);
+  expect(await fontsLoaded(page)).toBe(true);
   await context.setOffline(false);
 });
 
@@ -60,8 +81,10 @@ test("own cards are saved on the device in the installed app", async ({ page }) 
   await prepare(page, { installed: true });
   await page.goto("./#/deck");
   await page.getByRole("link", { name: "Create your own card" }).click();
-  await page.getByLabel("Title").fill("Dice Under the Table");
-  await page.getByLabel("Effect").fill("Your die rolls under the table. You lose your bonus action.");
+  await expect(page.getByRole("heading", { name: "New card" })).toBeVisible();
+  // exact: the deck's search box is labelled "Search title or effect"
+  await page.getByLabel("Title", { exact: true }).fill("Dice Under the Table");
+  await page.getByLabel("Effect", { exact: true }).fill("Your die rolls under the table. You lose your bonus action.");
   await page.getByRole("button", { name: "Comic" }).click();
   await page.getByRole("button", { name: "Save" }).click();
   await expect(page).toHaveURL(/#\/deck$/);

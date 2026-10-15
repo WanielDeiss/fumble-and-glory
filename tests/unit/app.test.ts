@@ -237,6 +237,20 @@ describe("own cards", () => {
     expect(JSON.parse(localStorage.getItem(CUSTOM_KEY)!)).toEqual([]);
   });
 
+  it("keeps the field being typed in when something changes in the background", async () => {
+    await start({ installed: true, hash: "#/card/new" });
+    const title = $<HTMLInputElement>("#card-title")!;
+    title.focus();
+    type("#card-title", "Half a title");
+    window.dispatchEvent(Object.assign(new Event("beforeinstallprompt"), { prompt: vi.fn() }));
+    expect($("#card-title")).toBe(title);
+    expect(document.activeElement).toBe(title);
+
+    title.blur();
+    click('[data-action="draft-toggle"][data-key="tones"][data-value="comic"]');
+    expect($<HTMLInputElement>("#card-title")!.value).toBe("Half a title");
+  });
+
   it("clears tones when switching between fumble and glory", async () => {
     await start({ installed: true, hash: "#/card/new" });
     click('[data-action="draft-toggle"][data-key="tones"][data-value="comic"]');
