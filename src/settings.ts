@@ -31,7 +31,7 @@ export function loadSettings(locales: string[]): Settings {
   const defaults = defaultSettings(locales);
   try {
     const stored = JSON.parse(localStorage.getItem(KEY) ?? "null");
-    const merged = { ...defaults, ...(stored ?? {}) } as Settings;
+    const merged = { ...defaults, ...stored } as Settings;
     if (!locales.includes(merged.locale)) merged.locale = defaults.locale;
     return merged;
   } catch {

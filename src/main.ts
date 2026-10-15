@@ -169,12 +169,24 @@ function updateBanner(): string {
   if (updateDone) return `<div class="update-banner" role="status"><span>${esc(t("update.done"))}</span></div>`;
   if (!pendingUpdate) return "";
   const { added } = pendingUpdate.diff;
-  const text = added === 1 ? t("update.newOne") : added > 1 ? t("update.new", { n: added }) : t("update.changed");
+  let text = t("update.changed");
+  if (added === 1) text = t("update.newOne");
+  else if (added > 1) text = t("update.new", { n: added });
   return `
     <div class="update-banner" role="status">
       <span>${esc(text)}</span>
       <button class="fg-btn fg-btn--small fg-btn--primary" data-action="apply-update">${esc(t("update.load"))}</button>
     </div>`;
+}
+
+/** Help and install links under the empty card. */
+function hintLinks(): string {
+  const install = isInstalled() ? "" : `<a class="text-link" href="#/install">${icon("install")}${esc(t("install.link"))}</a>`;
+  return `
+    <p class="hint-links">
+      <a class="text-link" href="#/help">${icon("help")}${esc(t("help.link"))}</a>
+      ${install}
+    </p>`;
 }
 
 function drawScreen(): string {
@@ -194,11 +206,7 @@ function drawScreen(): string {
     <div class="stage">
       ${drawn ? cardView(drawn.card, drawn.fresh) : `<div class="empty-card">${esc(t("draw.empty"))}</div>`}
     </div>
-    ${drawn ? "" : `
-      <p class="hint-links">
-        <a class="text-link" href="#/help">${icon("help")}${esc(t("help.link"))}</a>
-        ${isInstalled() ? "" : `<a class="text-link" href="#/install">${icon("install")}${esc(t("install.link"))}</a>`}
-      </p>`}
+    ${drawn ? "" : hintLinks()}
     <div class="footer">
       <p class="meta center">${esc(t("draw.pool", { fumble: fumbles, glory: glories }))}</p>
       <button class="fg-btn fg-btn--fumble" data-action="draw" data-kind="fumble" ${fumbles ? "" : "disabled"}>${esc(t("draw.fumble"))}</button>
@@ -470,76 +478,107 @@ const INSTALL_STEPS: Record<Platform, number> = { ios: 3, android: 3, desktop: 3
 function installScreen(): string {
   const current = detectPlatform();
   const order = [current, ...(Object.keys(INSTALL_STEPS) as Platform[]).filter((p) => p !== current)];
-  const block = (p: Platform) => `
-    <details class="install-block"${p === current ? " open" : ""}>
-      <summary>${esc(t(`install.${p}.title`))}</summary>
-      <ol class="steps">${Array.from({ length: INSTALL_STEPS[p] }, (_, i) => `<li>${esc(t(`install.${p}.${i + 1}`))}</li>`).join("")}</ol>
-      ${p === "desktop" ? `<p class="meta">${esc(t("install.desktop.firefox"))}</p>` : ""}
-    </details>`;
+  const step = (p: Platform, n: number) => `<li>${esc(t(`install.${p}.${n}`))}</li>`;
+  const firefoxNote = `<p class="meta">${esc(t("install.desktop.firefox"))}</p>`;
+  const block = (p: Platform) => {
+    const steps = Array.from({ length: INSTALL_STEPS[p] }, (_, i) => step(p, i + 1)).join("");
+    return `
+      <details class="install-block"${p === current ? " open" : ""}>
+        <summary>${esc(t(`install.${p}.title`))}</summary>
+        <ol class="steps">${steps}</ol>
+        ${p === "desktop" ? firefoxNote : ""}
+      </details>`;
+  };
+  const installButton = installPrompt
+    ? `<button class="fg-btn fg-btn--primary" data-action="install">${icon("install")}${esc(t("install.button"))}</button>`
+    : "";
+  const body = isInstalled()
+    ? `<p class="notice">${esc(t("install.installed"))}</p>`
+    : `<p class="lead">${esc(t("install.intro"))}</p>${installButton}${order.map(block).join("")}`;
   return `
     ${topbar(t("install.title"))}
     <div class="content">
-      ${isInstalled()
-        ? `<p class="notice">${esc(t("install.installed"))}</p>`
-        : `<p class="lead">${esc(t("install.intro"))}</p>
-           ${installPrompt ? `<button class="fg-btn fg-btn--primary" data-action="install">${icon("install")}${esc(t("install.button"))}</button>` : ""}
-           ${order.map(block).join("")}`}
+      ${body}
       <p class="meta">${esc(t("install.offline"))}</p>
     </div>`;
 }
 
+const SCREENS: Record<string, () => string> = {
+  "/table": tableScreen,
+  "/deck": deckScreen,
+  "/install": installScreen,
+  "/help": helpScreen,
+};
+
+// "#/card/new" or "#/card/<id of an own card>"; anything else falls back to the draw screen.
+const CARD_ROUTE = /^\/card\/([a-z0-9-]+)$/;
+
+function screenFor(route: string): string {
+  const screen = SCREENS[route];
+  if (screen) return screen();
+  const card = CARD_ROUTE.exec(route);
+  return card ? editorScreen(card[1]) : drawScreen();
+}
+
 function render() {
   document.documentElement.lang = settings.locale;
-  const route = location.hash.replace(/^#/, "") || "/";
-  app.innerHTML =
-    route === "/table" ? tableScreen() :
-    route === "/deck" ? deckScreen() :
-    route === "/install" ? installScreen() :
-    route === "/help" ? helpScreen() :
-    route.startsWith("/card/") ? editorScreen(decodeURIComponent(route.slice("/card/".length))) :
-    drawScreen();
+  app.innerHTML = screenFor(location.hash.replace(/^#/, "") || "/");
   if (drawn) drawn.fresh = false;
 }
 
 // ---------- events ----------
 
-app.addEventListener("click", (e) => {
-  const el = (e.target as HTMLElement).closest<HTMLElement>("[data-action]");
-  if (!el) return;
-  const { action, key, value, kind } = el.dataset;
-  if (action === "draw" && kind) {
-    const pool = drawPool(kind as Kind);
-    const others = pool.filter((c) => c.id !== drawn?.card.id);
-    const from = others.length ? others : pool;
-    if (from.length) drawn = { card: from[Math.floor(Math.random() * from.length)], fresh: true };
-    render();
-  } else if (action === "set" && key && value) {
+const toggle = (list: string[], value: string) =>
+  list.includes(value) ? list.filter((x) => x !== value) : [...list, value];
+
+function drawCard(kind: Kind) {
+  const pool = drawPool(kind);
+  const others = pool.filter((c) => c.id !== drawn?.card.id);
+  const from = others.length ? others : pool;
+  // Shuffling cards, not security: Math.random is fine here.
+  if (from.length) drawn = { card: from[Math.floor(Math.random() * from.length)], fresh: true };
+  render();
+}
+
+const CLICK_ACTIONS: Record<string, (d: DOMStringMap) => void> = {
+  draw: ({ kind }) => { if (kind) drawCard(kind as Kind); },
+  set: ({ key, value }) => {
+    if (!key || !value) return;
     if (key === "deckFilter") { deckFilter = value as typeof deckFilter; render(); }
     else update({ [key]: value } as Partial<Settings>);
-  } else if (action === "tone" && kind && value) {
+  },
+  tone: ({ kind, value }) => {
+    if (!kind || !value) return;
     const field = kind === "fumble" ? "fumbleTones" : "gloryTones";
-    const cur = settings[field];
-    update({ [field]: cur.includes(value) ? cur.filter((x) => x !== value) : [...cur, value] } as Partial<Settings>);
-  } else if (action === "draft" && draft && key && value) {
+    update({ [field]: toggle(settings[field], value) } as Partial<Settings>);
+  },
+  draft: ({ key, value }) => {
+    if (!draft || !key || !value) return;
     if (key === "kind" && value !== draft.kind) draft.tones = []; // tones belong to one kind
     draft = { ...draft, [key]: value };
     render();
-  } else if (action === "draft-toggle" && draft && (key === "classGroups" || key === "tones") && value) {
-    const cur = draft[key];
-    draft[key] = cur.includes(value) ? cur.filter((x) => x !== value) : [...cur, value];
+  },
+  "draft-toggle": ({ key, value }) => {
+    if (!draft || !value || (key !== "classGroups" && key !== "tones")) return;
+    draft[key] = toggle(draft[key], value);
     draftError = "";
     render();
-  } else if (action === "save-card") {
-    saveDraft();
-  } else if (action === "delete-card") {
-    deleteDraft();
-  } else if (action === "apply-update") {
-    applyUpdate();
-  } else if (action === "install" && installPrompt) {
+  },
+  "save-card": saveDraft,
+  "delete-card": deleteDraft,
+  "apply-update": applyUpdate,
+  install: () => {
+    if (!installPrompt) return;
     const prompt = installPrompt;
     installPrompt = null; // a prompt can only be shown once
     void prompt.prompt().finally(render);
-  }
+  },
+};
+
+app.addEventListener("click", (e) => {
+  const el = (e.target as HTMLElement).closest<HTMLElement>("[data-action]");
+  const handler = el?.dataset.action ? CLICK_ACTIONS[el.dataset.action] : undefined;
+  if (el && handler) handler(el.dataset);
 });
 
 app.addEventListener("input", (e) => {
@@ -595,7 +634,7 @@ if ("serviceWorker" in navigator && import.meta.env.PROD) {
 
 // ---------- start ----------
 
-(async () => {
+void (async () => {
   try {
     const stored = loadStoredData();
     if (stored) {

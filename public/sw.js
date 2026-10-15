@@ -67,9 +67,8 @@ function assetsIn(html) {
 async function pruneAssets(html) {
   const keep = new Set(assetsIn(html));
   const cache = await caches.open(CACHE);
-  for (const req of await cache.keys()) {
-    if (new URL(req.url).pathname.startsWith(ASSETS) && !keep.has(req.url)) await cache.delete(req);
-  }
+  const stale = (await cache.keys()).filter((req) => new URL(req.url).pathname.startsWith(ASSETS) && !keep.has(req.url));
+  await Promise.all(stale.map((req) => cache.delete(req)));
 }
 
 /** Cache the app shell, current decks and UI strings so the app works offline right after the first visit. */

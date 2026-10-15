@@ -29,9 +29,13 @@ export interface LocalizedCard extends Card { text: CardText }
 
 const base = import.meta.env.BASE_URL;
 
+// Only our own JSON files under data/ and i18n/ are ever fetched.
+const SAFE_PATH = /^(data|i18n)\/[a-z0-9/._-]+\.json$/;
+
 async function getJson<T>(path: string, version?: string): Promise<T> {
-  const url = `${base}${path}${version ? `?v=${encodeURIComponent(version)}` : ""}`;
-  const res = await fetch(url);
+  if (!SAFE_PATH.test(path) || path.includes("..")) throw new Error(`Refusing to load ${path}`);
+  const query = version ? `?v=${encodeURIComponent(version)}` : "";
+  const res = await fetch(`${base}${path}${query}`);
   if (!res.ok) throw new Error(`Could not load ${path} (${res.status})`);
   return res.json() as Promise<T>;
 }
@@ -51,18 +55,32 @@ export async function fetchData(): Promise<GameData> {
 // switches to newer server data when the player accepts the update.
 const DATA_KEY = "fumble-and-glory.data.v1";
 
+const ID = /^[a-z0-9-]+$/;
+const isText = (t: unknown): t is CardText =>
+  typeof t === "object" && t !== null && typeof (t as CardText).title === "string" && typeof (t as CardText).effect === "string";
+const isCard = (c: Card): boolean =>
+  ID.test(c?.id ?? "") && (c.kind === "fumble" || c.kind === "glory") &&
+  Array.isArray(c.classGroups) && Array.isArray(c.tones) && Object.values(c.i18n ?? {}).every(isText);
+
+/** Keeps only data in the shape the app expects; null when the basics are missing. */
+function sanitize(d: GameData | null): GameData | null {
+  if (typeof d?.manifest?.version !== "string" || !d.taxonomy || !Array.isArray(d.cards)) return null;
+  return { manifest: d.manifest, taxonomy: d.taxonomy, cards: d.cards.filter(isCard) };
+}
+
 export function loadStoredData(): GameData | null {
   try {
-    const d = JSON.parse(localStorage.getItem(DATA_KEY) ?? "null") as GameData | null;
-    return d?.manifest?.version && d.taxonomy && Array.isArray(d.cards) ? d : null;
+    return sanitize(JSON.parse(localStorage.getItem(DATA_KEY) ?? "null"));
   } catch {
     return null;
   }
 }
 
 export function storeData(d: GameData): void {
+  const clean = sanitize(d);
+  if (!clean) return;
   try {
-    localStorage.setItem(DATA_KEY, JSON.stringify(d));
+    localStorage.setItem(DATA_KEY, JSON.stringify(clean));
   } catch {
     /* storage full or blocked: the data is fetched again next time */
   }
@@ -93,10 +111,10 @@ export async function loadUiStrings(locale: string, version: string): Promise<La
 }
 
 export function localize(card: Card, locale: string, fallback: "en" | "hide"): LocalizedCard | null {
+  let text = card.i18n[locale];
   // A player's own card is written in one language and shown as written.
-  const text = card.custom
-    ? card.i18n[locale] ?? Object.values(card.i18n)[0]
-    : card.i18n[locale] ?? (fallback === "en" ? card.i18n.en : undefined);
+  if (!text && card.custom) text = Object.values(card.i18n)[0];
+  else if (!text && fallback === "en") text = card.i18n.en;
   return text ? { ...card, text } : null;
 }
 
