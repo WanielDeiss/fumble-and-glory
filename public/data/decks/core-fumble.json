@@ -240,7 +240,7 @@
     {
       "id": "fumble-martial-muscle-cramp",
       "kind": "fumble",
-      "classGroups": ["martial"],
+      "classGroups": ["martial", "ranged"],
       "tones": ["awkward"],
       "severity": "mild",
       "i18n": {
@@ -348,12 +348,12 @@
     {
       "id": "fumble-martial-aching-arm",
       "kind": "fumble",
-      "classGroups": ["martial"],
+      "classGroups": ["martial", "ranged"],
       "tones": ["embarrassing", "painful"],
       "severity": "medium",
       "i18n": {
-        "en": { "title": "Aching Arm", "effect": "Your arm throbs with every blow. You deal only half damage.", "duration": "1d4 + 1 rounds" },
-        "de": { "title": "Schmerzender Arm", "effect": "Dein Arm pocht bei jedem Schlag. Du verursachst nur halben Schaden.", "duration": "1d4 + 1 Runden" },
+        "en": { "title": "Aching Arm", "effect": "Your arm throbs with every attack. You deal only half damage.", "duration": "1d4 + 1 rounds" },
+        "de": { "title": "Schmerzender Arm", "effect": "Dein Arm pocht bei jedem Angriff. Du verursachst nur halben Schaden.", "duration": "1d4 + 1 Runden" },
         "fr": { "title": "Bras endolori", "effect": "Ton bras t'élance à chaque coup. Tu n'infliges que la moitié des dégâts.", "duration": "1d4 + 1 rounds" }
       }
     },
@@ -1231,6 +1231,222 @@
         "en": { "title": "Static Charge", "effect": "If this spell deals lightning damage, the charge stays with you. You get an unpleasant shock whenever you touch metal.", "duration": "1d4 days" },
         "de": { "title": "Statisch geladen", "effect": "Verursacht dieser Zauber Blitzschaden, bleibt die Ladung an dir haften. Jedes Mal, wenn du Metall berührst, bekommst du einen unangenehmen Schlag.", "duration": "1d4 Tage" },
         "fr": { "title": "Électricité statique", "effect": "Si ce sort inflige des dégâts de foudre, la charge reste sur toi. Chaque fois que tu touches du métal, tu reçois une décharge désagréable.", "duration": "1d4 jours" }
+      }
+    },
+    {
+      "id": "fumble-ranged-pinned-down",
+      "kind": "fumble",
+      "classGroups": ["ranged"],
+      "tones": ["awkward", "comic"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Pinned Down", "effect": "Your shot pins a loose piece of your own clothing to the ground. You can't move until you spend an action to pull it free.", "duration": "Until you free yourself" },
+        "de": { "title": "Selbst festgesteckt", "effect": "Dein Schuss nagelt ein loses Stück deiner eigenen Kleidung an den Boden. Du kannst dich nicht bewegen, bis du es mit einer Aktion losreißt.", "duration": "Bis du dich befreist" },
+        "fr": { "title": "Épinglé", "effect": "Ton tir cloue au sol un pan de tes propres vêtements. Tu ne peux pas te déplacer avant d'utiliser une action pour te dégager.", "duration": "Jusqu'à ce que tu te libères" }
+      }
+    },
+    {
+      "id": "fumble-arcane-friendly-spark",
+      "kind": "fumble",
+      "classGroups": ["arcane"],
+      "tones": ["awkward"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Friendly Spark", "effect": "Your spell veers toward a friend. Reroll the attack against an ally within 10 feet of the target; on a hit, it deals half damage.", "duration": "Immediately" },
+        "de": { "title": "Freundlicher Funke", "effect": "Dein Zauber schwenkt zu einem Freund ab. Wiederhole den Angriff gegen einen Verbündeten im Umkreis von 3 m um das Ziel; bei einem Treffer verursacht er halben Schaden.", "duration": "Sofort" },
+        "fr": { "title": "Étincelle amicale", "effect": "Ton sort dévie vers un ami. Relance l'attaque contre un allié à 3 m ou moins de la cible ; s'il touche, il inflige la moitié des dégâts.", "duration": "Immédiatement" }
+      }
+    },
+    {
+      "id": "fumble-arcane-wrong-address",
+      "kind": "fumble",
+      "classGroups": ["arcane"],
+      "tones": ["embarrassing"],
+      "severity": "medium",
+      "i18n": {
+        "en": { "title": "Wrong Address", "effect": "Your spell picks the wrong recipient. Reroll the attack against an ally within 10 feet of the target.", "duration": "Immediately" },
+        "de": { "title": "Falsche Adresse", "effect": "Dein Zauber sucht sich den falschen Empfänger. Wiederhole den Angriff gegen einen Verbündeten im Umkreis von 3 m um das Ziel.", "duration": "Sofort" },
+        "fr": { "title": "Mauvais destinataire", "effect": "Ton sort se trompe de destinataire. Relance l'attaque contre un allié à 3 m ou moins de la cible.", "duration": "Immédiatement" }
+      }
+    },
+    {
+      "id": "fumble-any-loose-straps",
+      "kind": "fumble",
+      "classGroups": [],
+      "tones": ["embarrassing"],
+      "severity": "medium",
+      "i18n": {
+        "en": { "title": "Loose Straps", "effect": "A buckle gives and your armor or clothing slips out of place. Your AC is reduced by 1d6.", "duration": "1d4 rounds" },
+        "de": { "title": "Lose Riemen", "effect": "Eine Schnalle gibt nach, und Rüstung oder Kleidung verrutschen. Deine RK sinkt um 1d6.", "duration": "1d4 Runden" },
+        "fr": { "title": "Sangles lâches", "effect": "Une boucle cède et ton armure ou tes vêtements glissent. Ta CA est réduite de 1d6.", "duration": "1d4 rounds" }
+      }
+    },
+    {
+      "id": "fumble-martial-open-season",
+      "kind": "fumble",
+      "classGroups": ["martial"],
+      "tones": ["disgraceful"],
+      "severity": "harsh",
+      "i18n": {
+        "en": { "title": "Open Season", "effect": "You leave yourself wide open. Up to 1d4 + 1 enemies within 5 feet of you can each make an opportunity attack against you; each one that hits may make a second one.", "duration": "Immediately" },
+        "de": { "title": "Freiwild", "effect": "Du bietest dich völlig ungeschützt an. Bis zu 1d4 + 1 Feinde im Umkreis von 1,5 m dürfen je einen Gelegenheitsangriff gegen dich ausführen; wer trifft, darf einen zweiten ausführen.", "duration": "Sofort" },
+        "fr": { "title": "Cible facile", "effect": "Tu te découvres complètement. Jusqu'à 1d4 + 1 ennemis à 1,5 m ou moins peuvent chacun faire une attaque d'opportunité contre toi ; chacun qui touche peut en faire une seconde.", "duration": "Immédiatement" }
+      }
+    },
+    {
+      "id": "fumble-martial-torn-tendon",
+      "kind": "fumble",
+      "classGroups": ["martial"],
+      "tones": ["disgraceful", "painful"],
+      "severity": "harsh",
+      "i18n": {
+        "en": { "title": "Torn Tendon", "effect": "Something tears as you strike. Make a DC 18 Constitution saving throw; on a failure, you can't attack with that limb.", "duration": "Until you finish a long rest" },
+        "de": { "title": "Gerissene Sehne", "effect": "Beim Schlag reißt etwas. Mach einen Konstitutionsrettungswurf SG 18; bei einem Fehlschlag kannst du mit diesem Körperteil nicht angreifen.", "duration": "Bis du eine lange Rast beendest" },
+        "fr": { "title": "Tendon déchiré", "effect": "Quelque chose se déchire pendant ton coup. Fais un jet de sauvegarde de Constitution DD 18 ; en cas d'échec, tu ne peux plus attaquer avec ce membre.", "duration": "Jusqu'à ce que tu termines un repos long" }
+      }
+    },
+    {
+      "id": "fumble-arcane-inner-beast",
+      "kind": "fumble",
+      "classGroups": ["arcane"],
+      "tones": ["disgraceful", "comic"],
+      "severity": "harsh",
+      "i18n": {
+        "en": { "title": "Inner Beast", "effect": "Your spell turns you into an animal. Make a DC 18 Wisdom saving throw; on a failure, you become (as polymorph) a beast of the GM's choice, or the first animal you can think of that starts with your character's initial.", "duration": "1d8 rounds" },
+        "de": { "title": "Inneres Tier", "effect": "Dein Zauber macht dich zum Tier. Mach einen Weisheitsrettungswurf SG 18; bei einem Fehlschlag wirst du (wie durch Verwandlung) zu einem Tier nach Wahl der SL oder zum ersten Tier, das dir mit dem Anfangsbuchstaben deines Charakters einfällt.", "duration": "1d8 Runden" },
+        "fr": { "title": "Bête intérieure", "effect": "Ton sort te change en animal. Fais un jet de sauvegarde de Sagesse DD 18 ; en cas d'échec, tu deviens (comme par métamorphose) une bête choisie par le MJ, ou le premier animal qui te vient commençant par l'initiale de ton personnage.", "duration": "1d8 rounds" }
+      }
+    },
+    {
+      "id": "fumble-ranged-long-shot",
+      "kind": "fumble",
+      "classGroups": ["ranged"],
+      "tones": ["awkward", "comic"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Long Shot", "effect": "Your shot sails far past the target, up to twice its normal range. The GM decides what it hits out there.", "duration": "Immediately" },
+        "de": { "title": "Weitschuss", "effect": "Dein Schuss fliegt weit am Ziel vorbei, bis zur doppelten normalen Reichweite. Die Spielleitung entscheidet, was er dort trifft.", "duration": "Sofort" },
+        "fr": { "title": "Tir trop long", "effect": "Ton tir file loin derrière la cible, jusqu'au double de sa portée normale. Le MJ décide de ce qu'il touche là-bas.", "duration": "Immédiatement" }
+      }
+    },
+    {
+      "id": "fumble-arcane-scattered-focus",
+      "kind": "fumble",
+      "classGroups": ["arcane"],
+      "tones": ["awkward"],
+      "severity": "medium",
+      "i18n": {
+        "en": { "title": "Scattered Focus", "effect": "Your mind won't settle. You lose concentration on any spell and can't concentrate on spells.", "duration": "1d4 rounds" },
+        "de": { "title": "Zerstreut", "effect": "Dein Geist kommt nicht zur Ruhe. Du verlierst die Konzentration auf jeden Zauber und kannst dich auf keinen Zauber konzentrieren.", "duration": "1d4 Runden" },
+        "fr": { "title": "Esprit dispersé", "effect": "Ton esprit ne tient pas en place. Tu perds ta concentration sur tout sort et ne peux te concentrer sur aucun sort.", "duration": "1d4 rounds" }
+      }
+    },
+    {
+      "id": "fumble-arcane-runaway-legs",
+      "kind": "fumble",
+      "classGroups": ["arcane"],
+      "tones": ["embarrassing", "comic"],
+      "severity": "medium",
+      "i18n": {
+        "en": { "title": "Runaway Legs", "effect": "Your legs take on a life of their own. On each of your turns, they run at full speed in a random direction.", "duration": "1d4 rounds" },
+        "de": { "title": "Eigensinnige Beine", "effect": "Deine Beine machen sich selbstständig. In jedem deiner Züge rennen sie mit voller Bewegungsrate in eine zufällige Richtung.", "duration": "1d4 Runden" },
+        "fr": { "title": "Jambes folles", "effect": "Tes jambes n'en font qu'à leur tête. À chacun de tes tours, elles courent à pleine vitesse dans une direction aléatoire.", "duration": "1d4 rounds" }
+      }
+    },
+    {
+      "id": "fumble-martial-snapped",
+      "kind": "fumble",
+      "classGroups": ["martial"],
+      "tones": ["shameful"],
+      "severity": "harsh",
+      "i18n": {
+        "en": { "title": "Snapped", "effect": "Your weapon breaks. A magic weapon survives, but flies out of your hand and lands at your feet.", "duration": "Immediately" },
+        "de": { "title": "Zerbrochen", "effect": "Deine Waffe zerbricht. Eine magische Waffe übersteht es, fliegt dir aber aus der Hand und landet vor deinen Füßen.", "duration": "Sofort" },
+        "fr": { "title": "Brisée", "effect": "Ton arme se brise. Une arme magique résiste, mais t'échappe des mains et tombe à tes pieds.", "duration": "Immédiatement" }
+      }
+    },
+    {
+      "id": "fumble-ranged-stinging-forearm",
+      "kind": "fumble",
+      "classGroups": ["ranged"],
+      "tones": ["shameful", "painful"],
+      "severity": "medium",
+      "i18n": {
+        "en": { "title": "Stinging Forearm", "effect": "If you used a bow, the string whips your forearm. Subtract 1d8 from your next two attack rolls.", "duration": "Until your next two attacks" },
+        "de": { "title": "Brennender Unterarm", "effect": "Hast du mit einem Bogen geschossen, peitscht dir die Sehne über den Unterarm. Zieh 1d8 von deinen nächsten zwei Angriffswürfen ab.", "duration": "Bis zu deinen nächsten zwei Angriffen" },
+        "fr": { "title": "Avant-bras cinglé", "effect": "Si tu as tiré à l'arc, la corde te cingle l'avant-bras. Soustrais 1d8 à tes deux prochains jets d'attaque.", "duration": "Jusqu'à tes deux prochaines attaques" }
+      }
+    },
+    {
+      "id": "fumble-martial-shaken",
+      "kind": "fumble",
+      "classGroups": ["martial"],
+      "tones": ["shameful"],
+      "severity": "medium",
+      "i18n": {
+        "en": { "title": "Shaken", "effect": "Your target punishes the opening. It can make an opportunity attack against you; if it hits, make a DC 16 Wisdom saving throw or be frightened of it.", "duration": "Until the end of your next turn" },
+        "de": { "title": "Eingeschüchtert", "effect": "Dein Ziel bestraft deine Blöße. Es darf einen Gelegenheitsangriff gegen dich ausführen; trifft er, machst du einen Weisheitsrettungswurf SG 16 oder bist vor ihm verängstigt.", "duration": "Bis zum Ende deines nächsten Zuges" },
+        "fr": { "title": "Ébranlé", "effect": "Ta cible punit ton ouverture. Elle peut faire une attaque d'opportunité contre toi ; si elle touche, fais un jet de sauvegarde de Sagesse DD 16 ou sois effrayé par elle.", "duration": "Jusqu'à la fin de ton prochain tour" }
+      }
+    },
+    {
+      "id": "fumble-arcane-animal-aversion",
+      "kind": "fumble",
+      "classGroups": ["arcane"],
+      "tones": ["shameful", "comic"],
+      "severity": "medium",
+      "i18n": {
+        "en": { "title": "Animal Aversion", "effect": "Make a DC 16 saving throw with your spellcasting ability. On a failure, ordinary beasts (Intelligence 4 or lower) can't stand you and react to you as their nature dictates.", "duration": "1d6 days" },
+        "de": { "title": "Tierisch unbeliebt", "effect": "Mach einen Rettungswurf SG 16 mit deinem Attribut zum Zauberwirken. Bei einem Fehlschlag können gewöhnliche Tiere (Intelligenz 4 oder weniger) dich nicht ausstehen und reagieren auf dich, wie es ihrer Natur entspricht.", "duration": "1d6 Tage" },
+        "fr": { "title": "Bête noire", "effect": "Fais un jet de sauvegarde DD 16 avec ta caractéristique d'incantation. En cas d'échec, les bêtes ordinaires (Intelligence 4 ou moins) ne te supportent pas et réagissent à toi selon leur nature.", "duration": "1d6 jours" }
+      }
+    },
+    {
+      "id": "fumble-martial-down-like-a-stone",
+      "kind": "fumble",
+      "classGroups": ["martial"],
+      "tones": ["shameful"],
+      "severity": "harsh",
+      "i18n": {
+        "en": { "title": "Down Like a Stone", "effect": "You crash to the ground and are prone. 1d4 enemies within 5 feet of you can each make an opportunity attack against you.", "duration": "Immediately" },
+        "de": { "title": "Wie ein nasser Sack", "effect": "Du knallst zu Boden und liegst. 1d4 Feinde im Umkreis von 1,5 m dürfen je einen Gelegenheitsangriff gegen dich ausführen.", "duration": "Sofort" },
+        "fr": { "title": "Comme une pierre", "effect": "Tu t'écroules et tu es à terre. 1d4 ennemis à 1,5 m ou moins peuvent chacun faire une attaque d'opportunité contre toi.", "duration": "Immédiatement" }
+      }
+    },
+    {
+      "id": "fumble-arcane-bad-dreams",
+      "kind": "fumble",
+      "classGroups": ["arcane"],
+      "tones": ["awkward"],
+      "severity": "medium",
+      "i18n": {
+        "en": { "title": "Bad Dreams", "effect": "If this spell deals psychic damage, it echoes in your sleep. At the end of each long rest, make a DC 12 Wisdom saving throw; on a failure, nightmares rob you of that rest's benefits.", "duration": "Your next 1d4 long rests" },
+        "de": { "title": "Albträume", "effect": "Verursacht dieser Zauber psychischen Schaden, hallt er in deinem Schlaf nach. Mach am Ende jeder langen Rast einen Weisheitsrettungswurf SG 12; bei einem Fehlschlag rauben dir Albträume die Vorteile dieser Rast.", "duration": "Deine nächsten 1d4 langen Rasten" },
+        "fr": { "title": "Mauvais rêves", "effect": "Si ce sort inflige des dégâts psychiques, il résonne dans ton sommeil. À la fin de chaque repos long, fais un jet de sauvegarde de Sagesse DD 12 ; en cas d'échec, des cauchemars te privent des bénéfices de ce repos.", "duration": "Tes 1d4 prochains repos longs" }
+      }
+    },
+    {
+      "id": "fumble-any-split-pack",
+      "kind": "fumble",
+      "classGroups": [],
+      "tones": ["awkward", "comic"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Split Pack", "effect": "Your backpack tears open and everything in it spills onto the floor.", "duration": "Immediately" },
+        "de": { "title": "Geplatzter Rucksack", "effect": "Dein Rucksack reißt auf, und sein ganzer Inhalt landet auf dem Boden.", "duration": "Sofort" },
+        "fr": { "title": "Sac éventré", "effect": "Ton sac à dos se déchire et tout son contenu se répand par terre.", "duration": "Immédiatement" }
+      }
+    },
+    {
+      "id": "fumble-arcane-brimstone",
+      "kind": "fumble",
+      "classGroups": ["arcane"],
+      "tones": ["awkward", "comic"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Brimstone", "effect": "If this spell deals fire damage, a nauseating stench of sulfur clings to you.", "duration": "1d4 days" },
+        "de": { "title": "Schwefelwolke", "effect": "Verursacht dieser Zauber Feuerschaden, hängt ein widerlicher Schwefelgestank an dir.", "duration": "1d4 Tage" },
+        "fr": { "title": "Odeur de soufre", "effect": "Si ce sort inflige des dégâts de feu, une odeur de soufre écœurante te colle à la peau.", "duration": "1d4 jours" }
       }
     }
   ]

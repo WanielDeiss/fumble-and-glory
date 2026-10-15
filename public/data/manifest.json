@@ -1,5 +1,5 @@
 {
-  "version": "2026-10-15.1",
+  "version": "2026-10-15.2",
   "defaultLocale": "en",
   "locales": ["en", "de", "fr"],
   "decks": ["decks/core-fumble.json", "decks/core-glory.json"]
