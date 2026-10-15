@@ -1448,6 +1448,186 @@
         "de": { "title": "Schwefelwolke", "effect": "Verursacht dieser Zauber Feuerschaden, hängt ein widerlicher Schwefelgestank an dir.", "duration": "1d4 Tage" },
         "fr": { "title": "Odeur de soufre", "effect": "Si ce sort inflige des dégâts de feu, une odeur de soufre écœurante te colle à la peau.", "duration": "1d4 jours" }
       }
+    },
+    {
+      "id": "fumble-martial-friend-in-the-way",
+      "kind": "fumble",
+      "classGroups": ["martial"],
+      "tones": ["disgraceful"],
+      "severity": "harsh",
+      "i18n": {
+        "en": { "title": "Friend in the Way", "effect": "You lash out wildly at the wrong person. Reroll this attack with advantage against an ally within 5 feet of both you and your target.", "duration": "Immediately" },
+        "de": { "title": "Freund im Weg", "effect": "Du schlägst blindlings nach der falschen Person. Wiederhole diesen Angriff mit Vorteil gegen einen Verbündeten, der höchstens 1,5 m von dir und deinem Ziel entfernt ist.", "duration": "Sofort" },
+        "fr": { "title": "Ami sur le chemin", "effect": "Tu frappes à l'aveugle la mauvaise personne. Relance cette attaque avec avantage contre un allié situé à 1,5 m ou moins de toi et de ta cible.", "duration": "Immédiatement" }
+      }
+    },
+    {
+      "id": "fumble-ranged-shot-in-the-back",
+      "kind": "fumble",
+      "classGroups": ["ranged"],
+      "tones": ["disgraceful", "painful"],
+      "severity": "harsh",
+      "i18n": {
+        "en": { "title": "Shot in the Back", "effect": "Your shot finds a friend. An ally within 10 feet of the target makes a DC 18 Dexterity saving throw or is hit by this attack instead. If their back was turned to you, it's a critical hit.", "duration": "Immediately" },
+        "de": { "title": "Schuss in den Rücken", "effect": "Dein Schuss findet einen Freund. Ein Verbündeter im Umkreis von 3 m um das Ziel macht einen Geschicklichkeitsrettungswurf SG 18 oder wird stattdessen getroffen. Stand er mit dem Rücken zu dir, ist es ein kritischer Treffer.", "duration": "Sofort" },
+        "fr": { "title": "Tir dans le dos", "effect": "Ton tir trouve un ami. Un allié à 3 m ou moins de la cible fait un jet de sauvegarde de Dextérité DD 18 ou reçoit l'attaque à sa place. S'il te tournait le dos, c'est un coup critique.", "duration": "Immédiatement" }
+      }
+    },
+    {
+      "id": "fumble-martial-own-medicine",
+      "kind": "fumble",
+      "classGroups": ["martial"],
+      "tones": ["disgraceful", "painful"],
+      "severity": "harsh",
+      "i18n": {
+        "en": { "title": "Taste of Your Own Medicine", "effect": "Your blow somehow lands on you. Make a DC 18 Constitution saving throw; on a failure, you take this attack's normal damage.", "duration": "Immediately" },
+        "de": { "title": "Eigene Medizin", "effect": "Dein Schlag trifft irgendwie dich selbst. Mach einen Konstitutionsrettungswurf SG 18; bei einem Fehlschlag erleidest du den normalen Schaden dieses Angriffs.", "duration": "Sofort" },
+        "fr": { "title": "Ta propre médecine", "effect": "Ton coup finit on ne sait comment sur toi. Fais un jet de sauvegarde de Constitution DD 18 ; en cas d'échec, tu subis les dégâts normaux de cette attaque.", "duration": "Immédiatement" }
+      }
+    },
+    {
+      "id": "fumble-martial-no-bite",
+      "kind": "fumble",
+      "classGroups": ["martial"],
+      "tones": ["embarrassing"],
+      "severity": "medium",
+      "i18n": {
+        "en": { "title": "No Bite", "effect": "Your strikes lose their force. You don't add your damage bonus to your attacks.", "duration": "1d4 + 1 rounds" },
+        "de": { "title": "Kraftlos", "effect": "Deinen Schlägen fehlt die Wucht. Du addierst deinen Schadensbonus nicht zu deinen Angriffen.", "duration": "1d4 + 1 Runden" },
+        "fr": { "title": "Sans mordant", "effect": "Tes coups manquent de force. Tu n'ajoutes pas ton bonus de dégâts à tes attaques.", "duration": "1d4 + 1 rounds" }
+      }
+    },
+    {
+      "id": "fumble-arcane-charged-foe",
+      "kind": "fumble",
+      "classGroups": ["arcane"],
+      "tones": ["embarrassing"],
+      "severity": "medium",
+      "i18n": {
+        "en": { "title": "Charged Foe", "effect": "Your spell's energy clings to the target. Its melee attacks deal an extra 1d4 damage of your spell's type.", "duration": "1d4 rounds" },
+        "de": { "title": "Aufgeladen", "effect": "Die Energie deines Zaubers bleibt am Ziel haften. Seine Nahkampfangriffe verursachen 1d4 zusätzlichen Schaden der Schadensart deines Zaubers.", "duration": "1d4 Runden" },
+        "fr": { "title": "Ennemi chargé", "effect": "L'énergie de ton sort s'accroche à la cible. Ses attaques au corps à corps infligent 1d4 dégâts supplémentaires du type de ton sort.", "duration": "1d4 rounds" }
+      }
+    },
+    {
+      "id": "fumble-ranged-gone-for-good",
+      "kind": "fumble",
+      "classGroups": ["ranged"],
+      "tones": ["awkward"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Gone for Good", "effect": "Your ammunition vanishes without a trace. You can't recover it after the fight.", "duration": "Permanent" },
+        "de": { "title": "Auf Nimmerwiedersehen", "effect": "Dein Geschoss verschwindet spurlos. Du kannst es nach dem Kampf nicht wiederfinden.", "duration": "Dauerhaft" },
+        "fr": { "title": "Perdu à jamais", "effect": "Ton projectile disparaît sans laisser de trace. Tu ne peux pas le récupérer après le combat.", "duration": "Permanent" }
+      }
+    },
+    {
+      "id": "fumble-arcane-poultry-surprise",
+      "kind": "fumble",
+      "classGroups": ["arcane"],
+      "tones": ["awkward", "comic"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Poultry Surprise", "effect": "Your spell fizzles into feathers. 2d4 chickens appear in empty spaces within 10 feet of you.", "duration": "Until they wander off" },
+        "de": { "title": "Hühnerüberraschung", "effect": "Dein Zauber verpufft in Federn. 2d4 Hühner erscheinen auf freien Feldern im Umkreis von 3 m.", "duration": "Bis sie davonlaufen" },
+        "fr": { "title": "Surprise à plumes", "effect": "Ton sort s'évanouit en plumes. 2d4 poules apparaissent dans des emplacements libres à 3 m ou moins de toi.", "duration": "Jusqu'à ce qu'elles s'en aillent" }
+      }
+    },
+    {
+      "id": "fumble-arcane-radiant-glow",
+      "kind": "fumble",
+      "classGroups": ["arcane"],
+      "tones": ["awkward", "comic"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Radiant Glow", "effect": "If this spell deals radiant damage, the light stays in you. You glow like a torch, shedding bright light in a 20-foot radius.", "duration": "1d4 hours" },
+        "de": { "title": "Strahlend schön", "effect": "Verursacht dieser Zauber gleißenden Schaden, bleibt das Licht in dir. Du leuchtest wie eine Fackel und spendest helles Licht im Umkreis von 6 m.", "duration": "1d4 Stunden" },
+        "fr": { "title": "Rayonnant", "effect": "Si ce sort inflige des dégâts radiants, la lumière reste en toi. Tu brilles comme une torche et émets une lumière vive dans un rayon de 6 m.", "duration": "1d4 heures" }
+      }
+    },
+    {
+      "id": "fumble-weapon-lost-nerve",
+      "kind": "fumble",
+      "classGroups": ["martial", "ranged"],
+      "tones": ["embarrassing", "shameful"],
+      "severity": "medium",
+      "i18n": {
+        "en": { "title": "Lost Nerve", "effect": "Your confidence is gone. You have disadvantage on attack rolls until you hit with one.", "duration": "Until you hit" },
+        "de": { "title": "Selbstzweifel", "effect": "Dein Selbstvertrauen ist dahin. Du hast Nachteil auf Angriffswürfe, bis du wieder triffst.", "duration": "Bis du triffst" },
+        "fr": { "title": "Doute", "effect": "Ta confiance s'est envolée. Tu as le désavantage aux jets d'attaque jusqu'à ce que tu touches.", "duration": "Jusqu'à ce que tu touches" }
+      }
+    },
+    {
+      "id": "fumble-arcane-demonic-tongue",
+      "kind": "fumble",
+      "classGroups": ["arcane"],
+      "tones": ["embarrassing", "comic"],
+      "severity": "medium",
+      "i18n": {
+        "en": { "title": "Demonic Tongue", "effect": "Something infernal gets into your mouth. Make a DC 14 saving throw with your spellcasting ability; on a failure, the only language you can speak is Abyssal.", "duration": "Until you finish a long rest" },
+        "de": { "title": "Dämonenzunge", "effect": "Etwas Höllisches fährt dir in den Mund. Mach einen Rettungswurf SG 14 mit deinem Attribut zum Zauberwirken; bei einem Fehlschlag kannst du nur noch Abyssisch sprechen.", "duration": "Bis du eine lange Rast beendest" },
+        "fr": { "title": "Langue démoniaque", "effect": "Quelque chose d'infernal s'empare de ta bouche. Fais un jet de sauvegarde DD 14 avec ta caractéristique d'incantation ; en cas d'échec, tu ne peux plus parler que l'abyssal.", "duration": "Jusqu'à ce que tu termines un repos long" }
+      }
+    },
+    {
+      "id": "fumble-arcane-blown-away",
+      "kind": "fumble",
+      "classGroups": ["arcane"],
+      "tones": ["embarrassing"],
+      "severity": "medium",
+      "i18n": {
+        "en": { "title": "Blown Away", "effect": "The blast throws you backward. You are pushed 1d10 × 5 feet directly away from your target.", "duration": "Immediately" },
+        "de": { "title": "Weggeblasen", "effect": "Die Druckwelle schleudert dich zurück. Du wirst 1d10 × 1,5 m direkt von deinem Ziel weggestoßen.", "duration": "Sofort" },
+        "fr": { "title": "Soufflé", "effect": "L'explosion te projette en arrière. Tu es repoussé de 1d10 × 1,5 m en t'éloignant directement de ta cible.", "duration": "Immédiatement" }
+      }
+    },
+    {
+      "id": "fumble-arcane-detonation",
+      "kind": "fumble",
+      "classGroups": ["arcane"],
+      "tones": ["shameful", "painful"],
+      "severity": "harsh",
+      "i18n": {
+        "en": { "title": "Detonation", "effect": "Your spell explodes around you. Every creature within 15 feet of you, including you, makes a saving throw against your spell save DC (GM picks the ability) or takes 1d8 damage of the spell's type.", "duration": "Immediately" },
+        "de": { "title": "Detonation", "effect": "Dein Zauber explodiert um dich herum. Jede Kreatur im Umkreis von 4,5 m, du eingeschlossen, macht einen Rettungswurf gegen deinen Zauber-SG (Attribut wählt die SL) oder erleidet 1d8 Schaden der Schadensart des Zaubers.", "duration": "Sofort" },
+        "fr": { "title": "Détonation", "effect": "Ton sort explose autour de toi. Chaque créature à 4,5 m ou moins, toi compris, fait un jet de sauvegarde contre le DD de tes sorts (caractéristique au choix du MJ) ou subit 1d8 dégâts du type du sort.", "duration": "Immédiatement" }
+      }
+    },
+    {
+      "id": "fumble-any-lights-out",
+      "kind": "fumble",
+      "classGroups": [],
+      "tones": ["awkward", "comic"],
+      "severity": "mild",
+      "i18n": {
+        "en": { "title": "Lights Out", "effect": "If you wear a helmet or hat, it slips over your eyes. You are blinded until you use a bonus action to push it back.", "duration": "Until you fix it" },
+        "de": { "title": "Licht aus", "effect": "Trägst du Helm oder Hut, rutscht er dir über die Augen. Du bist blind, bis du ihn mit einer Bonusaktion zurückschiebst.", "duration": "Bis du ihn richtest" },
+        "fr": { "title": "Extinction des feux", "effect": "Si tu portes un casque ou un chapeau, il te glisse sur les yeux. Tu es aveuglé jusqu'à ce que tu le remettes en place avec une action bonus.", "duration": "Jusqu'à ce que tu le remettes" }
+      }
+    },
+    {
+      "id": "fumble-arcane-misfire",
+      "kind": "fumble",
+      "classGroups": ["arcane"],
+      "tones": ["awkward"],
+      "severity": "medium",
+      "i18n": {
+        "en": { "title": "Misfire", "effect": "Your spell turns on you, but weakly. Harmful effects hit you instead of the target at half strength; beneficial effects meant for you or an ally land on a random creature in range.", "duration": "Immediately" },
+        "de": { "title": "Fehlzündung", "effect": "Dein Zauber wendet sich gegen dich, aber nur schwach. Schädliche Effekte treffen dich statt des Ziels mit halber Wirkung; nützliche Effekte für dich oder Verbündete gehen an eine zufällige Kreatur in Reichweite.", "duration": "Sofort" },
+        "fr": { "title": "Raté", "effect": "Ton sort se retourne contre toi, mais faiblement. Les effets néfastes te frappent à la place de la cible à moitié de leur puissance ; les effets bénéfiques destinés à toi ou à un allié touchent une créature au hasard à portée.", "duration": "Immédiatement" }
+      }
+    },
+    {
+      "id": "fumble-arcane-out-of-phase",
+      "kind": "fumble",
+      "classGroups": ["arcane"],
+      "tones": ["shameful"],
+      "severity": "harsh",
+      "i18n": {
+        "en": { "title": "Out of Phase", "effect": "Your spell flings you into the Ethereal Plane. At the end of each of your turns, make a DC 16 saving throw with your spellcasting ability; on a success, you return to the material world.", "duration": "Until you succeed" },
+        "de": { "title": "Phasenverschoben", "effect": "Dein Zauber schleudert dich auf die Ätherebene. Mach am Ende jedes deiner Züge einen Rettungswurf SG 16 mit deinem Attribut zum Zauberwirken; bei einem Erfolg kehrst du in die materielle Welt zurück.", "duration": "Bis dir der Wurf gelingt" },
+        "fr": { "title": "Déphasé", "effect": "Ton sort te projette dans le plan Éthéré. À la fin de chacun de tes tours, fais un jet de sauvegarde DD 16 avec ta caractéristique d'incantation ; en cas de réussite, tu reviens dans le monde matériel.", "duration": "Jusqu'à ce que tu réussisses" }
+      }
     }
   ]
 }
