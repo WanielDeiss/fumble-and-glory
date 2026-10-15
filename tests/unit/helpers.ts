@@ -12,7 +12,8 @@ export const readPublicJson = <T = any>(path: string): T => JSON.parse(readFileS
  */
 export function stubFetch(override: Record<string, (json: any) => any> = {}) {
   const fetch = vi.fn((input: string | URL) => {
-    const path = new URL(String(input), "http://localhost").pathname.replace(/^\/fumble-and-glory\//, "");
+    // The site lives under /fumble-and-glory/; Vitest may serve it from the root instead.
+    const path = new URL(String(input), "http://localhost").pathname.replace(/^\/(fumble-and-glory\/)?/, "");
     const file = join(publicDir, path);
     if (!existsSync(file)) return Promise.resolve(new Response("not found", { status: 404 }));
     const json = JSON.parse(readFileSync(file, "utf8"));

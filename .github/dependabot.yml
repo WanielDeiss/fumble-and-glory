@@ -1,0 +1,34 @@
+# Weekly, grouped dependency updates. A version has to be out for 14 days before
+# Dependabot proposes it (fresh releases are where hijacked packages show up);
+# security fixes skip that wait and arrive together in one PR.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    cooldown:
+      default-days: 14
+    open-pull-requests-limit: 5
+    groups:
+      security:
+        applies-to: security-updates
+        patterns: ["*"]
+      build-and-test:
+        patterns: ["vite", "vitest", "@vitest/*", "typescript", "@types/*", "jsdom"]
+      browser-tools:
+        patterns: ["@playwright/*", "@lhci/*"]
+      other:
+        patterns: ["*"]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    cooldown:
+      default-days: 14
+    groups:
+      actions:
+        patterns: ["*"]

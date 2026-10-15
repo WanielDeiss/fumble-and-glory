@@ -81,6 +81,8 @@ A new deck file must also be added to `manifest.decks`. A new language needs its
 
 ## Development
 
+Needs Node.js 22.12 or newer (CI uses Node 24).
+
 ```bash
 npm install
 npm run dev        # local dev server
@@ -98,6 +100,8 @@ CI runs all of these on every push and pull request, and only deploys when every
 ## Deployment
 
 Every push to `main` runs `.github/workflows/deploy.yml`: validate, build, deploy to GitHub Pages. Pull requests are validated only; the translation coverage report appears in the job summary.
+
+Dependabot (`.github/dependabot.yml`) proposes grouped updates every Monday, only for versions that have been out for at least 14 days; security fixes come right away in one PR.
 
 ## Design
 
