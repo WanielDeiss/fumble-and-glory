@@ -11,6 +11,14 @@
 [![Security](https://sonarcloud.io/api/project_badges/measure?project=WanielDeiss_fumble-and-glory&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=WanielDeiss_fumble-and-glory)
 [![Maintainability](https://sonarcloud.io/api/project_badges/measure?project=WanielDeiss_fumble-and-glory&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=WanielDeiss_fumble-and-glory)
 [![Reliability](https://sonarcloud.io/api/project_badges/measure?project=WanielDeiss_fumble-and-glory&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=WanielDeiss_fumble-and-glory)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=WanielDeiss_fumble-and-glory&metric=bugs)](https://sonarcloud.io/summary/new_code?id=WanielDeiss_fumble-and-glory)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=WanielDeiss_fumble-and-glory&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=WanielDeiss_fumble-and-glory)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=WanielDeiss_fumble-and-glory&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=WanielDeiss_fumble-and-glory)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=WanielDeiss_fumble-and-glory&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=WanielDeiss_fumble-and-glory)
+[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=WanielDeiss_fumble-and-glory&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=WanielDeiss_fumble-and-glory)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=WanielDeiss_fumble-and-glory&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=WanielDeiss_fumble-and-glory)
+
+[![SonarQube Cloud](https://sonarcloud.io/images/project_badges/sonarcloud-light.svg)](https://sonarcloud.io/summary/new_code?id=WanielDeiss_fumble-and-glory)
 
 Crit cards for every natural 1 and 20 at your table. A phone-first web app for pen-and-paper groups: roll a natural 1 or 20, draw a card whose effect fits your character's class and the tones your table agreed on.
 
