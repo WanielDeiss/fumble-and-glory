@@ -100,6 +100,56 @@ test("own cards are saved on the device in the installed app", async ({ page }) 
   await expect(page.locator(".deck-row").first()).not.toContainText("Dice Under the Table");
 });
 
+test("own cards survive a backup and restore", async ({ page }) => {
+  await prepare(page, { installed: true });
+  // Desktop download path, even on the emulated phone
+  await page.addInitScript(() => Object.defineProperty(navigator, "canShare", { value: undefined }));
+  const card = {
+    id: "custom-e2e", kind: "glory", classGroups: [], tones: ["lucky"], severity: "mild", custom: true,
+    i18n: { de: { title: "Glückspilz", effect: "Du findest eine Münze." } },
+  };
+  await page.addInitScript((c) => {
+    if (!sessionStorage.getItem("seeded")) {
+      localStorage.setItem("fumble-and-glory.custom-cards.v1", JSON.stringify([c]));
+      sessionStorage.setItem("seeded", "1");
+    }
+  }, card);
+  await page.goto("./#/deck");
+  await page.getByRole("link", { name: "Back up or import own cards" }).click();
+  await expect(page.getByText("You have 1 own card.")).toBeVisible();
+
+  const [download] = await Promise.all([page.waitForEvent("download"), page.getByRole("button", { name: "Save backup" }).click()]);
+  expect(download.suggestedFilename()).toMatch(/^fumble-and-glory-cards-.*\.json$/);
+  const backupPath = await download.path();
+
+  await page.evaluate(() => localStorage.removeItem("fumble-and-glory.custom-cards.v1"));
+  await page.reload();
+  await expect(page.getByText("You have 0 own cards.")).toBeVisible();
+  await page.locator('input[type="file"]').setInputFiles(backupPath);
+  await expect(page.getByRole("status")).toHaveText("1 card added");
+
+  await page.goto("./#/deck");
+  await expect(page.locator(".deck-row").first()).toContainText("Glückspilz");
+});
+
+test("a shared link shows the card and adds it", async ({ page }) => {
+  await prepare(page, { installed: true });
+  await page.goto("./");
+  const card = { kind: "fumble", classGroups: ["ranged"], tones: ["comic"], severity: "mild", i18n: { en: { title: "Arrow in the Hat", effect: "You shoot your own hat." } } };
+  const code = await page.evaluate((c) => {
+    const bytes = new TextEncoder().encode(JSON.stringify({ app: "fumble-and-glory", v: 1, cards: [c] }));
+    return btoa(String.fromCodePoint(...bytes)).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+  }, card);
+
+  await page.goto(`./#/import/${code}`);
+  await expect(page.getByRole("heading", { name: "Shared cards" })).toBeVisible();
+  await expect(page.locator(".deck-row")).toContainText("Arrow in the Hat");
+  await page.getByRole("button", { name: "Add to my deck" }).click();
+  await expect(page.getByRole("status")).toHaveText("1 card added");
+  await page.getByRole("link", { name: "Open deck" }).click();
+  await expect(page.locator(".deck-row").first()).toContainText("Arrow in the Hat");
+});
+
 test.describe("card updates", () => {
   // page.route can't see requests the service worker makes; offline caching has its own test above.
   test.use({ serviceWorkers: "block" });

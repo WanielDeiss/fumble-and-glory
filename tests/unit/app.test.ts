@@ -1,5 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { readPublicJson, stubFetch, stubMatchMedia } from "./helpers";
+import { decodeCode, encodeCards } from "../../src/share";
+import type { Card } from "../../src/data";
 
 const SETTINGS_KEY = "fumble-and-glory.settings.v1";
 const CUSTOM_KEY = "fumble-and-glory.custom-cards.v1";
@@ -337,5 +339,154 @@ describe("card updates", () => {
     document.dispatchEvent(new Event("visibilitychange"));
     await waitFor(() => fetchSpy.mock.calls.length > before, "update check");
     expect(String(fetchSpy.mock.calls[before][0])).toMatch(/data\/manifest\.json/);
+  });
+});
+
+describe("backing up and sharing own cards", () => {
+  const own = (title: string, over: Partial<Card> = {}): Card => ({
+    id: `custom-${title.toLowerCase().replace(/\W+/g, "-")}`, kind: "fumble", classGroups: [], tones: ["comic"], severity: "mild",
+    i18n: { en: { title, effect: "Something silly happens." } }, custom: true, ...over,
+  });
+  const seed = (...cards: Card[]) => localStorage.setItem(CUSTOM_KEY, JSON.stringify(cards));
+  const stored = (): Card[] => JSON.parse(localStorage.getItem(CUSTOM_KEY) ?? "[]");
+  const notice = () => $(".notice")?.textContent?.trim() ?? "";
+
+  function stubClipboard(writeText = vi.fn(() => Promise.resolve())) {
+    Object.defineProperty(navigator, "clipboard", { value: { writeText }, configurable: true });
+    return writeText;
+  }
+
+  it("is only offered in the installed app", async () => {
+    await start({ hash: "#/own" });
+    await waitFor(() => location.hash === "#/install", "redirect to install");
+  });
+
+  it("downloads a backup without ids", async () => {
+    seed(own("Pie in the Face"), own("Lost Boot"));
+    const files: File[] = [];
+    URL.createObjectURL = vi.fn((f: Blob) => { files.push(f as File); return "blob:backup"; });
+    URL.revokeObjectURL = vi.fn();
+    const clicked = vi.spyOn(HTMLAnchorElement.prototype, "click").mockImplementation(() => {});
+    await start({ installed: true, hash: "#/own" });
+    expect(app().textContent).toContain("You have 2 own cards.");
+
+    click('[data-action="export"]');
+    await waitFor(() => clicked.mock.calls.length, "download");
+    expect(files[0].name).toMatch(/^fumble-and-glory-cards-\d{4}-\d{2}-\d{2}\.json$/);
+    const backup = JSON.parse(await files[0].text());
+    expect(backup.cards.map((c: Card) => c.i18n.en.title)).toEqual(["Pie in the Face", "Lost Boot"]);
+    expect(backup.cards[0].id).toBeUndefined();
+  });
+
+  it("uses the share sheet for backups on phones", async () => {
+    seed(own("Pie in the Face"));
+    vi.spyOn(navigator, "userAgent", "get").mockReturnValue("Mozilla/5.0 (Linux; Android 14; Pixel 7)");
+    const share = vi.fn(() => Promise.resolve());
+    Object.defineProperty(navigator, "canShare", { value: () => true, configurable: true });
+    Object.defineProperty(navigator, "share", { value: share, configurable: true });
+    await start({ installed: true, hash: "#/own" });
+    click('[data-action="export"]');
+    await waitFor(() => share.mock.calls.length, "share sheet");
+    expect(share.mock.calls[0]).toMatchObject([{ files: [expect.any(File)] }]);
+    Reflect.deleteProperty(navigator, "share");
+    Reflect.deleteProperty(navigator, "canShare");
+  });
+
+  it("restores a backup file and skips cards already in the deck", async () => {
+    seed(own("Pie in the Face"));
+    await start({ installed: true, hash: "#/own" });
+    const backup = { app: "fumble-and-glory", v: 1, cards: [own("Pie in the Face"), own("Lost Boot"), { kind: "nope" }] };
+    const input = $<HTMLInputElement>('[data-action="import-file"]')!;
+    Object.defineProperty(input, "files", { value: [new File([JSON.stringify(backup)], "backup.json")] });
+    input.dispatchEvent(new Event("change", { bubbles: true }));
+    await waitFor(() => notice(), "import result");
+    expect(notice()).toBe("1 card added · 1 already in your deck · 1 invalid cards ignored");
+    expect(stored().map((c) => c.i18n.en.title)).toEqual(["Lost Boot", "Pie in the Face"]);
+  });
+
+  it("ignores files that aren't backups", async () => {
+    await start({ installed: true, hash: "#/own" });
+    const input = $<HTMLInputElement>('[data-action="import-file"]')!;
+    Object.defineProperty(input, "files", { value: [new File(["<html>nope"], "page.html")] });
+    input.dispatchEvent(new Event("change", { bubbles: true }));
+    await waitFor(() => notice(), "import result");
+    expect(notice()).toBe("No valid cards found.");
+    expect(stored()).toEqual([]);
+  });
+
+  it("adds cards from a pasted link, code or backup text", async () => {
+    await start({ installed: true, hash: "#/own" });
+    const paste = (text: string) => {
+      $<HTMLTextAreaElement>("#import-text")!.value = text;
+      click('[data-action="import-text"]');
+    };
+    const code = encodeCards([own("Lost Boot")]);
+    paste(`https://wanieldeiss.github.io/fumble-and-glory/#/import/${code}`);
+    expect(notice()).toBe("1 card added");
+    paste(code);
+    expect(notice()).toBe("1 already in your deck");
+    paste(JSON.stringify([own("Pie in the Face")]));
+    expect(notice()).toBe("1 card added");
+    paste("hello?");
+    expect(notice()).toBe("No valid cards found.");
+    expect(stored()).toHaveLength(2);
+  });
+
+  it("previews a shared link and adds it on request", async () => {
+    await start({ installed: true, hash: `#/import/${encodeCards([own("Lost Boot"), own("Pie in the Face")])}` });
+    expect($(".lead")!.textContent).toBe("Someone shared 2 cards with you.");
+    expect($$(".deck-row__title").map((e) => e.textContent)).toEqual(["Lost Boot", "Pie in the Face"]);
+    expect(stored()).toEqual([]);
+    expect($('[data-action="copy-code"]')).toBeNull();
+
+    click('[data-action="import-confirm"]');
+    expect(notice()).toBe("2 cards added");
+    expect(stored()).toHaveLength(2);
+    expect($('[data-action="import-confirm"]')).toBeNull();
+    expect($('a[href="#/deck"]')).not.toBeNull();
+  });
+
+  it("shows shared text as text, never as markup", async () => {
+    await start({ installed: true, hash: `#/import/${encodeCards([own('<img src=x onerror="alert(1)">')])}` });
+    expect($("img")).toBeNull();
+    expect($(".deck-row__title")!.textContent).toBe('<img src=x onerror="alert(1)">');
+  });
+
+  it("explains invalid links", async () => {
+    await start({ hash: "#/import/bm90LWNhcmRz" });
+    expect(notice()).toBe("This link doesn't contain any valid cards.");
+  });
+
+  it("offers the code to copy when the link opens outside the installed app", async () => {
+    const code = encodeCards([own("Lost Boot")]);
+    const writeText = stubClipboard();
+    await start({ hash: `#/import/${code}` });
+    click('[data-action="copy-code"]');
+    await waitFor(() => notice(), "copied notice");
+    expect(writeText).toHaveBeenCalledWith(code);
+    expect(notice()).toBe("Code copied. Paste it in the installed app.");
+
+    stubClipboard(vi.fn(() => Promise.reject(new Error("denied"))));
+    click('[data-action="copy-code"]');
+    await waitFor(() => $<HTMLInputElement>(".notice input")?.value === code, "manual copy field");
+  });
+
+  it("shares a saved card as a link from the editor", async () => {
+    const card = own("Lost Boot");
+    seed(card);
+    const writeText = stubClipboard();
+    await start({ installed: true, hash: `#/card/${card.id}` });
+    click('[data-action="share-card"]');
+    await waitFor(() => writeText.mock.calls.length, "link copied");
+    const link = String((writeText.mock.calls[0] as unknown[])[0]);
+    expect(link).toMatch(/^http:\/\/localhost:\d+\/.*#\/import\/[A-Za-z0-9_-]+$/);
+    const shared = decodeCode(link.split("#/import/")[1]) as { cards: Card[] };
+    expect(shared.cards[0].i18n.en.title).toBe("Lost Boot");
+    expect(notice()).toBe("Link copied. Send it to your group.");
+  });
+
+  it("offers no share button for a card that isn't saved yet", async () => {
+    await start({ installed: true, hash: "#/card/new" });
+    expect($('[data-action="share-card"]')).toBeNull();
   });
 });

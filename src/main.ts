@@ -6,6 +6,7 @@ import {
   type Card, type DataDiff, type GameData, type Kind, type Labels, type LocalizedCard, type Severity,
 } from "./data";
 import { loadCustomCards, saveCustomCards, newCustomId } from "./custom";
+import { decodeCode, encodeCards, extractCode, mergeCards, parseImport, toPayload, type SharedCard } from "./share";
 import { loadSettings, saveSettings, type Settings } from "./settings";
 
 const app = document.getElementById("app")!;
@@ -38,6 +39,11 @@ interface Draft {
 let draft: Draft | null = null;
 let draftError = "";
 
+/** Feedback after sharing or importing; cleared on navigation. `link` is shown for manual copying. */
+let notice: { text: string; link?: string } | null = null;
+/** Cards from a share link (#/import/<code>), decoded once per code. */
+let pendingImport: { code: string; cards: SharedCard[]; invalid: number; done: boolean } | null = null;
+
 /** Chrome's deferred install prompt (beforeinstallprompt); null where the browser has none. */
 interface InstallPromptEvent extends Event { prompt(): Promise<void> }
 let installPrompt: InstallPromptEvent | null = null;
@@ -64,6 +70,8 @@ const ICONS = {
   arcane: '<path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/>',
   install: '<path d="M12 3v12M7 10l5 5 5-5M5 21h14"/>',
   plus: '<path d="M12 5v14M5 12h14"/>',
+  share: '<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/>',
+  upload: '<path d="M12 21V9M7 14l5-5 5 5M5 3h14"/>',
   help: '<circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.5v.7M12 17h.01"/>',
 } as const;
 const icon = (name: keyof typeof ICONS) => `<svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[name]}</svg>`;
@@ -282,19 +290,23 @@ function deckRows(): string {
   );
   return list
     .map((c) => {
-      const inner = `
-        <span class="deck-die deck-die--${c.kind}" aria-label="${esc(t(c.kind === "fumble" ? "card.fumble" : "card.glory"))}">${c.kind === "fumble" ? 1 : 20}</span>
-        <span class="deck-row__text">
-          <span class="deck-row__title">${esc(c.text.title)}</span>
-          <span class="deck-row__effect">${esc(c.text.effect)}</span>
-          <span class="deck-row__meta">${c.custom ? `<span class="fg-tag fg-tag--static fg-tag--custom">${esc(t("card.custom"))}</span>` : ""}${classBadge(c.classGroups)}<span class="meta">${esc(c.tones.map((tn) => toneLabel(c.kind, tn)).join(", "))}</span></span>
-        </span>`;
+      const inner = deckRowInner(c);
       // Own cards open the editor.
       return c.custom
         ? `<li><a class="deck-row deck-row--link" href="#/card/${esc(c.id)}">${inner}</a></li>`
         : `<li class="deck-row">${inner}</li>`;
     })
     .join("");
+}
+
+function deckRowInner(c: LocalizedCard): string {
+  return `
+        <span class="deck-die deck-die--${c.kind}" aria-label="${esc(t(c.kind === "fumble" ? "card.fumble" : "card.glory"))}">${c.kind === "fumble" ? 1 : 20}</span>
+        <span class="deck-row__text">
+          <span class="deck-row__title">${esc(c.text.title)}</span>
+          <span class="deck-row__effect">${esc(c.text.effect)}</span>
+          <span class="deck-row__meta">${c.custom ? `<span class="fg-tag fg-tag--static fg-tag--custom">${esc(t("card.custom"))}</span>` : ""}${classBadge(c.classGroups)}<span class="meta">${esc(c.tones.map((tn) => toneLabel(c.kind, tn)).join(", "))}</span></span>
+        </span>`;
 }
 
 function deckScreen(): string {
@@ -304,7 +316,8 @@ function deckScreen(): string {
     ${updateBanner()}
     <div class="filters">
       ${isInstalled()
-        ? `<a class="fg-btn fg-btn--outline" href="#/card/new">${icon("plus")}${esc(t("deck.addCustom"))}</a>`
+        ? `<a class="fg-btn fg-btn--outline" href="#/card/new">${icon("plus")}${esc(t("deck.addCustom"))}</a>
+           <a class="fg-btn fg-btn--outline" href="#/own">${icon("share")}${esc(t("own.link"))}</a>`
         : `<p class="meta">${esc(t("deck.customHint"))} <a href="#/install">${esc(t("install.title"))}</a></p>`}
       <label class="search">${icon("search")}<span class="visually-hidden">${esc(t("deck.search"))}</span>
         <input type="search" placeholder="${esc(t("deck.search"))}" value="${esc(deckQuery)}" data-action="search">
@@ -367,9 +380,11 @@ function editorScreen(id: string): string {
       </section>
       <p class="meta">${esc(t("editor.savedLocally"))}</p>
       ${draftError ? `<p class="form-error" role="alert">${esc(draftError)}</p>` : ""}
+      ${noticeView()}
     </div>
     <div class="footer">
       <button class="fg-btn fg-btn--primary" data-action="save-card">${esc(t("editor.save"))}</button>
+      ${d.id ? `<button class="fg-btn fg-btn--outline" data-action="share-card">${icon("share")}${esc(t("editor.share"))}</button>` : ""}
       ${d.id ? `<button class="fg-btn fg-btn--outline fg-btn--danger" data-action="delete-card">${esc(t("editor.delete"))}</button>` : ""}
       <a class="fg-btn fg-btn--outline" href="#/deck">${esc(t("editor.cancel"))}</a>
     </div>`;
@@ -413,6 +428,164 @@ function deleteDraft() {
   if (drawn?.card.id === id) drawn = null;
   draft = null;
   location.hash = "#/deck";
+}
+
+// ---------- own cards: backup, import, sharing ----------
+
+function noticeView(): string {
+  if (!notice) return "";
+  const link = notice.link
+    ? `<input class="input" type="text" readonly value="${esc(notice.link)}" aria-label="${esc(t("import.copyCode"))}">`
+    : "";
+  return `<div class="notice" role="status"><p>${esc(notice.text)}</p>${link}</div>`;
+}
+
+const isMobile = () => ["ios", "android"].includes(detectPlatform());
+
+function ownScreen(): string {
+  if (!isInstalled()) { location.replace("#/install"); return ""; }
+  const n = customCards.length;
+  return `
+    ${topbar(t("own.title"))}
+    <div class="content">
+      <section class="section">
+        <p class="lead">${esc(n === 1 ? t("own.countOne") : t("own.count", { n }))}</p>
+        <p class="meta">${esc(t("own.backupHint"))}</p>
+        <button class="fg-btn fg-btn--primary" data-action="export" ${n ? "" : "disabled"}>${icon("install")}${esc(t("own.export"))}</button>
+      </section>
+      <section class="section">
+        <h2 class="label">${esc(t("own.importTitle"))}</h2>
+        <label class="fg-btn fg-btn--outline">${icon("upload")}${esc(t("own.importFile"))}
+          <input class="visually-hidden" type="file" accept=".json,application/json" data-action="import-file">
+        </label>
+        <label class="label" for="import-text">${esc(t("own.pasteLabel"))}</label>
+        <textarea id="import-text" class="input textarea" rows="3" autocomplete="off" spellcheck="false"></textarea>
+        <button class="fg-btn fg-btn--outline" data-action="import-text">${esc(t("own.pasteButton"))}</button>
+      </section>
+      ${noticeView()}
+    </div>`;
+}
+
+function importScreen(code: string): string {
+  if (pendingImport?.code !== code) {
+    pendingImport = { code, ...parseImport(decodeCode(code), data.taxonomy), done: false };
+  }
+  const { cards, done } = pendingImport;
+  if (cards.length === 0) {
+    return `
+      ${topbar(t("import.title"))}
+      <div class="content"><p class="notice" role="status">${esc(t("import.invalidLink"))}</p></div>
+      <div class="footer"><a class="fg-btn fg-btn--outline" href="#/deck">${esc(t("import.toDeck"))}</a></div>`;
+  }
+  const rows = cards
+    .map((c) => localize({ ...c, id: "shared", custom: true }, settings.locale, "en"))
+    .filter((c): c is LocalizedCard => c !== null)
+    .map((c) => `<li class="deck-row">${deckRowInner(c)}</li>`)
+    .join("");
+  const notInstalled = isInstalled() ? "" : `
+    <p class="meta">${esc(t("import.notInstalled"))}</p>
+    <button class="fg-btn fg-btn--outline" data-action="copy-code">${esc(t("import.copyCode"))}</button>`;
+  const action = done
+    ? `<a class="fg-btn fg-btn--primary" href="#/deck">${esc(t("import.toDeck"))}</a>`
+    : `<button class="fg-btn fg-btn--primary" data-action="import-confirm">${icon("plus")}${esc(t("import.add"))}</button>`;
+  return `
+    ${topbar(t("import.title"))}
+    <div class="content">
+      <p class="lead">${esc(cards.length === 1 ? t("import.introOne") : t("import.intro", { n: cards.length }))}</p>
+      <ul class="deck-list deck-list--flush">${rows}</ul>
+      ${noticeView()}
+      ${notInstalled}
+    </div>
+    <div class="footer">${action}</div>`;
+}
+
+function importResultText(added: number, skipped: number, invalid: number): string {
+  const parts: string[] = [];
+  if (added) parts.push(added === 1 ? t("import.addedOne") : t("import.added", { n: added }));
+  if (skipped) parts.push(t("import.skipped", { n: skipped }));
+  if (invalid) parts.push(t("import.invalid", { n: invalid }));
+  return parts.length ? parts.join(" · ") : t("import.nothing");
+}
+
+/** Adds valid cards to the player's own cards and reports what happened. */
+function addImported(raw: unknown) {
+  const { cards, invalid } = parseImport(raw, data.taxonomy);
+  const result = mergeCards(customCards, cards, newCustomId);
+  if (result.added && !saveCustomCards(result.cards)) {
+    notice = { text: t("editor.errorStorage") };
+    return;
+  }
+  customCards = result.cards;
+  notice = { text: importResultText(result.added, result.skipped, invalid) };
+}
+
+/** Pasted text: a share link, a bare code, or the JSON of a backup file. */
+function importText(text: string) {
+  const code = extractCode(text);
+  let raw: unknown = code ? decodeCode(code) : null;
+  if (!code) {
+    try { raw = JSON.parse(text); } catch { raw = null; }
+  }
+  addImported(raw);
+  render();
+}
+
+const MAX_BACKUP_BYTES = 2_000_000;
+
+async function importFile(file: File | undefined) {
+  if (!file) return;
+  let raw: unknown = null;
+  if (file.size <= MAX_BACKUP_BYTES) {
+    try { raw = JSON.parse(await file.text()); } catch { raw = null; }
+  }
+  addImported(raw);
+  render();
+}
+
+/** Backup of all own cards: the share sheet on phones, a download elsewhere. */
+async function exportCards() {
+  const name = `fumble-and-glory-cards-${new Date().toISOString().slice(0, 10)}.json`;
+  const file = new File([JSON.stringify(toPayload(customCards), null, 2)], name, { type: "application/json" });
+  if (isMobile() && navigator.canShare?.({ files: [file] })) {
+    try {
+      await navigator.share({ files: [file], title: t("own.title") });
+      return;
+    } catch (err) {
+      if ((err as DOMException).name === "AbortError") return;
+    }
+  }
+  const url = URL.createObjectURL(file);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = name;
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+async function copyText(text: string, done: string, manual: string) {
+  try {
+    await navigator.clipboard.writeText(text);
+    notice = { text: done };
+  } catch {
+    notice = { text: manual, link: text };
+  }
+  render();
+}
+
+/** Shares the saved version of the card being edited as a link. */
+async function shareCard() {
+  const card = customCards.find((c) => c.id === draft?.id);
+  if (!card) return;
+  const url = `${location.origin}${import.meta.env.BASE_URL}#/import/${encodeCards([card])}`;
+  if (isMobile() && navigator.share) {
+    try {
+      await navigator.share({ title: Object.values(card.i18n)[0].title, url });
+      return;
+    } catch (err) {
+      if ((err as DOMException).name === "AbortError") return;
+    }
+  }
+  await copyText(url, t("editor.linkCopied"), t("editor.linkManual"));
 }
 
 /**
@@ -521,16 +694,21 @@ const SCREENS: Record<string, () => string> = {
   "/deck": deckScreen,
   "/install": installScreen,
   "/help": helpScreen,
+  "/own": ownScreen,
 };
 
 // "#/card/new" or "#/card/<id of an own card>"; anything else falls back to the draw screen.
 const CARD_ROUTE = /^\/card\/([a-z0-9-]+)$/;
+// "#/import/<base64url code>" from a shared link.
+const IMPORT_ROUTE = /^\/import\/([A-Za-z0-9_-]+)$/;
 
 function screenFor(route: string): string {
   const screen = SCREENS[route];
   if (screen) return screen();
   const card = CARD_ROUTE.exec(route);
-  return card ? editorScreen(card[1]) : drawScreen();
+  if (card) return editorScreen(card[1]);
+  const shared = IMPORT_ROUTE.exec(route);
+  return shared ? importScreen(shared[1]) : drawScreen();
 }
 
 function render() {
@@ -580,6 +758,18 @@ const CLICK_ACTIONS: Record<string, (d: DOMStringMap) => void> = {
   "save-card": saveDraft,
   "delete-card": deleteDraft,
   "apply-update": applyUpdate,
+  export: () => { void exportCards(); },
+  "share-card": () => { void shareCard(); },
+  "import-text": () => importText(app.querySelector<HTMLTextAreaElement>("#import-text")?.value ?? ""),
+  "import-confirm": () => {
+    if (!pendingImport || pendingImport.done) return;
+    addImported({ cards: pendingImport.cards });
+    pendingImport.done = true;
+    render();
+  },
+  "copy-code": () => {
+    if (pendingImport) void copyText(pendingImport.code, t("import.copied"), t("import.copyManual"));
+  },
   install: () => {
     if (!installPrompt) return;
     const prompt = installPrompt;
@@ -610,12 +800,15 @@ app.addEventListener("input", (e) => {
 });
 
 app.addEventListener("change", (e) => {
-  const el = e.target as HTMLSelectElement;
+  const el = e.target as HTMLInputElement;
   if (el.dataset.action === "locale") update({ locale: el.value });
+  else if (el.dataset.action === "import-file") void importFile(el.files?.[0]);
 });
 
 window.addEventListener("hashchange", () => {
   if (!location.hash.startsWith("#/card/")) draft = null;
+  if (!location.hash.startsWith("#/import/")) pendingImport = null;
+  notice = null;
   updateDone = false;
   render();
   window.scrollTo(0, 0);

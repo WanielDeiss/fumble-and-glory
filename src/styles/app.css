@@ -203,3 +203,10 @@ button, input, textarea { font: inherit; color: inherit; }
 .help-rule { display: flex; gap: var(--space-4); align-items: flex-start; }
 .help-title { margin: 0; font-family: var(--font-display); font-size: 20px; line-height: 26px; font-weight: 600; }
 .help-text { margin: 0; font-size: 16px; line-height: 23px; }
+
+/* Own cards: backup, import, sharing */
+.notice p { margin: 0; }
+.notice .input { margin-top: var(--space-2); font-size: 14px; }
+label.fg-btn { cursor: pointer; }
+label.fg-btn:focus-within { outline: 2px solid var(--focus); outline-offset: 2px; }
+.deck-list--flush { padding: 0; }

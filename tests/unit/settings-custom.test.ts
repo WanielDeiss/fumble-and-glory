@@ -65,6 +65,6 @@ describe("own cards", () => {
   });
 
   it("get ids that the card route accepts", () => {
-    expect(newCustomId()).toMatch(/^custom-[a-z0-9]+$/);
+    expect(newCustomId()).toMatch(/^custom-[a-z0-9-]+$/);
   });
 });
