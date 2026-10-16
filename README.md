@@ -5,6 +5,7 @@
 [![Glories](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fwanieldeiss.github.io%2Ffumble-and-glory%2Fdata%2Fdecks%2Fcore-glory.json&query=%24.cards.length&label=glories&color=c9952a)](public/data/decks/core-glory.json)
 [![Languages](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fwanieldeiss.github.io%2Ffumble-and-glory%2Fdata%2Fmanifest.json&query=%24.locales&label=languages&color=3a5486)](public/i18n/)
 [![PWA](https://img.shields.io/badge/PWA-installable-5b4636)](https://wanieldeiss.github.io/fumble-and-glory/#/install)
+[![License: MIT](https://img.shields.io/github/license/WanielDeiss/fumble-and-glory)](LICENSE)
 
 [![Validate and deploy](https://github.com/WanielDeiss/fumble-and-glory/actions/workflows/deploy.yml/badge.svg)](https://github.com/WanielDeiss/fumble-and-glory/actions/workflows/deploy.yml)
 [![Tests](https://img.shields.io/endpoint?url=https%3A%2F%2Fwanieldeiss.github.io%2Ffumble-and-glory%2Fbadges%2Ftests.json)](https://github.com/WanielDeiss/fumble-and-glory/actions/workflows/deploy.yml)
@@ -106,3 +107,7 @@ Dependabot (`.github/dependabot.yml`) proposes grouped updates every Monday, onl
 ## Design
 
 Colors, type and components follow the "Fumble & Glory" design system: parchment and ink, blood red for fumbles, gold for glory, Fraunces for numerals and titles, Alegreya Sans for text. Light ("Parchment") and dark ("Tavern night") follow the system setting.
+
+## License
+
+[MIT](LICENSE) for code and card texts. The fonts in `public/fonts/` (Fraunces, Alegreya Sans) are under the SIL Open Font License 1.1, see [`public/fonts/OFL.txt`](public/fonts/OFL.txt).
