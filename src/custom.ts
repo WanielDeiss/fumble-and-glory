@@ -24,5 +24,5 @@ export function saveCustomCards(cards: Card[]): boolean {
   return true;
 }
 
-/** Unique even when many cards are created at once, e.g. by an import. */
-export const newCustomId = () => `custom-${Date.now().toString(36)}-${crypto.randomUUID().slice(0, 8)}`;
+/** A random UUID v4: unique even when many cards are created at once, e.g. by an import. Lowercase hex and dashes, so it fits the card route. */
+export const newCustomId = () => crypto.randomUUID();

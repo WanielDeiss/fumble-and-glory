@@ -91,7 +91,7 @@ describe("mergeCards", () => {
     expect(result).toMatchObject({ added: 1, skipped: 2 });
     expect(result.cards).toHaveLength(2);
     expect(result.cards[0]).toMatchObject({ custom: true, i18n: other.i18n });
-    expect(result.cards[0].id).toMatch(/^custom-[a-z0-9-]+$/);
+    expect(result.cards[0].id).toMatch(/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/);
   });
 
   it("gives every card its own id, even when created at the same moment", () => {
