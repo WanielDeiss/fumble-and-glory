@@ -15,7 +15,7 @@ interface Payload { app: "fumble-and-glory"; v: 1; cards: SharedCard[] }
 const MAX_CARDS = 1000;
 const LOCALE = /^[a-z]{2}(-[A-Z]{2})?$/;
 const CODE = /^[A-Za-z0-9_-]+$/;
-const SEVERITIES: Severity[] = ["mild", "medium", "harsh"];
+const SEVERITIES = new Set<unknown>(["mild", "medium", "harsh"]);
 
 export const toShared = ({ kind, classGroups, tones, severity, i18n }: Card): SharedCard =>
   ({ kind, classGroups, tones, severity, i18n });
@@ -28,7 +28,7 @@ function toBase64Url(text: string): string {
   const bytes = new TextEncoder().encode(text);
   let binary = "";
   for (const b of bytes) binary += String.fromCodePoint(b);
-  return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+  return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=/g, "") // "=" only appears as padding;
 }
 
 function fromBase64Url(code: string): string {
@@ -65,26 +65,29 @@ function cleanText(v: unknown): CardText | null {
   return out;
 }
 
+/** The known keys from a list, without duplicates. */
+const knownKeys = (list: unknown, known: object): string[] =>
+  Array.isArray(list) ? [...new Set(list.filter((k): k is string => typeof k === "string" && k in known))] : [];
+
+/** Texts per language; languages with invalid texts are dropped. */
+function cleanI18n(v: unknown): Record<string, CardText> {
+  const i18n: Record<string, CardText> = {};
+  if (!isRecord(v)) return i18n;
+  for (const [locale, t] of Object.entries(v)) {
+    const clean = LOCALE.test(locale) ? cleanText(t) : null;
+    if (clean) i18n[locale] = clean;
+  }
+  return i18n;
+}
+
 /** A card from outside in exactly the shape the app expects, or null. Unknown tones and classes are dropped. */
 function cleanCard(v: unknown, taxonomy: Taxonomy): SharedCard | null {
-  if (!isRecord(v)) return null;
-  const kind = v.kind;
-  if (kind !== "fumble" && kind !== "glory") return null;
-  if (!SEVERITIES.includes(v.severity as Severity)) return null;
-  const tones = Array.isArray(v.tones) ? v.tones.filter((t) => typeof t === "string" && t in taxonomy.tones[kind]) : [];
-  if (tones.length === 0) return null;
-  const classGroups = Array.isArray(v.classGroups)
-    ? v.classGroups.filter((g) => typeof g === "string" && g in taxonomy.classGroups)
-    : [];
-  const i18n: Record<string, CardText> = {};
-  if (isRecord(v.i18n)) {
-    for (const [locale, t] of Object.entries(v.i18n)) {
-      const clean = LOCALE.test(locale) ? cleanText(t) : null;
-      if (clean) i18n[locale] = clean;
-    }
-  }
-  if (Object.keys(i18n).length === 0) return null;
-  return { kind, classGroups: [...new Set(classGroups)], tones: [...new Set(tones)], severity: v.severity as Severity, i18n };
+  if (!isRecord(v) || (v.kind !== "fumble" && v.kind !== "glory") || !SEVERITIES.has(v.severity)) return null;
+  const kind: Kind = v.kind;
+  const tones = knownKeys(v.tones, taxonomy.tones[kind]);
+  const i18n = cleanI18n(v.i18n);
+  if (tones.length === 0 || Object.keys(i18n).length === 0) return null;
+  return { kind, classGroups: knownKeys(v.classGroups, taxonomy.classGroups), tones, severity: v.severity as Severity, i18n };
 }
 
 /** Valid cards from a backup file or share code (also accepts a bare list of cards). */

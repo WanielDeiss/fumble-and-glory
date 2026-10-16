@@ -359,6 +359,7 @@ describe("backing up and sharing own cards", () => {
   it("is only offered in the installed app", async () => {
     await start({ hash: "#/own" });
     await waitFor(() => location.hash === "#/install", "redirect to install");
+    expect($("h1")!.textContent).toBe("Install the app");
   });
 
   it("downloads a backup without ids", async () => {
